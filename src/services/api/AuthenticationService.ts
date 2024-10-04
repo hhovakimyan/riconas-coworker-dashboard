@@ -2,6 +2,8 @@ import { Service } from 'services/Service';
 import { httpClient } from 'services/axiosInstance';
 import { annotateNameAsync, ServiceError } from 'services/helperTypes';
 import {
+  AcceptInviteRequestDto,
+  AcceptInviteResponseDto,
   RequestNewPasswordRequestDto,
   RequestNewPasswordResponseDto,
   ResetPasswordRequestDto,
@@ -50,6 +52,20 @@ class AuthenticationService extends Service {
         undefined,
         requestData,
         ResetPasswordResponseDto,
+        true
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async acceptInvitation(requestData: AcceptInviteRequestDto) {
+    try {
+      return await httpClient.post<AcceptInviteResponseDto | ServiceError>(
+        `${apiPath}/accept-invite` ,
+        undefined,
+        requestData,
+        AcceptInviteResponseDto,
         true
       );
     } catch (error: any) {

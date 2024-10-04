@@ -18,5 +18,12 @@ export class ResetPasswordRequestDto {
   new_password!: string;
 }
 
-
 export class ResetPasswordResponseDto {}
+
+export class AcceptInviteRequestDto {
+  code!: string;
+
+  password!: string;
+}
+
+export class AcceptInviteResponseDto {}

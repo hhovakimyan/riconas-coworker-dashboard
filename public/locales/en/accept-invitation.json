@@ -1,0 +1,21 @@
+{
+  "title": "Set password to activate your account",
+  "form": {
+    "password": {
+      "label": "Password",
+      "errors": {
+        "required": "Password is a required field",
+        "invalid": "Password must contain minimum eight characters, at least one letter, one number and one character"
+      }
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "errors": {
+        "required": "Confirm Password is a required field",
+        "notMatch": "Passwords must match"
+      }
+    },
+    "submitBtnTitle": "Submit"
+  },
+  "accountActivatedMessage": "Your account is successfully activated. Go ahead and <0>Sign in</0> with the password you set"
+}

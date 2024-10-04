@@ -1,0 +1,21 @@
+{
+  "title": "Legen Sie ein passwort fest, um Ihr Konto zu aktivieren",
+  "form": {
+    "password": {
+      "label": "Passwort",
+      "errors": {
+        "required": "Das Passwort ist ein Pflichtfeld",
+        "invalid": "Das Passwort muss mindestens acht Zeichen, mindestens einen Buchstaben, eine Zahl und ein Zeichen enthalten"
+      }
+    },
+    "confirmPassword": {
+      "label": "Passwort bestätigen",
+      "errors": {
+        "required": "„Passwort bestätigen“ ist ein Pflichtfeld",
+        "notMatch": "Passwörter müssen übereinstimmen"
+      }
+    },
+    "submitBtnTitle": "Einreichen"
+  },
+  "accountActivatedMessage": "Ihr Konto wurde erfolgreich aktiviert.  <0>anmelden</0> mit dem von Ihnen festgelegten Passwort"
+}

@@ -1,42 +1,41 @@
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
-import { Alert, TextField } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import { Alert, Box, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
-import ResetPasswordSchema from 'pages/ResetPassword/ResetPasswordForm/validationSchema';
-
-import 'pages/ResetPassword/ResetPasswordForm/styles.css';
+import SetPasswordSchema from 'pages/AcceptInvitation/SetPasswordForm/validationSchema';
+import { formStyles } from 'pages/AcceptInvitation/SetPasswordForm/styles';
 
 type Props = {
-  passwordResetCode: string;
+  acceptInvitationCode: string;
   onSubmit: () => void;
 }
 
-const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
+const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
   const { control, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(ResetPasswordSchema),
+    resolver: yupResolver(SetPasswordSchema),
   });
-  const { t } = useTranslation('reset-password', { keyPrefix: 'form' });
+  const { t } = useTranslation('accept-invitation', { keyPrefix: 'form' });
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
   const [serverError, setServerError] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    const resetPasswordResponse = await authenticationService.resetPassword(
+    const acceptInvitationResponse = await authenticationService.acceptInvitation(
       {
-        code: passwordResetCode,
-        new_password: data.password,
+        code: acceptInvitationCode,
+        password: data.password,
       }
     );
 
     setIsLoading(false);
 
-    if (resetPasswordResponse instanceof ServiceError) {
+    if (acceptInvitationResponse instanceof ServiceError) {
       setServerError(mainT('somethingWentWrong'));
     } else {
       // Success response
@@ -45,7 +44,7 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="resetPasswordForm" autoComplete="off">
+    <Box component="form" onSubmit={handleSubmit(onFormSubmit)} sx={formStyles} autoComplete="off">
       <Controller
         name="password"
         control={control}
@@ -88,8 +87,7 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
       >
         {t('submitBtnTitle')}
       </LoadingButton>
-    </form>
-  );
-}
+    </Box>
+  );}
 
-export default ResetPasswordForm;
+export default SetPasswordForm;

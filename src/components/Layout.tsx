@@ -11,6 +11,7 @@ const noAuthRoutes = [
   '/login',
   '/forgot-password',
   '/reset-password',
+  '/accept-invite',
 ];
 
 const Layout = () => {
