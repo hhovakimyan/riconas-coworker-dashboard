@@ -14,35 +14,7 @@ type MenuItemProps = {
   submenu?: MenuItemProps[];
 }
 
-const menuItems: MenuItemProps[] = [
-  {
-    name: 'coworkers',
-    title: 'coworkers',
-    link: '/coworkers',
-  },
-  {
-    name: 'clients',
-    title: 'clients',
-    link: '/clients',
-  },
-  {
-    name: 'projects',
-    title: 'projects',
-    link: '/projects',
-    submenu: [
-      {
-        name: 'subprojects',
-        title: 'subprojects',
-        link: '/subprojects',
-      },
-      {
-        name: 'nvt',
-        title: 'nvt',
-        link: '/nvt',
-      },
-    ],
-  },
-];
+const menuItems: MenuItemProps[] = [];
 
 const Sidebar = () => {
   const navigate = useNavigate();

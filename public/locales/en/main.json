@@ -1,5 +1,5 @@
 {
-  "title": "Welcome to Riconas Admin Dashboard",
+  "title": "Welcome to Riconas Dashboard",
   "errors": {
     "somethingWentWrong": "Something went wrong. Please try later!"
   },
@@ -10,13 +10,6 @@
   "deleteModal": {
     "cancelText": "Cancel",
     "confirmText": "Confirm"
-  },
-  "menu": {
-    "projects": "Projects",
-    "subprojects": "Subprojects",
-    "clients": "Clients",
-    "coworkers": "Coworkers",
-    "nvt": "NVT"
   },
   "form": {
     "cancelBtn": "Cancel",

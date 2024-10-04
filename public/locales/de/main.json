@@ -1,7 +1,7 @@
 {
-  "title": "Willkommen beim Riconas Admin-Dashboard",
+  "title": "Willkommen im Riconas Dashboard",
   "errors": {
-    "somethingWentWrong": "Etwas ist schief gelaufen."
+    "somethingWentWrong": "Etwas ist schief gelaufen. "
   },
   "header": {
     "signOut": "Abmelden"
@@ -10,11 +10,6 @@
   "deleteModal": {
     "cancelText": "Stornieren",
     "confirmText": "Bestätigen"
-  },
-  "menu": {
-    "projects": "Projekte",
-    "clients": "Kunden",
-    "coworkers": "Kollegen"
   },
   "form": {
     "cancelBtn": "Stornieren",
