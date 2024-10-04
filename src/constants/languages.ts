@@ -16,5 +16,10 @@ export const availableLanguages: LanguageProps[] = [
     code: 'de',
     name: 'German',
     flag: 'data:image/webp;base64,UklGRjYAAABXRUJQVlA4TCkAAAAvIgAFABcwzgKBJJb9lXaJ+Q/agEzAQgkl9FFST9cKRPR/AkTvNWU3FAA=',
-  }
+  },
+  {
+    code: 'es',
+    name: 'Spanish',
+    flag: 'data:image/webp;base64,UklGRl4BAABXRUJQVlA4TFEBAAAvIoAFAFfiqrZtpcLdtTtBSEAC/t3d/cmp4TYA2LRRmJOd8e48x0zlVpVcSZKkVIO7u8MX5+Zq7s9dhvkPjyECJAAKwgABCsALMPgD4f4R0M/uT7SXJUA87v3HeiQgHiqx+qfog0BcwB8Zz2b4I+kXxxb66D5HD+w+SCJ/DEK7+P3uLukL+94B/eG0OhkJ6tfHIvE6jZFJuKBgVdLvpVvh4ZZrtoxYmaf87lABJKtCqAUREQLpAdN+CA9cxPiI6NkoDyP6zTEdV+AP/IvnJiWcOfvHA5ji1L9yQN0V4cqC+RGx/xenqmzWFVwJAGg02Xaz7a25Zt7/Uo/fEf2fgIK2cxgZuDlTAKb3l70ZD0RWpu1Oq8tKINT5ZFu/P7QFCCfer8rvj3cDMUh369/rO66KAIZJM/ufjm6JAWhdG9l5c7AvIPzIqD0royAEATaHsaBtAA==',
+  },
 ];
