@@ -103,7 +103,7 @@ const onRejectedInterceptor = (error: AxiosError) => {
     }
   }
 
-  if (error?.response?.status === 401) {
+  if (error?.response?.status === 401 && JSON.parse(localStorage.getItem(accessTokenKey) || '')) {
     Events.emit(AuthEvents.clearAccessToken);
   }
 
