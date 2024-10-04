@@ -2,9 +2,9 @@ import { Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import LoginForm from 'pages/Login/components/LoginForm';
+import PageTitle from 'components/PageTitle';
 
 import 'pages/Login/styles.css';
-import PageTitle from 'components/PageTitle';
 
 const Login = () => {
   const { t } = useTranslation('login');
