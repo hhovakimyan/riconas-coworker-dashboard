@@ -19,3 +19,15 @@ export const headerStyles = {
         }
     }
 };
+
+export const accountMenuWrapperStyles = {
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+};
+
+export const accountMenuStyles = {
+    '& .MuiLink-root': {
+        color: '#000',
+    }
+};

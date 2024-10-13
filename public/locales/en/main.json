@@ -4,7 +4,8 @@
     "somethingWentWrong": "Something went wrong. Please try later!"
   },
   "header": {
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "changePassword": "Change Password"
   },
   "backBtn": "Back",
   "deleteModal": {

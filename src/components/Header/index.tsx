@@ -1,18 +1,13 @@
 import { Box, Link } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 import { headerStyles } from 'components/Header/styles';
 import logo from 'components/Header/logo.png';
 import LanguageMenu from 'components/Header/LanguageMenu';
 import { useAuth } from 'providers/AuthContext';
+import MyAccountMenu from 'components/Header/MyAccountMenu';
 
 const Header = () => {
-  const { userSignedIn, clearAccessToken } = useAuth();
-  const { t } = useTranslation('main', { keyPrefix: 'header' })
-
-  const onSignOut = () => {
-    clearAccessToken();
-  }
+  const { userSignedIn } = useAuth();
 
   return (
     <Box component="header" sx={headerStyles}>
@@ -24,17 +19,11 @@ const Header = () => {
         </div>
         <div className="rightSection">
           <LanguageMenu />
-          {
-            userSignedIn &&
-            <Link component="button" underline="none" onClick={onSignOut}>
-              {t('signOut')}
-            </Link>
-          }
+          { userSignedIn && <MyAccountMenu /> }
         </div>
       </div>
     </Box>
-  )
-
+  );
 };
 
-export default Header
+export default Header;
