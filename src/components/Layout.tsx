@@ -18,6 +18,8 @@ const Layout = () => {
   const location = useLocation();
   const { userSignedIn } = useAuth();
 
+  const isHomepage = location.pathname === "/";
+
   if (noAuthRoutes.includes(location.pathname)) {
     if (userSignedIn) {
       return <Navigate to={'/'} replace />
@@ -34,7 +36,7 @@ const Layout = () => {
           userSignedIn ?
             (
               <Box sx={{ display: 'flex' }}>
-                <Sidebar />
+                {!isHomepage && <Sidebar />}
                 <MainContent open>
                   <Outlet />
                 </MainContent>

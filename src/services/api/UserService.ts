@@ -2,7 +2,9 @@ import { Service } from 'services/Service';
 import { httpClient } from 'services/axiosInstance';
 import { annotateNameAsync, ServiceError } from 'services/helperTypes';
 import {
-  ChangeUserPasswordRequestDto, ChangeUserPasswordResponseDto,
+  ChangeUserPasswordRequestDto,
+  ChangeUserPasswordResponseDto,
+  GetUserDetailsResponseDto,
   SetUserLanguageRequestDto,
   SetUserLanguageResponseDto,
 } from 'services/models/User';
@@ -33,6 +35,20 @@ class UserService extends Service {
         undefined,
         requestData,
         ChangeUserPasswordResponseDto,
+        true
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  @annotateNameAsync
+  async getDetails() {
+    try {
+      return await httpClient.get<GetUserDetailsResponseDto | ServiceError>(
+        `${apiPath}/me` ,
+        undefined,
+        GetUserDetailsResponseDto,
         true
       );
     } catch (error: any) {

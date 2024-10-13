@@ -11,3 +11,9 @@ export class ChangeUserPasswordRequestDto {
 }
 
 export class ChangeUserPasswordResponseDto {}
+
+export class GetUserDetailsResponseDto {
+  id!: string;
+
+  company_name!: string;
+}

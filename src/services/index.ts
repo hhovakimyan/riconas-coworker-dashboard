@@ -4,6 +4,7 @@ import {Service} from 'services/Service';
 import {ServiceCallsArgs} from 'services/ServiceCallsArgs';
 import AuthenticationService from 'services/api/AuthenticationService';
 import UserService from 'services/api/UserService';
+import ProjectService from 'services/api/ProjectService';
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -37,3 +38,5 @@ export default createAxiosInstance;
 export const authenticationService = traceMethod(new AuthenticationService());
 
 export const userService = traceMethod(new UserService());
+
+export const projectService = traceMethod(new ProjectService());
