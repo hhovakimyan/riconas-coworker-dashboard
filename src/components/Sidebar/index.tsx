@@ -1,38 +1,23 @@
-import { Button, Collapse, Drawer, List, ListItemButton, ListItemText } from '@mui/material';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import ExpandLess from '@mui/icons-material/ExpandLess';
-import ExpandMore from '@mui/icons-material/ExpandMore';
-import React, { useState } from 'react';
+import { Drawer } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 
-import { expandBtnStyles, sidebarStyles } from 'components/Sidebar/styles';
-
-type MenuItemProps = {
-  name: string;
-  title: string;
-  link: string;
-  submenu?: MenuItemProps[];
-}
-
-const menuItems: MenuItemProps[] = [];
+import { sidebarStyles } from 'components/Sidebar/styles';
+import ProjectTree from 'components/Sidebar/ProjectTree';
+import { FetchProjectsListResponseDto } from 'services/models/Projects';
+import { projectService } from 'services';
+import LoadingSpinner from 'components/LoadingSpinner';
+import ViewTypeSelect from 'components/Sidebar/ViewTypeSelect';
 
 const Sidebar = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [projects, setProjects] = useState<FetchProjectsListResponseDto | null>(null);
 
-  const { t } = useTranslation('main', {keyPrefix: 'menu'});
-
-  const [submenuOpen, setSubmenuOpen] = useState<boolean>(false);
-
-  const handleMenuExpandBtnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-
-    setSubmenuOpen((prev) => !prev);
-  };
-
-  const onMenuItemClick = (link: string) => {
-    navigate(link);
-  };
+  useEffect(() => {
+    projectService
+      .fetchList()
+      .then((data: FetchProjectsListResponseDto) => {
+        setProjects(data);
+      })
+  }, []);
 
   return (
     <Drawer
@@ -41,44 +26,12 @@ const Sidebar = () => {
       anchor="left"
       open
     >
-      <List>
-        {menuItems.map((menuItem) => (
-          <React.Fragment key={`menu-${menuItem.name}`}>
-            <ListItemButton
-              onClick={() => { onMenuItemClick(menuItem.link) }}
-              sx={{ backgroundColor: location.pathname.includes(menuItem.link) ? 'rgba(25, 118, 210, 0.08)' : ''  }}
-            >
-              <ListItemText primary={t(menuItem.title)} />
-              {
-                menuItem.submenu &&
-                <Button onClick={handleMenuExpandBtnClick} sx={expandBtnStyles}>
-                  {submenuOpen ? <ExpandLess /> : <ExpandMore />}
-                </Button>
-              }
-            </ListItemButton>
-            {
-              menuItem.submenu && (
-                <Collapse in={submenuOpen} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    {menuItem.submenu.map((submenuItem) => (
-                        <ListItemButton
-                          sx={{
-                            pl: 4,
-                            backgroundColor: location.pathname.includes(submenuItem.link) ? 'rgba(25, 118, 210, 0.08)' : ''
-                          }}
-                          key={submenuItem.name}
-                          onClick={() => { onMenuItemClick(submenuItem.link) }}
-                        >
-                          <ListItemText primary={t(submenuItem.title)} />
-                        </ListItemButton>
-                      ))}
-                  </List>
-                </Collapse>
-              )
-            }
-          </React.Fragment>
-        ))}
-      </List>
+      <ViewTypeSelect />
+      {
+        projects ?
+          <ProjectTree treeItems={projects} /> :
+          <LoadingSpinner />
+      }
     </Drawer>
   )
 }

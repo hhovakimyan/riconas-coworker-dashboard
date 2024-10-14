@@ -10,7 +10,8 @@ import HomePage from 'pages/HomePage';
 import {SnackbarProvider} from 'providers/Snackbar';
 import LoadingSpinner from 'components/LoadingSpinner';
 import AcceptInvitation from 'pages/AcceptInvitation';
-import ChangePasswordPage from './pages/ChangePasswordPage';
+import ChangePasswordPage from 'pages/ChangePasswordPage';
+import HouseConnectionPage from 'pages/HouseConnectionPage';
 
 const pageRoutes = [
   {
@@ -36,6 +37,10 @@ const pageRoutes = [
   {
     path: '/change-password',
     element: <ChangePasswordPage />,
+  },
+  {
+    path: '/house-connections',
+    element: <HouseConnectionPage />,
   },
 ];
 

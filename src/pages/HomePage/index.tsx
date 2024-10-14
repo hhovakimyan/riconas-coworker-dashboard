@@ -8,6 +8,7 @@ import {
   Typography
 } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { GetUserDetailsResponseDto } from 'services/models/User';
 import { projectService, userService } from 'services';
@@ -19,6 +20,8 @@ import ProjectTree from 'pages/HomePage/ProjectTree';
 
 const HomePage = () => {
   const { t } = useTranslation('homepage');
+  const navigate = useNavigate();
+
   const [coworkerData, setCoworkerData] = useState<GetUserDetailsResponseDto | null>(null);
   const [projects, setProjects] = useState<FetchProjectsListResponseDto | null>(null);
 
@@ -37,6 +40,10 @@ const HomePage = () => {
         setProjects(data);
       })
   }, []);
+
+  const onBrowseBtnClick = () => {
+    navigate('/house-connections');
+  }
 
   return (
     <Box sx={wrapperStyles}>
@@ -63,7 +70,7 @@ const HomePage = () => {
         </Card>
       </Box>
       <Box>
-        <Button variant="contained" color="info">
+        <Button variant="contained" color="info" onClick={onBrowseBtnClick}>
           {t('houseConnectionsBtn')}
         </Button>
       </Box>

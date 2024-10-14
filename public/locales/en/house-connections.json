@@ -1,0 +1,9 @@
+{
+  "viewType": {
+    "label": "View",
+    "options": {
+      "overview": "Overview",
+      "mounting": "Mounting HA"
+    }
+  }
+}

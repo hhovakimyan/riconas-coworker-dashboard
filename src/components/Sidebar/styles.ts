@@ -6,13 +6,8 @@ export const sidebarStyles = {
   '& .MuiDrawer-paper': {
     width: `${sidebarWidth}px`,
     boxSizing: 'border-box',
-    top: '78px'
+    top: '78px',
+    padding: '20px',
+    borderRight: 0,
   },
-};
-
-export const expandBtnStyles = {
-  background: 'transparent',
-  padding: 0,
-  minWidth: 'auto',
-  outline: 'none',
 };
