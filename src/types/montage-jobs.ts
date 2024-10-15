@@ -19,6 +19,9 @@ export type JobApiListItem = {
   cabel_type_planned: string;
   cabel_code: string;
   cabel_code_planned: string;
+  cabel_length: number;
+  disability_length: number;
+  cabel_position: string;
   tube_color: string;
   tube_color_planned: string;
   hup_code: string;

@@ -10,15 +10,16 @@ import React from 'react';
 type Props = {
   name: string;
   options: { value: string, label: string }[];
-  label: string;
+  label?: string;
   errorMessage?: string;
   styles?: Record<string, unknown>;
   onChange: (newValue: string) => void;
   value?: string;
+  size?: 'small' | 'medium' | undefined;
 }
 
 const SelectInput = (
-  {name, options, errorMessage, label, styles, onChange, value}: Props
+  {name, options, errorMessage, label, styles, onChange, value, size}: Props
 ) => (
     <FormControl error={!!errorMessage} sx={styles}>
       <InputLabel id={`${name}-select-label`}>
@@ -33,6 +34,7 @@ const SelectInput = (
         onChange={(event: SelectChangeEvent) => {
           onChange(event.target.value as string);
         }}
+        size={size}
       >
         {
           options.map((option) =>
