@@ -28,6 +28,9 @@
     "cabelTypeCell": {
       "selectLabel": "Cabel Type"
     },
+    "tubeColorCell": {
+      "selectLabel": "Tube Color"
+    },
     "noRecords": "No data found"
   },
   "hupModal": {

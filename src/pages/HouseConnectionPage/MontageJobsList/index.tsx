@@ -16,6 +16,7 @@ import { FetchJobListQueryParams } from 'services/models/MontageJobs';
 import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
 import CabelTypeCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelTypeCell';
+import TubeColorCell from 'pages/HouseConnectionPage/MontageJobsList/components/TubeColorCell';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -225,7 +226,9 @@ const MontageJobsList = () => {
                                         onHupBtnClick={onHupBtnClick}
                                       />
                                     )
-                                  } if (column.id === "cabel_type") {
+                                  }
+
+                                  if (column.id === "cabel_type") {
                                       return (
                                         <CabelTypeCell
                                           key={column.id}
@@ -235,6 +238,18 @@ const MontageJobsList = () => {
                                           }}
                                         />
                                       )
+                                  }
+
+                                  if (column.id === "tube_color") {
+                                    return (
+                                      <TubeColorCell
+                                        key={column.id}
+                                        rowData={row}
+                                        onChange={(newValue: string) => {
+                                          updateCellData(row.id, 'tube_color', newValue);
+                                        }}
+                                      />
+                                    )
                                   }
 
 

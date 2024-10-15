@@ -13,3 +13,8 @@ export interface TableColumn {
   align?: TableColumnAlign;
   format?: (value: number) => string;
 }
+
+export enum TableCellMode {
+  normal = 'normal',
+  edit = 'edit',
+}
