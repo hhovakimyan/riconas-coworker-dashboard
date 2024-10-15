@@ -16,6 +16,7 @@ export type JobApiListItem = {
   project_name: string;
   coworker_name: string;
   cabel_type: string;
+  cabel_type_planned: string;
   cabel_code: string;
   tube_color: string;
   hup_code: string;

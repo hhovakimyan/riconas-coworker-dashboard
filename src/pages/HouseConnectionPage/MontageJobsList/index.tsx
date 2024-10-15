@@ -15,6 +15,7 @@ import { JobApiListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
 import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
+import CabelTypeCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelTypeCell';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -170,6 +171,20 @@ const MontageJobsList = () => {
     setModalAction(null);
   }
 
+  const updateCellData = (jobId: string, itemName: string, itemValue: string) => {
+    const newItems = items.map((item) => {
+      if (item.id === jobId) {
+        return {
+          ...item,
+          [itemName]: itemValue,
+        }
+      }
+
+      return item;
+    });
+    setItems(newItems);
+  }
+
   const tableColumnsLocalized = tableColumns.map((tableColumn) => ({
     ...tableColumn,
     label: t(tableColumn.label)
@@ -202,12 +217,24 @@ const MontageJobsList = () => {
                                   const value = row[column.id as keyof object];
                                   // let value;
                                   if (column.id === "location") {
-                                    return <LocationCell
-                                      key={column.id}
-                                      rowData={row}
-                                      columnAlign={column.align}
-                                      onHupBtnClick={onHupBtnClick}
-                                    />
+                                    return (
+                                      <LocationCell
+                                        key={column.id}
+                                        rowData={row}
+                                        columnAlign={column.align}
+                                        onHupBtnClick={onHupBtnClick}
+                                      />
+                                    )
+                                  } if (column.id === "cabel_type") {
+                                      return (
+                                        <CabelTypeCell
+                                          key={column.id}
+                                          rowData={row}
+                                          onChange={(newValue: string) => {
+                                            updateCellData(row.id, 'cabel_type', newValue);
+                                          }}
+                                        />
+                                      )
                                   }
 
 

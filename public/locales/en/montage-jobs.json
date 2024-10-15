@@ -25,6 +25,9 @@
       "hupAssembly": "HÜP assembly",
       "dispatcherFeedback": "feedback to dispatcher"
     },
+    "cabelTypeCell": {
+      "selectLabel": "Cabel Type"
+    },
     "noRecords": "No data found"
   },
   "hupModal": {
