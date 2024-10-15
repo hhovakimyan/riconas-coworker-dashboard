@@ -1,5 +1,5 @@
 import { Drawer } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { SetStateAction, useEffect, useState } from 'react';
 
 import { sidebarStyles } from 'components/Sidebar/styles';
 import ProjectTree from 'components/Sidebar/ProjectTree';
@@ -8,7 +8,12 @@ import { projectService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import ViewTypeSelect from 'components/Sidebar/ViewTypeSelect';
 
-const Sidebar = () => {
+type Props = {
+  viewType: string;
+  setViewType: React.Dispatch<SetStateAction<string>>;
+}
+
+const Sidebar = ({viewType, setViewType}: Props) => {
   const [projects, setProjects] = useState<FetchProjectsListResponseDto | null>(null);
 
   useEffect(() => {
@@ -26,7 +31,7 @@ const Sidebar = () => {
       anchor="left"
       open
     >
-      <ViewTypeSelect />
+      <ViewTypeSelect viewType={viewType} setViewType={setViewType} />
       {
         projects ?
           <ProjectTree treeItems={projects} /> :

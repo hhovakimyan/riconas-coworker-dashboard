@@ -5,6 +5,7 @@ import {ServiceCallsArgs} from 'services/ServiceCallsArgs';
 import AuthenticationService from 'services/api/AuthenticationService';
 import UserService from 'services/api/UserService';
 import ProjectService from 'services/api/ProjectService';
+import MontageJobService from 'services/api/MontageJobService';
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -40,3 +41,5 @@ export const authenticationService = traceMethod(new AuthenticationService());
 export const userService = traceMethod(new UserService());
 
 export const projectService = traceMethod(new ProjectService());
+
+export const montageJobService = traceMethod(new MontageJobService());

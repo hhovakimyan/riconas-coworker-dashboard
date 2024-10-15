@@ -6,18 +6,18 @@ import {
   Typography
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { useState } from 'react';
+import React, { SetStateAction } from 'react';
 
 import { selectStyles, wrapperStyles } from 'components/Sidebar/ViewTypeSelect/styles';
+import { VIEW_TYPES } from 'constants/main';
 
-const viewTypes = [
-  'overview',
-  'mounting'
-];
+type Props = {
+  viewType: string;
+  setViewType: React.Dispatch<SetStateAction<string>>;
+}
 
-const ViewTypeSelect = () => {
+const ViewTypeSelect = ({viewType, setViewType}: Props) => {
   const { t } = useTranslation('house-connections', { keyPrefix: 'viewType' });
-  const [viewType, setViewType] = useState<string>(viewTypes[0]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setViewType(event.target.value as string);
@@ -34,7 +34,7 @@ const ViewTypeSelect = () => {
         sx={selectStyles}
       >
         {
-          viewTypes.map((viewTypeOption) =>
+          VIEW_TYPES.map((viewTypeOption) =>
             <MenuItem
               key={`view-type-${viewTypeOption}`}
               value={viewTypeOption}
