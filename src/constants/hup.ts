@@ -1,9 +1,11 @@
 export const HUP_TYPES = [
-  'hup',
-  'hup_ont',
+  'none',
+  'SINGLE',
+  'WITH_ONT',
 ];
 
 export const HUP_LOCATIONS = [
+  'none',
   'basement',
   'living_room',
   'corridor',

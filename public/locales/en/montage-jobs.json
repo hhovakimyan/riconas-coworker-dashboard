@@ -33,13 +33,15 @@
       "hupType": {
         "label": "HUP Type",
         "options": {
-          "hup": "HUP",
-          "hup_ont": "HUP & ONT"
+          "none": "None",
+          "SINGLE": "HUP",
+          "WITH_ONT": "HUP & ONT"
         }
       },
       "hupLocation": {
         "label": "HUP Location",
         "options": {
+          "none": "None",
           "basement": "Basement",
           "living_room": "Living Room",
           "corridor": "Corridor",

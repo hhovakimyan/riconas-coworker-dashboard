@@ -3,7 +3,12 @@ import React, { useCallback, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
-  Box, Button, DialogActions, FormControlLabel, Switch,
+  Alert,
+  Box,
+  Button,
+  DialogActions,
+  FormControlLabel,
+  Switch,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 
@@ -17,8 +22,9 @@ import { actionButtonWrapperStyles } from 'pages/HouseConnectionPage/MontageJobs
 type Props = {
   onSubmit: (newData: HupEditableProps, isDataChanged: boolean) => void;
   currentData?: HupEditableProps | null;
-  submitError?: string;
+  submitError: string | null;
   isLoading: boolean;
+  closeModal: () => void;
 };
 
 const defaultFormValuesInitialState: HupEditableProps = {
@@ -35,17 +41,11 @@ const HupForm: React.FC<Props> = ({
   submitError,
   currentData,
   isLoading,
+  closeModal,
 }) => {
   let defaultFormValues = defaultFormValuesInitialState;
   if (currentData) {
-    defaultFormValues = {
-      openedHupPhoto: currentData.openedHupPhoto,
-      closedHupPhoto: currentData.closedHupPhoto,
-      hupType: currentData.hupType,
-      hupLocation: currentData.hupLocation,
-      hupPreInstalled: currentData.hupPreInstalled,
-      hupInstalled: currentData.hupInstalled,
-    };
+    defaultFormValues = currentData;
   }
 
   const {
@@ -111,16 +111,19 @@ const HupForm: React.FC<Props> = ({
          <FormControlLabel control={<Switch {...field} />} label={t('hupInstalled.label')} />
        )}
       />
+      {submitError && (
+        <Alert severity="error">{submitError}</Alert>
+      )}
       <DialogActions>
         <Box sx={actionButtonWrapperStyles}>
-          <Button variant="text">{t('closeBtn')}</Button>
+          <Button variant="text" onClick={closeModal}>{t('closeBtn')}</Button>
           <LoadingButton
             type="submit"
             variant="contained"
             fullWidth
             loading={isLoading}
             disabled={isLoading}
-            loadingPosition={'end'}
+            loadingPosition='end'
           >
             {t('submitBtn')}
           </LoadingButton>

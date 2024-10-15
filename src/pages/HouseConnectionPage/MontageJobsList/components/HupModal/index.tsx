@@ -13,6 +13,7 @@ import { FetchHupDetailsResponseDto } from 'services/models/Hups';
 import LoadingSpinner from 'components/LoadingSpinner';
 import HupForm from 'pages/HouseConnectionPage/MontageJobsList/components/HupForm';
 import { HupEditableProps } from 'types/hups';
+import { ServiceError } from 'services/helperTypes';
 
 type Props = {
   onClose: () => void;
@@ -21,9 +22,11 @@ type Props = {
 
 const HupModal = ({onClose, jobData}: Props) => {
   const [hupData, setHupData] = useState<HupDetailsApiItem | null>(null);
-  const [submitError, setSubmitError] = useState<{[key: string]: string} | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { t } = useTranslation('montage-jobs');
+  const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
 
   useEffect(() => {
     if (jobData.id) {
@@ -35,10 +38,29 @@ const HupModal = ({onClose, jobData}: Props) => {
     }
   }, [jobData.id]);
 
-  const onFormSubmit = (newData: HupEditableProps) => {
-    // Update HUP data in db
-    console.log(newData);
-    setSubmitError(null);
+  const onFormSubmit = async (newData: HupEditableProps, isDataChanged: boolean) => {
+    if (!isDataChanged) {
+      return;
+    }
+
+    setIsLoading(true);
+    const updateResponseDto = await hupService.updateDetails(
+      jobData.id,
+      {
+        hup_type: newData.hupType,
+        location: newData.hupLocation,
+        is_pre_installed: newData.hupPreInstalled,
+        is_installed: newData.hupInstalled,
+        opened_hup_photo_path: newData.openedHupPhoto,
+        closed_hup_photo_path: newData.closedHupPhoto,
+      }
+    );
+    setIsLoading(false);
+    if (updateResponseDto instanceof ServiceError) {
+      setSubmitError(mainT('somethingWentWrong'));
+    } else {
+      setSubmitError(null);
+    }
   };
 
   const closeModal = () => {
@@ -71,7 +93,12 @@ const HupModal = ({onClose, jobData}: Props) => {
         </Typography>
         {
           hupData ?
-            <HupForm onSubmit={onFormSubmit} isLoading={false} /> :
+            <HupForm
+              onSubmit={onFormSubmit}
+              submitError={submitError}
+              isLoading={isLoading}
+              closeModal={closeModal}
+            /> :
             <LoadingSpinner />
         }
       </DialogContent>
