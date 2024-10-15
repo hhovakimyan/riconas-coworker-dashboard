@@ -3,15 +3,16 @@ import { useTranslation } from 'react-i18next';
 
 import { HupStatus, JobApiListItem } from 'types/montage-jobs';
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
-import { hupButtonsWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/styles';
+import { hupButtonsWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/styles';
 import { TableColumnAlign } from 'types/generic';
 
 type Props = {
   columnAlign?: TableColumnAlign;
   rowData: JobApiListItem;
+  onHupBtnClick: (jobId: string) => void;
 }
 
-const LocationCell = ({rowData, columnAlign}: Props) => {
+const LocationCell = ({rowData, columnAlign, onHupBtnClick}: Props) => {
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'table.locationCell'});
 
   return (
@@ -37,7 +38,9 @@ const LocationCell = ({rowData, columnAlign}: Props) => {
           <Box sx={hupButtonsWrapperStyles}>
             <Button
               variant="contained"
-              color={rowData.hup_status === HupStatus.INSTALLED ? 'success' : 'info'}>
+              color={rowData.hup_status === HupStatus.INSTALLED ? 'success' : 'info'}
+              onClick={() => { onHupBtnClick(rowData.id) }}
+            >
                 {t('hupAssembly')}
             </Button>
             <Button variant="contained" color="warning">{t('dispatcherFeedback')}</Button>

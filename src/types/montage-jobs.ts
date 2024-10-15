@@ -25,3 +25,12 @@ export type JobApiListItem = {
   hup_customer_phone_number1: string;
   hup_customer_phone_number2: string;
 }
+
+export type HupDetailsApiItem = {
+  id: string
+  hup_type: string | null;
+  location: string | null;
+  status: HupStatus;
+  opened_hup_photo_path: string | null;
+  closed_hup_photo_path: string | null;
+};

@@ -14,6 +14,11 @@ import { TABLE_DEFAULT_ROWS_PER_PAGE, TABLE_DEFAULT_START_PAGE, TABLE_ROWS_PER_P
 import { JobApiListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
 import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
+import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
+
+enum TableModalActions {
+  openHupModal = 'openHupModal',
+}
 
 const tableColumns: TableColumn[] = [
   {
@@ -84,8 +89,9 @@ const MontageJobsList = () => {
   const [items, setItems] = useState<JobApiListItem[]>([]);
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
+  const [modalAction, setModalAction] = useState<TableModalActions | null>(null);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
-  // const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
   // const [filter, setFilter] = useState<MontageJobFilterProps | null>(null);
 
   const { t } = useTranslation('montage-jobs');
@@ -151,6 +157,16 @@ const MontageJobsList = () => {
   //   fetchItems(page, rowsPerPage, newFilter);
   // }
 
+  const onHupBtnClick = (jobId: string) => {
+    setSelectedItemId(jobId);
+    setModalAction(TableModalActions.openHupModal);
+  }
+
+  const onModalClose = () => {
+    setSelectedItemId(null);
+    setModalAction(null);
+  }
+
   const tableColumnsLocalized = tableColumns.map((tableColumn) => ({
     ...tableColumn,
     label: t(tableColumn.label)
@@ -183,7 +199,12 @@ const MontageJobsList = () => {
                                   const value = row[column.id as keyof object];
                                   // let value;
                                   if (column.id === "location") {
-                                    return <LocationCell key={column.id} rowData={row} columnAlign={column.align} />
+                                    return <LocationCell
+                                      key={column.id}
+                                      rowData={row}
+                                      columnAlign={column.align}
+                                      onHupBtnClick={onHupBtnClick}
+                                    />
                                   }
 
 
@@ -225,6 +246,11 @@ const MontageJobsList = () => {
                 </>
               </TableWrapper>
           )
+      }
+      {
+        modalAction === TableModalActions.openHupModal &&
+        selectedItemId &&
+        <HupModal jobId={selectedItemId} onClose={onModalClose} />
       }
     </>
   );
