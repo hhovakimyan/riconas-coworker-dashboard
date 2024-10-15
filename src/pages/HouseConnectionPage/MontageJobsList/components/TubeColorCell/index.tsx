@@ -27,9 +27,10 @@ const TubeColorCell = ({rowData, columnAlign, onChange}: Props) => {
   return (
     <TableCell padding="none" align={columnAlign} onClick={toggleCellMode}>
       {
-        mode === 'normal' ?
+        mode === TableCellMode.normal ?
           rowData.tube_color :
           <SelectInput
+            value={rowData.tube_color || TUBE_COLORS[0]}
             name="tubeColor"
             options={
               TUBE_COLORS.map((cabelType) => ({label: cabelType, value: cabelType}))

@@ -17,6 +17,7 @@ import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/L
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
 import CabelTypeCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelTypeCell';
 import TubeColorCell from 'pages/HouseConnectionPage/MontageJobsList/components/TubeColorCell';
+import CabelCodeCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelCodeCell';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -41,12 +42,12 @@ const tableColumns: TableColumn[] = [
   {
     id: 'cabel_code_planned',
     label: 'table.headers.cabelCodePlanned',
-    minWidth: 40,
+    minWidth: 100,
   },
   {
     id: 'cabel_code',
     label: 'table.headers.cabelCode',
-    minWidth: 40,
+    minWidth: 100,
   },
   {
     id: 'tube_color_planned',
@@ -248,6 +249,20 @@ const MontageJobsList = () => {
                                         onChange={(newValue: string) => {
                                           updateCellData(row.id, 'tube_color', newValue);
                                         }}
+                                      />
+                                    )
+                                  }
+
+                                  if (column.id === "cabel_code") {
+                                    return (
+                                      <CabelCodeCell
+                                        key={column.id}
+                                        rowData={row}
+                                        onChange={
+                                          (newValue: string) => {
+                                            updateCellData(row.id, 'cabel_code', newValue);
+                                          }
+                                        }
                                       />
                                     )
                                   }
