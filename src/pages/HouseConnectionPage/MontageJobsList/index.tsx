@@ -13,6 +13,7 @@ import { montageJobService } from 'services';
 import { TABLE_DEFAULT_ROWS_PER_PAGE, TABLE_DEFAULT_START_PAGE, TABLE_ROWS_PER_PAGE_OPTIONS } from 'constants/main';
 import { JobApiListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
+import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
 
 const tableColumns: TableColumn[] = [
   {
@@ -181,9 +182,12 @@ const MontageJobsList = () => {
                                 {tableColumns.map((column) => {
                                   const value = row[column.id as keyof object];
                                   // let value;
-                                  // if (column.id === "location") {
-                                  //   return <LocationCell key={column.id} rowData={row} columnAlign={column.align} />
-                                  // } if (column.id === "cabel_props") {
+                                  if (column.id === "location") {
+                                    return <LocationCell key={column.id} rowData={row} columnAlign={column.align} />
+                                  }
+
+
+                                  // if (column.id === "cabel_props") {
                                   //   return <CabelPropsCell key={column.id} rowData={row} columnAlign={column.align} />
                                   // } if (column.id === "hup") {
                                   //   return <HupDataCell key={column.id} rowData={row} columnAlign={column.align} />

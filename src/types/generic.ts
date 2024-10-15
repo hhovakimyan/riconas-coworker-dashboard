@@ -4,10 +4,12 @@ export type SearchedValueType = {
   value: string;
 }
 
+export type TableColumnAlign = 'inherit' | 'left' | 'center' | 'right' | 'justify';
+
 export interface TableColumn {
   id: string;
   label: string;
   minWidth?: number;
-  align?: 'right';
+  align?: TableColumnAlign;
   format?: (value: number) => string;
 }

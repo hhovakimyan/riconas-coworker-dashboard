@@ -22,11 +22,8 @@
       "photos": "Photos"
     },
     "locationCell": {
-      "project": "Project",
-      "subproject": "Subproject",
-      "nvt": "NVT",
-      "addressLine1": "Address Line 1",
-      "addressLine2": "Address Line 2"
+      "hupAssembly": "HÜP assembly",
+      "dispatcherFeedback": "feedback to dispatcher"
     },
     "noRecords": "No data found"
   },

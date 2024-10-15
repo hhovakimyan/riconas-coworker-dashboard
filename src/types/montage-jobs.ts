@@ -1,3 +1,9 @@
+export enum HupStatus {
+  NOT_INSTALLED = 'NOT_INSTALLED',
+  PREINSTALLED = 'PREINSTALLED',
+  INSTALLED = 'INSTALLED',
+}
+
 export type JobApiListItem = {
   id: string;
   address_line1: string;
@@ -13,6 +19,7 @@ export type JobApiListItem = {
   cabel_code: string;
   tube_color: string;
   hup_code: string;
+  hup_status: HupStatus;
   hup_customer_name: string;
   hup_customer_email: string;
   hup_customer_phone_number1: string;
