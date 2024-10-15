@@ -6,33 +6,28 @@ import { ImageTypes } from 'types/images';
 import FileUploadButton from 'components/FileUploadButton';
 import useImageUpload from 'hooks/image-upload';
 import UploadFileErrorSnackbar from 'components/UploadFileErrorSnackbar';
-import { photoImageButtonStyles } from 'components/UploadImage/styles';
 
 type Props = {
   fileMaxSizeMb: number;
   allowedImageTypes: string[];
-  resolutionWidth: number;
-  resolutionHeight: number;
   onImageUpload: (uploadedFile: File, imageType: string) => Promise<boolean>;
   btnId: string;
   t: TFunction,
+  sx?: Record<string, unknown>;
 };
 
 const UploadImage: React.FC<Props> = ({
   fileMaxSizeMb,
   allowedImageTypes,
-  resolutionWidth,
-  resolutionHeight,
   onImageUpload,
   btnId,
   t,
+  sx,
 }) => {
   const { uploadError, onFileUpload, clearUploadError } =
     useImageUpload(
       fileMaxSizeMb,
       allowedImageTypes,
-      resolutionWidth,
-      resolutionHeight,
       onImageUpload,
       t,
     );
@@ -43,8 +38,9 @@ const UploadImage: React.FC<Props> = ({
         icon={<AddAPhotoIcon />}
         accept={[ImageTypes.Png, ImageTypes.Jpeg].join(", ")}
         onUpload={onFileUpload}
-        sx={photoImageButtonStyles}
         id={btnId}
+        title={t('title')}
+        sx={sx}
       />
       {uploadError && (
         <UploadFileErrorSnackbar

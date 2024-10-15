@@ -3,7 +3,7 @@
   "buildingType": {
     "options": {
       "MULTI_HOUSE": "Multi-family house",
-      "SINGLE_HOUSE": "Single-family/two-family house"
+      "SINGLE_HOUSE": "Single-family or two-family house"
     }
   },
   "table": {
@@ -26,6 +26,43 @@
       "dispatcherFeedback": "feedback to dispatcher"
     },
     "noRecords": "No data found"
+  },
+  "hupModal": {
+    "subtitle": "HÜP-Assembly Building for {{buildingType}}",
+    "form": {
+      "hupType": {
+        "label": "HUP Type",
+        "options": {
+          "hup": "HUP",
+          "hup_ont": "HUP & ONT"
+        }
+      },
+      "hupLocation": {
+        "label": "HUP Location",
+        "options": {
+          "basement": "Basement",
+          "living_room": "Living Room",
+          "corridor": "Corridor",
+          "bureau": "Bureau",
+          "utility_room": "Utility Room",
+          "miscellaneous": "Miscellaneous"
+        }
+      },
+      "hupPreInstalled": {
+        "label": "PreInstalled"
+      },
+      "hupInstalled": {
+        "label": "Installed"
+      },
+      "openedHupPhoto": {
+        "title": "Upload open HUP photo"
+      },
+      "closedHupPhoto": {
+        "title": "Upload closed HUP photo"
+      },
+      "closeBtn": "Close",
+      "submitBtn": "Submit"
+    }
   },
   "filters": {
     "project": {

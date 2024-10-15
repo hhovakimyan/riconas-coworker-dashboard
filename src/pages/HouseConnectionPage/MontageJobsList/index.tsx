@@ -90,7 +90,7 @@ const MontageJobsList = () => {
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [modalAction, setModalAction] = useState<TableModalActions | null>(null);
-  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [selectedItem, setSelectedItem] = useState<JobApiListItem | undefined>(undefined);
 
   // const [filter, setFilter] = useState<MontageJobFilterProps | null>(null);
 
@@ -158,12 +158,15 @@ const MontageJobsList = () => {
   // }
 
   const onHupBtnClick = (jobId: string) => {
-    setSelectedItemId(jobId);
+    const targetItem = items.find(
+      (item) => item.id === jobId
+    );
+    setSelectedItem(targetItem);
     setModalAction(TableModalActions.openHupModal);
   }
 
   const onModalClose = () => {
-    setSelectedItemId(null);
+    setSelectedItem(undefined);
     setModalAction(null);
   }
 
@@ -209,9 +212,9 @@ const MontageJobsList = () => {
 
 
                                   // if (column.id === "cabel_props") {
-                                  //   return <CabelPropsCell key={column.id} rowData={row} columnAlign={column.align} />
+                                  //   return <CabelPropsCell key={column.id} jobData={row} columnAlign={column.align} />
                                   // } if (column.id === "hup") {
-                                  //   return <HupDataCell key={column.id} rowData={row} columnAlign={column.align} />
+                                  //   return <HupDataCell key={column.id} jobData={row} columnAlign={column.align} />
                                   // } if (column.id === "stuff") {
                                   //   value = row.coworker || '-';
                                   // } else if (column.id === "registrationDate") {
@@ -249,8 +252,8 @@ const MontageJobsList = () => {
       }
       {
         modalAction === TableModalActions.openHupModal &&
-        selectedItemId &&
-        <HupModal jobId={selectedItemId} onClose={onModalClose} />
+        selectedItem &&
+        <HupModal jobData={selectedItem} onClose={onModalClose} />
       }
     </>
   );

@@ -1,15 +1,9 @@
 import { ChangeEvent, useState } from 'react';
 import type { TFunction } from 'i18next';
 
-import {
-  getUploadedImageResolution,
-} from 'utils/uploaded-files';
-
 const useImageUpload = (
   fileMaxSize: number,
   allowedImageTypes: string[],
-  resolutionWidth: number,
-  resolutionHeight: number,
   onImageUpload: (
     uploadedFile: File,
     imageType: string,
@@ -34,12 +28,6 @@ const useImageUpload = (
       return 'errors.fileFormat';
     }
 
-    // Validate image resolution
-    const [width, height] = await getUploadedImageResolution(uploadedFile);
-    if (width < resolutionWidth || height < resolutionHeight) {
-      return 'errors.resolution';
-    }
-
     return true;
   };
 
@@ -55,7 +43,6 @@ const useImageUpload = (
       setUploadError(
         t(validationResult, {
           maxSize: fileMaxSize,
-          resolution: `${resolutionWidth}x${resolutionHeight}`,
         }),
       );
       setIsUploading(false);
