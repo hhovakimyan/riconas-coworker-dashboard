@@ -30,3 +30,13 @@ export const TUBE_COLORS = [
   'OR2',
   'RS2',
 ];
+
+export const CABEL_POSITIONS = [
+  "none",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6"
+];

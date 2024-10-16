@@ -6,6 +6,15 @@
       "SINGLE_HOUSE": "Single-family or two-family house"
     }
   },
+  "cabelPositions": {
+    "none": "None",
+    "1": "1 - cable in house (without error)",
+    "2": "2 - cable in front of the house / house entry missing",
+    "3": "3 - cabel on the property / connection missing",
+    "4": "4 - cable at the property / property crossing missing",
+    "5": "5 - Disability from NVT (with m indication)",
+    "6": "6 - Obstruction from building (with m indication)"
+  },
   "table": {
     "headers": {
       "location": "Location",
@@ -25,12 +34,6 @@
     "locationCell": {
       "hupAssembly": "HÜP assembly",
       "dispatcherFeedback": "feedback to dispatcher"
-    },
-    "cabelTypeCell": {
-      "selectLabel": "Cabel Type"
-    },
-    "tubeColorCell": {
-      "selectLabel": "Tube Color"
     },
     "noRecords": "No data found"
   },

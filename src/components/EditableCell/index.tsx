@@ -22,7 +22,6 @@ const EditableCell = ({columnAlign, children, cellValue}: Props) => {
 
   return (
     <TableCell
-      padding="none"
       align={columnAlign}
       onDoubleClick={onDoubleClick}
       onClick={onClick}

@@ -12,6 +12,8 @@ export interface TableColumn {
   minWidth?: number;
   align?: TableColumnAlign;
   format?: (value: number) => string;
+  options?: {label: string, value: string}[];
+  inputType?: string;
 }
 
 export enum TableCellMode {

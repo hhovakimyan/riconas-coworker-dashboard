@@ -9,15 +9,14 @@ type Props = {
   onChange: (cellNewValue: string) => void;
   options: {label: string, value: string}[];
   columnAlign?: TableColumnAlign;
-  defaultValue?: string;
 }
 
 const EditableSelectCell = (
-  {cellName, cellValue, onChange, options, defaultValue, columnAlign}: Props
+  {cellName, cellValue, onChange, options, columnAlign}: Props
 ) => (
     <EditableCell cellValue={cellValue} columnAlign={columnAlign}>
       <SelectInput
-        value={cellValue || defaultValue}
+        value={cellValue || options[0].value}
         name={cellName}
         options={options}
         onChange={onChange}

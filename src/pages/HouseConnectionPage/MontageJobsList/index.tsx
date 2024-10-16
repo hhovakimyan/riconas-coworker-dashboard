@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TablePagination, TableRow } from '@mui/material';
+import { Table, TableBody, TableContainer, TablePagination } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -17,15 +17,25 @@ import {
 } from 'constants/main';
 import { JobApiListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
-import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
-import EditableSelectCell from 'components/EditableSelectCell';
-import { CABEL_TYPES, TUBE_COLORS } from 'constants/montageJobs';
-import EditableTextFieldCell from 'components/EditableTextFieldCell';
+import JobTableRow from 'pages/HouseConnectionPage/MontageJobsList/components/JobTableRow';
+import { CABEL_POSITIONS, CABEL_TYPES, TUBE_COLORS } from 'constants/montageJobs';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
 }
+
+const cabelTypeOptions = CABEL_TYPES.map(
+  (cabelType) => ({label: cabelType, value: cabelType})
+);
+
+const tubeColorOptions = TUBE_COLORS.map(
+  (tubeColor) => ({label: tubeColor, value: tubeColor})
+);
+
+const cabelPositionOptions = CABEL_POSITIONS.map((position) => (
+  {label: position, value: position}
+));
 
 const tableColumns: TableColumn[] = [
   {
@@ -42,6 +52,7 @@ const tableColumns: TableColumn[] = [
     id: 'cabel_type',
     label: 'table.headers.cabelType',
     minWidth: 40,
+    options: cabelTypeOptions,
   },
   {
     id: 'cabel_code_planned',
@@ -62,11 +73,13 @@ const tableColumns: TableColumn[] = [
     id: 'tube_color',
     label: 'table.headers.tubeColor',
     minWidth: 40,
+    options: tubeColorOptions,
   },
   {
     id: 'cabel_length',
     label: 'table.headers.cabelLength',
     minWidth: 40,
+    inputType: 'number',
   },
   {
     id: 'comment',
@@ -77,11 +90,13 @@ const tableColumns: TableColumn[] = [
     id: 'disability_length',
     label: 'table.headers.disabilityLength',
     minWidth: 40,
+    inputType: 'number',
   },
   {
     id: 'cabel_position',
     label: 'table.headers.cabelPosition',
     minWidth: 80,
+    options: cabelPositionOptions,
   },
   {
     id: 'completeDate',
@@ -94,14 +109,6 @@ const tableColumns: TableColumn[] = [
     minWidth: 20,
   }
 ];
-
-const cabelTypeOptions = CABEL_TYPES.map(
-  (cabelType) => ({label: cabelType, value: cabelType})
-);
-
-const tubeColorOptions = TUBE_COLORS.map(
-  (cabelType) => ({label: cabelType, value: cabelType})
-);
 
 const MontageJobsList = () => {
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
@@ -204,10 +211,23 @@ const MontageJobsList = () => {
     setItems(newItems);
   }
 
-  const tableColumnsLocalized = tableColumns.map((tableColumn) => ({
-    ...tableColumn,
-    label: t(tableColumn.label)
-  }));
+  const tableColumnsLocalized = tableColumns.map((tableColumn) => {
+    if (tableColumn.id === "cabel_position") {
+      return {
+        ...tableColumn,
+        label: t(tableColumn.label),
+        options: tableColumn.options?.map(
+          (option) =>
+            ({ value: option.value, label: t(`cabelPositions.${option.label}`) })
+        ),
+      }
+    }
+
+    return {
+      ...tableColumn,
+      label: t(tableColumn.label)
+    }
+  });
 
   return (
     <>
@@ -226,113 +246,13 @@ const MontageJobsList = () => {
                       <TableBody>
                         {items
                           .map((row) => (
-                            <TableRow
-                              hover
-                              role="checkbox"
-                              tabIndex={-1}
+                            <JobTableRow
                               key={`job-${row.id}`}
-                            >
-                              {tableColumns.map((column) => {
-                                const value = row[column.id as keyof object];
-                                if (column.id === "location") {
-                                  return (
-                                    <LocationCell
-                                      key={column.id}
-                                      rowData={row}
-                                      columnAlign={column.align}
-                                      onHupBtnClick={onHupBtnClick}
-                                    />
-                                  )
-                                }
-
-                                if (column.id === "cabel_type") {
-                                  return (
-                                    <EditableSelectCell
-                                      key={column.id}
-                                      cellName='cabelType'
-                                      cellValue={row.cabel_type}
-                                      onChange={(newValue: string) => {
-                                        updateCellData(row.id, 'cabel_type', newValue);
-                                      }}
-                                      options={cabelTypeOptions}
-                                      defaultValue={CABEL_TYPES[0]}
-                                    />
-                                  )
-                                }
-
-                                if (column.id === "tube_color") {
-                                  return (
-                                    <EditableSelectCell
-                                      key={column.id}
-                                      cellName="tubeColor"
-                                      cellValue={row.tube_color}
-                                      onChange={(newValue: string) => {
-                                        updateCellData(row.id, 'tube_color', newValue);
-                                      }}
-                                      options={tubeColorOptions}
-                                      defaultValue={TUBE_COLORS[0]}
-                                    />
-                                  )
-                                }
-
-                                if (column.id === "cabel_code") {
-                                  return (
-                                    <EditableTextFieldCell
-                                      key={column.id}
-                                      cellName="cabelCode"
-                                      cellValue={row.cabel_code}
-                                      onChange={
-                                        (newValue: string) => {
-                                          updateCellData(row.id, 'cabel_code', newValue);
-                                        }
-                                      }
-                                    />
-                                  )
-                                }
-
-                                if (column.id === "cabel_length") {
-                                  return (
-                                    <EditableTextFieldCell
-                                      key={column.id}
-                                      inputType="number"
-                                      cellName="cabelLength"
-                                      cellValue={row.cabel_length?.toString()}
-                                      onChange={
-                                        (newValue: string) => {
-                                          updateCellData(row.id, 'cabel_length', newValue);
-                                        }
-                                      }
-                                    />
-                                  )
-                                }
-
-                                if (column.id === "disability_length") {
-                                  return (
-                                    <EditableTextFieldCell
-                                      key={column.id}
-                                      inputType="number"
-                                      cellName="disabilityLength"
-                                      cellValue={row.disability_length?.toString()}
-                                      onChange={
-                                        (newValue: string) => {
-                                          updateCellData(row.id, 'disability_length', newValue);
-                                        }
-                                      }
-                                    />
-                                  )
-                                }
-
-                                return (
-                                  <TableCell
-                                    padding="none"
-                                    key={column.id}
-                                    align={column.align}
-                                  >
-                                    {value}
-                                  </TableCell>
-                                );
-                              })}
-                            </TableRow>
+                              tableColumns={tableColumnsLocalized}
+                              rowData={row}
+                              updateCellData={updateCellData}
+                              onHupBtnClick={onHupBtnClick}
+                            />
                           ))}
                       </TableBody>
                     </Table>
