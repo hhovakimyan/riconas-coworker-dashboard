@@ -11,10 +11,11 @@ type Props = {
   onChange: (cellNewValue: string) => void;
   columnAlign?: TableColumnAlign;
   inputType?: string;
+  maxLength?: number;
 }
 
 const EditableTextFieldCell = (
-  {cellName, cellValue, onChange, columnAlign, inputType}: Props
+  {cellName, cellValue, onChange, columnAlign, inputType, maxLength}: Props
 ) => {
   const [value, setValue] = useState<string>(cellValue || '');
 
@@ -30,6 +31,8 @@ const EditableTextFieldCell = (
     event.stopPropagation();
   }
 
+  const inputProps = maxLength ? { maxLength } : {}
+
   return (
     <EditableCell cellValue={cellValue} columnAlign={columnAlign}>
       <TextField
@@ -41,6 +44,9 @@ const EditableTextFieldCell = (
         onClick={onTextInputClick}
         size="small"
         autoComplete="off"
+        slotProps={{
+          htmlInput: inputProps,
+        }}
       />
     </EditableCell>
   )

@@ -51,7 +51,7 @@ const JobTableRow = (
         }
 
         if (
-          ["cabel_code", "cabel_length", "disability_length"]
+          ["cabel_code", "cabel_length", "disability_length", "comment"]
             .includes(column.id)
         ) {
           return (
@@ -65,6 +65,7 @@ const JobTableRow = (
                   updateCellData(rowData.id, column.id, newValue);
                 }
               }
+              maxLength={column.maxLength}
             />
           )
         }

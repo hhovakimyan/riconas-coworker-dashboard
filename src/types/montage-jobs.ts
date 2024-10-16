@@ -30,6 +30,7 @@ export type JobApiListItem = {
   hup_customer_email: string;
   hup_customer_phone_number1: string;
   hup_customer_phone_number2: string;
+  comment: string;
 }
 
 export type HupDetailsApiItem = {

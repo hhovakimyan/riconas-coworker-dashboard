@@ -40,3 +40,5 @@ export const CABEL_POSITIONS = [
   "5",
   "6"
 ];
+
+export const COMMENT_MAX_LENGTH = 100;

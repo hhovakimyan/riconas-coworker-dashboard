@@ -4,6 +4,8 @@ import { ServiceError } from 'services/helperTypes';
 import {
   FetchJobListQueryParams,
   FetchMontageJobListResponseDto,
+  SaveCommentRequestDto,
+  SaveCommentResponseDto,
   UpdateCabelPropsRequestDto,
   UpdateCabelPropsResponseDto,
 } from 'services/models/MontageJobs';
@@ -38,6 +40,23 @@ class MontageJobService extends Service {
         undefined,
         requestData,
         UpdateCabelPropsResponseDto,
+        true,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async saveComment(
+    jobId: string,
+    requestData: SaveCommentRequestDto
+  ): Promise<SaveCommentResponseDto | ServiceError> {
+    try {
+      return await httpClient.post<SaveCommentResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/comment`,
+        undefined,
+        requestData,
+        SaveCommentResponseDto,
         true,
       );
     } catch (error: any) {

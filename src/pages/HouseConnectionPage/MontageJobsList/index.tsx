@@ -19,7 +19,12 @@ import { JobApiListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
 import JobTableRow from 'pages/HouseConnectionPage/MontageJobsList/components/JobTableRow';
-import { CABEL_POSITIONS, CABEL_TYPES, TUBE_COLORS } from 'constants/montageJobs';
+import {
+  CABEL_POSITIONS,
+  CABEL_TYPES,
+  COMMENT_MAX_LENGTH,
+  TUBE_COLORS
+} from 'constants/montageJobs';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -85,6 +90,7 @@ const tableColumns: TableColumn[] = [
     id: 'comment',
     label: 'table.headers.comment',
     minWidth: 40,
+    maxLength: COMMENT_MAX_LENGTH,
   },
   {
     id: 'disability_length',
@@ -209,12 +215,16 @@ const MontageJobsList = () => {
       return item;
     });
 
-    montageJobService.updateCabelProps(
-      jobId,
-      {
-        [itemName]: itemValue,
-      }
-    );
+    if (itemName === "comment") {
+      montageJobService.saveComment(jobId, { comment: itemValue });
+    } else {
+      montageJobService.updateCabelProps(
+        jobId,
+        {
+          [itemName]: itemValue,
+        }
+      );
+    }
 
     setItems(newItems);
   }

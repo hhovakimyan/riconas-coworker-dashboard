@@ -30,3 +30,9 @@ export class UpdateCabelPropsRequestDto {
 }
 
 export class UpdateCabelPropsResponseDto {}
+
+export class SaveCommentRequestDto {
+  comment!: string;
+}
+
+export class SaveCommentResponseDto {}

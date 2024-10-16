@@ -14,6 +14,7 @@ export interface TableColumn {
   format?: (value: number) => string;
   options?: {label: string, value: string}[];
   inputType?: string;
+  maxLength?: number;
 }
 
 export enum TableCellMode {
