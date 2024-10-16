@@ -26,14 +26,14 @@ const LocationCell = ({rowData, columnAlign, onHupBtnClick}: Props) => {
         <Typography>{rowData.hup_code}</Typography>
         <Box className="hupBox">
           <Typography>{rowData.hup_customer_name}</Typography>
-          <Link href={`tel:${rowData.hup_customer_phone_number1}`}>{rowData.hup_customer_phone_number1}</Link>
+          <PhoneLink phoneNumber={rowData.hup_customer_phone_number1} />
           <br/>
           {
             rowData.hup_customer_phone_number2 &&
-            <Link href={`tel:${rowData.hup_customer_phone_number2}`}>{rowData.hup_customer_phone_number2}</Link>
+            <PhoneLink phoneNumber={rowData.hup_customer_phone_number2} />
           }
           <Typography>
-            <Link href={`mailto:${rowData.hup_customer_email}`}>{rowData.hup_customer_email}</Link>
+            <EmailLink emailAddress={rowData.hup_customer_email} />
           </Typography>
           <Box sx={hupButtonsWrapperStyles}>
             <Button

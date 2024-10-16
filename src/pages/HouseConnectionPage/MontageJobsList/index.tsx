@@ -143,7 +143,7 @@ const MontageJobsList = () => {
     setIsLoadingList(false);
     if (fetchListResponse instanceof ServiceError) {
       setSnackbarOpen(true);
-      setSnackbarMessage(t('failedToLoadItems'));
+      setSnackbarMessage(t('table.failedToLoadItems'));
       return;
     }
 
