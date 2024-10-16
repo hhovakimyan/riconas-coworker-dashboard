@@ -16,3 +16,17 @@ export class FetchMontageJobListResponseDto {
 
   total_count!: number;
 }
+
+export class UpdateCabelPropsRequestDto {
+  cabel_type?: string;
+
+  cabel_code?: string;
+
+  tube_color?: string;
+
+  cabel_length?: number;
+
+  disability_length?: number;
+}
+
+export class UpdateCabelPropsResponseDto {}

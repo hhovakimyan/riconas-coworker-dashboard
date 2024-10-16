@@ -4,6 +4,8 @@ import { ServiceError } from 'services/helperTypes';
 import {
   FetchJobListQueryParams,
   FetchMontageJobListResponseDto,
+  UpdateCabelPropsRequestDto,
+  UpdateCabelPropsResponseDto,
 } from 'services/models/MontageJobs';
 
 const apiPath = "/montage-jobs";
@@ -19,6 +21,23 @@ class MontageJobService extends Service {
         apiPath,
         queryParams,
         FetchMontageJobListResponseDto,
+        true,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async updateCabelProps(
+    jobId: string,
+    requestData: UpdateCabelPropsRequestDto
+  ): Promise<UpdateCabelPropsResponseDto | ServiceError> {
+    try {
+      return await httpClient.put<UpdateCabelPropsResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/cabel-props`,
+        undefined,
+        requestData,
+        UpdateCabelPropsResponseDto,
         true,
       );
     } catch (error: any) {

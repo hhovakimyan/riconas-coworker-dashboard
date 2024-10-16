@@ -208,6 +208,14 @@ const MontageJobsList = () => {
 
       return item;
     });
+
+    montageJobService.updateCabelProps(
+      jobId,
+      {
+        [itemName]: itemValue,
+      }
+    );
+
     setItems(newItems);
   }
 
