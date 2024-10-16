@@ -6,6 +6,7 @@ import EditableSelectCell from 'components/EditableSelectCell';
 import EditableTextFieldCell from 'components/EditableTextFieldCell';
 import { JobApiListItem } from 'types/montage-jobs';
 import { TableColumn } from 'types/generic';
+import CabelCodePlannedCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelCodeCell';
 
 type Props = {
   rowData: JobApiListItem;
@@ -70,6 +71,10 @@ const JobTableRow = (
               maxLength={column.maxLength}
             />
           )
+        }
+
+        if (column.id === "cabel_code_planned") {
+          return <CabelCodePlannedCell key={column.id} rowData={rowData} />
         }
 
         return (
