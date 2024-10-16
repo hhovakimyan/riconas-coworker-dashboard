@@ -32,10 +32,12 @@
       "photos": "Photos"
     },
     "locationCell": {
-      "hupAssembly": "HÜP assembly",
-      "dispatcherFeedback": "feedback to dispatcher"
+      "hupAssembly": "HÜP Assembly",
+      "dispatcherFeedback": "feedback to dispatcher",
+      "ontActivation": "ONT Activation"
     },
-    "noRecords": "No data found"
+    "noRecords": "No data found",
+    "failedToLoadItems": "Failed to load jobs list. Please try again later!"
   },
   "hupModal": {
     "subtitle": "HÜP-Assembly Building for {{buildingType}}",

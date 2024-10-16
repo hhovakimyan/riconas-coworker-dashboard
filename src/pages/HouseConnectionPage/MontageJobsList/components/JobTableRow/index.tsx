@@ -12,10 +12,11 @@ type Props = {
   tableColumns: TableColumn[];
   updateCellData: (jobId: string, itemName: string, itemValue: string) => void;
   onHupBtnClick: (jobId: string) => void;
+  onOntBtnClick: (jobId: string, ontId: string) => void;
 }
 
 const JobTableRow = (
-  {rowData, tableColumns, updateCellData, onHupBtnClick}: Props
+  {rowData, tableColumns, updateCellData, onHupBtnClick, onOntBtnClick}: Props
 ) => (
     <TableRow
       hover
@@ -32,6 +33,7 @@ const JobTableRow = (
               rowData={rowData}
               columnAlign={column.align}
               onHupBtnClick={onHupBtnClick}
+              onOntBtnClick={onOntBtnClick}
             />
           )
         }
@@ -72,7 +74,6 @@ const JobTableRow = (
 
         return (
           <TableCell
-            padding="none"
             key={column.id}
             align={column.align}
           >

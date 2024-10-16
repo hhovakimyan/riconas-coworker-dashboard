@@ -4,6 +4,22 @@ export enum HupStatus {
   INSTALLED = 'INSTALLED',
 }
 
+export enum OntStatus {
+  NOT_INSTALLED = 'NOT_INSTALLED',
+  PREINSTALLED = 'PREINSTALLED',
+  INSTALLED = 'INSTALLED',
+}
+
+export type JobOntItem = {
+  id: string;
+  code: string;
+  status: OntStatus;
+  customer_name: string | null;
+  customer_email: string | null;
+  customer_phone1: string | null;
+  customer_phone2: string | null;
+}
+
 export type JobApiListItem = {
   id: string;
   address_line1: string;
@@ -31,6 +47,7 @@ export type JobApiListItem = {
   hup_customer_phone_number1: string;
   hup_customer_phone_number2: string;
   comment: string;
+  ont: JobOntItem[];
 }
 
 export type HupDetailsApiItem = {

@@ -1,23 +1,29 @@
-import { Box, Button, Link, TableCell, Typography } from '@mui/material';
+import { Box, Button, TableCell, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import { HupStatus, JobApiListItem } from 'types/montage-jobs';
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
-import { hupButtonsWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/styles';
+import {
+  hupButtonsWrapperStyles,
+  ontItemsListStyles,
+} from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/styles';
 import { TableColumnAlign } from 'types/generic';
+import OntItem from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/OntItem';
+import PhoneLink from 'components/PhoneLink';
+import EmailLink from 'components/EmailLink';
 
 type Props = {
   columnAlign?: TableColumnAlign;
   rowData: JobApiListItem;
   onHupBtnClick: (jobId: string) => void;
+  onOntBtnClick: (jobId: string, ontId: string) => void;
 }
 
-const LocationCell = ({rowData, columnAlign, onHupBtnClick}: Props) => {
+const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Props) => {
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'table.locationCell'});
 
   return (
     <TableCell
-      padding="none"
       align={columnAlign}
       sx={multiValueCellStyles}
     >
@@ -45,6 +51,19 @@ const LocationCell = ({rowData, columnAlign, onHupBtnClick}: Props) => {
             </Button>
             <Button variant="contained" color="warning">{t('dispatcherFeedback')}</Button>
           </Box>
+        </Box>
+        <Box className="ontItemsList" sx={ontItemsListStyles}>
+          {
+            rowData.ont.map((ontItem) =>
+              <OntItem
+                key={`ont-${ontItem.id}`}
+                data={ontItem}
+                onOntActivationBtnClick={(ontId: string) => {
+                  onOntBtnClick(rowData.id, ontId);
+                }}
+              />
+            )
+          }
         </Box>
       </Box>
     </TableCell>

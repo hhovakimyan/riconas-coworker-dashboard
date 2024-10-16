@@ -28,6 +28,7 @@ import {
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
+  openOntModal = 'openOntModal',
 }
 
 const cabelTypeOptions = CABEL_TYPES.map(
@@ -46,7 +47,7 @@ const tableColumns: TableColumn[] = [
   {
     id: 'location',
     label: 'table.headers.location',
-    minWidth: 300,
+    minWidth: 400,
   },
   {
     id: 'cabel_type_planned',
@@ -198,6 +199,15 @@ const MontageJobsList = () => {
     setModalAction(TableModalActions.openHupModal);
   }
 
+  // TODO complete this
+  const onOntBtnClick = (jobId: string, ontItemId: string) => {
+    const targetItem = items.find(
+      (item) => item.id === jobId
+    );
+    setSelectedItem(targetItem);
+    setModalAction(TableModalActions.openOntModal);
+  }
+
   const onModalClose = () => {
     setSelectedItem(undefined);
     setModalAction(null);
@@ -270,6 +280,7 @@ const MontageJobsList = () => {
                               rowData={row}
                               updateCellData={updateCellData}
                               onHupBtnClick={onHupBtnClick}
+                              onOntBtnClick={onOntBtnClick}
                             />
                           ))}
                       </TableBody>
