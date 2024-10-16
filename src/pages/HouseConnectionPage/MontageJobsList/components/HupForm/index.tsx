@@ -52,6 +52,7 @@ const HupForm: React.FC<Props> = ({
     handleSubmit,
     formState: { isDirty },
     control,
+    setValue,
   } = useForm({
     defaultValues: defaultFormValues,
     resolver: yupResolver(HopFormValidationSchema),
@@ -101,14 +102,42 @@ const HupForm: React.FC<Props> = ({
        name="hupPreInstalled"
        control={control}
        render={({ field }) => (
-         <FormControlLabel control={<Switch {...field} />} label={t('hupPreInstalled.label')} />
+         <FormControlLabel
+           control={
+            <Switch
+              {...field}
+              checked={field.value}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                field.onChange(event);
+
+                if (event.target.checked) {
+                  setValue('hupInstalled', false, {shouldDirty: true});
+                }
+              }}
+            />}
+           label={t('hupPreInstalled.label')}
+         />
        )}
       />
       <Controller
        name="hupInstalled"
        control={control}
        render={({ field }) => (
-         <FormControlLabel control={<Switch {...field} />} label={t('hupInstalled.label')} />
+         <FormControlLabel
+           control={
+              <Switch
+                {...field}
+                checked={field.value}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  field.onChange(event);
+
+                  if (event.target.checked) {
+                    setValue('hupPreInstalled', false, {shouldDirty: true});
+                  }
+                }}
+              />}
+           label={t('hupInstalled.label')}
+         />
        )}
       />
       {submitError && (

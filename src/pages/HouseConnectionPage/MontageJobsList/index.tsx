@@ -19,9 +19,9 @@ import { JobApiListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
 import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
-import EditableSelectCell from 'pages/HouseConnectionPage/MontageJobsList/components/EditableSelectCell';
+import EditableSelectCell from 'components/EditableSelectCell';
 import { CABEL_TYPES, TUBE_COLORS } from 'constants/montageJobs';
-import EditableTextFieldCell from 'pages/HouseConnectionPage/MontageJobsList/components/EditableTextFieldCell';
+import EditableTextFieldCell from 'components/EditableTextFieldCell';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -95,9 +95,13 @@ const tableColumns: TableColumn[] = [
   }
 ];
 
-const cabelTypeOptions = CABEL_TYPES.map((cabelType) => ({label: cabelType, value: cabelType}));
+const cabelTypeOptions = CABEL_TYPES.map(
+  (cabelType) => ({label: cabelType, value: cabelType})
+);
 
-const tubeColorOptions = TUBE_COLORS.map((cabelType) => ({label: cabelType, value: cabelType}));
+const tubeColorOptions = TUBE_COLORS.map(
+  (cabelType) => ({label: cabelType, value: cabelType})
+);
 
 const MontageJobsList = () => {
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);

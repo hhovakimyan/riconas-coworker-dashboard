@@ -1,7 +1,7 @@
 
 import { TableColumnAlign } from 'types/generic';
 import SelectInput from 'components/SelectInput';
-import EditableCell from 'pages/HouseConnectionPage/MontageJobsList/components/EditableCell';
+import EditableCell from 'components/EditableCell';
 
 type Props = {
   cellName: string;

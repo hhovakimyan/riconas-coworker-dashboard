@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 
 import { TableColumnAlign } from 'types/generic';
-import EditableCell from 'pages/HouseConnectionPage/MontageJobsList/components/EditableCell';
+import EditableCell from 'components/EditableCell';
 
 type Props = {
   cellName: string;

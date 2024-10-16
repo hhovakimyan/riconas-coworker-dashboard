@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { DialogContent, DialogTitle, Typography } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-import { HupDetailsApiItem, JobApiListItem } from 'types/montage-jobs';
+import { HupDetailsApiItem, HupStatus, JobApiListItem } from 'types/montage-jobs';
 import {
+  StyledCloseIconButton,
   StyledDialog,
-  StyledCloseIconButton, subtitleStyles,
+  subtitleStyles,
 } from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/styles';
 import { hupService } from 'services';
 import { FetchHupDetailsResponseDto } from 'services/models/Hups';
@@ -38,6 +39,12 @@ const HupModal = ({onClose, jobData}: Props) => {
     }
   }, [jobData.id]);
 
+  const closeModal = () => {
+    setHupData(null);
+
+    onClose();
+  };
+
   const onFormSubmit = async (newData: HupEditableProps, isDataChanged: boolean) => {
     if (!isDataChanged) {
       return;
@@ -60,13 +67,8 @@ const HupModal = ({onClose, jobData}: Props) => {
       setSubmitError(mainT('somethingWentWrong'));
     } else {
       setSubmitError(null);
+      closeModal();
     }
-  };
-
-  const closeModal = () => {
-    setHupData(null);
-
-    onClose();
   };
 
   return (
@@ -98,6 +100,14 @@ const HupModal = ({onClose, jobData}: Props) => {
               submitError={submitError}
               isLoading={isLoading}
               closeModal={closeModal}
+              currentData={{
+                hupType: hupData.hup_type || undefined,
+                hupLocation: hupData.location || undefined,
+                closedHupPhoto: undefined,
+                openedHupPhoto: undefined,
+                hupInstalled: hupData.status === HupStatus.INSTALLED,
+                hupPreInstalled: hupData.status === HupStatus.PREINSTALLED,
+              }}
             /> :
             <LoadingSpinner />
         }

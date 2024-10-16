@@ -27,11 +27,7 @@ const EditableCell = ({columnAlign, children, cellValue}: Props) => {
       onDoubleClick={onDoubleClick}
       onClick={onClick}
     >
-      {
-        mode === TableCellMode.normal ?
-          cellValue :
-          children
-      }
+      { mode === TableCellMode.normal ? cellValue : children }
     </TableCell>
   )
 }
