@@ -5,8 +5,7 @@ const useImageUpload = (
   fileMaxSize: number,
   allowedImageTypes: string[],
   onImageUpload: (
-    uploadedFile: File,
-    imageType: string,
+    uploadedFiles: FileList | never[]
   ) => Promise<boolean>,
   t: TFunction,
 ) => {
@@ -17,31 +16,34 @@ const useImageUpload = (
     setUploadError('');
   };
 
-  const validateUploadedImage = async (
-    uploadedFile: File,
-  ): Promise<string | boolean> => {
-    if (uploadedFile.size > fileMaxSize * 1000000) {
-      return 'errors.fileSize';
-    }
+  const validateUploadedImage = (
+    uploadedFiles: FileList | never[],
+  ): boolean => {
+    Array.from(uploadedFiles).forEach((uploadedFile) => {
+      if (uploadedFile.size > fileMaxSize * 1000000) {
+        throw new Error('errors.fileSize');
+      }
 
-    if (!allowedImageTypes.includes(uploadedFile.type)) {
-      return 'errors.fileFormat';
-    }
+      if (!allowedImageTypes.includes(uploadedFile.type)) {
+        throw new Error('errors.fileFormat');
+      }
+    });
 
     return true;
   };
 
   const onFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     setIsUploading(true);
-    const uploadedFile = event?.target?.files?.[0];
-    if (!uploadedFile) {
+    const uploadedFiles = event?.target?.files || [];
+    if (!uploadedFiles || uploadedFiles.length === 0) {
       return;
     }
 
-    const validationResult = await validateUploadedImage(uploadedFile);
-    if (typeof validationResult === 'string') {
+    try {
+      validateUploadedImage(uploadedFiles);
+    } catch (error: any) {
       setUploadError(
-        t(validationResult, {
+        t(error.message, {
           maxSize: fileMaxSize,
         }),
       );
@@ -49,10 +51,7 @@ const useImageUpload = (
       return;
     }
 
-    const isUploaded = await onImageUpload(
-      uploadedFile,
-      uploadedFile.type,
-    );
+    const isUploaded = await onImageUpload(uploadedFiles);
     setIsUploading(false);
     if (!isUploaded) {
       setUploadError(t('errors.uploadFailed'));

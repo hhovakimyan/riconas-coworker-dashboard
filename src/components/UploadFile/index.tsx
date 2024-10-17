@@ -13,6 +13,7 @@ type Props = {
   onFileUploadToServer: (uploadedFile: File, fileType: string) => Promise<boolean>;
   btnId: string;
   t: TFunction,
+  multiple?: boolean;
 };
 
 const UploadFile: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const UploadFile: React.FC<Props> = ({
   onFileUploadToServer,
   btnId,
   t,
+  multiple = false,
 }) => {
   const { uploadError, onFileUpload, clearUploadError } =
     useFileUpload(
@@ -39,6 +41,7 @@ const UploadFile: React.FC<Props> = ({
         onUpload={onFileUpload}
         id={btnId}
         title={t('title')}
+        multiple={multiple}
       />
       {uploadError && (
         <UploadFileErrorSnackbar

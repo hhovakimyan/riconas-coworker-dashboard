@@ -2,12 +2,13 @@ import React, { ChangeEvent, ReactNode } from 'react';
 import { Button, styled } from '@mui/material';
 
 type Props = {
-    onUpload: (event: ChangeEvent<HTMLInputElement>) => void;
-    icon: ReactNode;
-    accept: string;
-    sx?: Record<string, unknown>;
-    id: string;
-    title?: string;
+  id: string;
+  onUpload: (event: ChangeEvent<HTMLInputElement>) => void;
+  icon: ReactNode;
+  accept: string;
+  multiple: boolean;
+  sx?: Record<string, unknown>;
+  title?: string;
 }
 
 const VisuallyHiddenInput = styled('input')({
@@ -26,6 +27,7 @@ const FileUploadButton: React.FC<Props> = ({
   onUpload,
   icon,
   accept,
+  multiple,
   sx,
   id,
   title,
@@ -44,7 +46,7 @@ const FileUploadButton: React.FC<Props> = ({
     <VisuallyHiddenInput
       type="file"
       onChange={onUpload}
-      multiple
+      multiple={multiple}
       accept={accept}
     />
   </Button>

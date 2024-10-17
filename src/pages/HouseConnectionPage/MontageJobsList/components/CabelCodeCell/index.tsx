@@ -16,6 +16,6 @@ const CabelCodePlannedCell = ({columnAlign, rowData}: Props) => (
       </Typography>
       <Typography>{rowData.cabel_code_planned}</Typography>
     </TableCell>
-  )
+);
 
 export default CabelCodePlannedCell;

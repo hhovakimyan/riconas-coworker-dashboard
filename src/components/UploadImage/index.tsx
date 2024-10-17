@@ -10,9 +10,11 @@ import UploadFileErrorSnackbar from 'components/UploadFileErrorSnackbar';
 type Props = {
   fileMaxSizeMb: number;
   allowedImageTypes: string[];
-  onImageUpload: (uploadedFile: File, imageType: string) => Promise<boolean>;
+  onImageUpload: (uploadedImages: FileList | never[]) => Promise<boolean>;
   btnId: string;
-  t: TFunction,
+  title: string;
+  t: TFunction;
+  multiple?: boolean;
   sx?: Record<string, unknown>;
 };
 
@@ -21,7 +23,9 @@ const UploadImage: React.FC<Props> = ({
   allowedImageTypes,
   onImageUpload,
   btnId,
+  title,
   t,
+  multiple = false,
   sx,
 }) => {
   const { uploadError, onFileUpload, clearUploadError } =
@@ -39,8 +43,9 @@ const UploadImage: React.FC<Props> = ({
         accept={[ImageTypes.Png, ImageTypes.Jpeg].join(", ")}
         onUpload={onFileUpload}
         id={btnId}
-        title={t('title')}
+        title={title}
         sx={sx}
+        multiple={multiple}
       />
       {uploadError && (
         <UploadFileErrorSnackbar
