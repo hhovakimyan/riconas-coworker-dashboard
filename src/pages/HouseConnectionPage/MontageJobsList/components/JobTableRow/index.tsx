@@ -7,6 +7,7 @@ import EditableTextFieldCell from 'components/EditableTextFieldCell';
 import { JobApiListItem } from 'types/montage-jobs';
 import { TableColumn } from 'types/generic';
 import CabelCodePlannedCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelCodeCell';
+import PhotosCell from 'pages/HouseConnectionPage/MontageJobsList/components/PhotosCell';
 
 type Props = {
   rowData: JobApiListItem;
@@ -14,10 +15,18 @@ type Props = {
   updateCellData: (jobId: string, itemName: string, itemValue: string) => void;
   onHupBtnClick: (jobId: string) => void;
   onOntBtnClick: (jobId: string, ontId: string) => void;
+  onGalleryBtnClick: (jobId: string) => void;
 }
 
 const JobTableRow = (
-  {rowData, tableColumns, updateCellData, onHupBtnClick, onOntBtnClick}: Props
+  {
+    rowData,
+    tableColumns,
+    updateCellData,
+    onHupBtnClick,
+    onOntBtnClick,
+    onGalleryBtnClick
+  }: Props
 ) => (
     <TableRow
       hover
@@ -75,6 +84,18 @@ const JobTableRow = (
 
         if (column.id === "cabel_code_planned") {
           return <CabelCodePlannedCell key={column.id} rowData={rowData} />
+        }
+
+        if (column.id === "photos") {
+          return (
+            <PhotosCell
+              key={column.id}
+              photosCount={rowData.photos_count}
+              onGalleryBtnClick={() => {
+                onGalleryBtnClick(rowData.id);
+              }}
+            />
+          )
         }
 
         return (
