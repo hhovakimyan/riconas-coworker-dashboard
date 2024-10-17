@@ -42,3 +42,7 @@ export const CABEL_POSITIONS = [
 ];
 
 export const COMMENT_MAX_LENGTH = 100;
+
+export const JOB_IMAGE_MAX_SIZE_MB = 2;
+
+export const JOB_IMAGE_ALLOWED_TYPES = ['image/jpeg', 'image/png'];

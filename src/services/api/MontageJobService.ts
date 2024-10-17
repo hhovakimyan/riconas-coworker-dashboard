@@ -3,6 +3,7 @@ import { httpClient } from 'services/axiosInstance';
 import { ServiceError } from 'services/helperTypes';
 import {
   FetchJobListQueryParams,
+  FetchJobPhotosListResponseDto,
   FetchMontageJobListResponseDto,
   SaveCommentRequestDto,
   SaveCommentResponseDto,
@@ -57,6 +58,19 @@ class MontageJobService extends Service {
         undefined,
         requestData,
         SaveCommentResponseDto,
+        true,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async fetchPhotosList(jobId: string): Promise<FetchJobPhotosListResponseDto | ServiceError> {
+    try {
+      return await httpClient.get<FetchJobPhotosListResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/photos`,
+        undefined,
+        FetchJobPhotosListResponseDto,
         true,
       );
     } catch (error: any) {

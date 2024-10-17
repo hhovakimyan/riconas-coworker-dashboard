@@ -20,6 +20,11 @@ export type JobOntItem = {
   customer_phone2: string | null;
 }
 
+export type JobPhotoListItem = {
+  id: string;
+  path: string;
+};
+
 export type JobApiListItem = {
   id: string;
   address_line1: string;
@@ -48,6 +53,7 @@ export type JobApiListItem = {
   hup_customer_phone_number2: string;
   comment: string;
   ont: JobOntItem[];
+  photos_count: number;
 }
 
 export type HupDetailsApiItem = {

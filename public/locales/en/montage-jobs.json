@@ -78,6 +78,15 @@
       "submitBtn": "Submit"
     }
   },
+  "galleryModal": {
+    "title": "Upload Job Photos",
+    "uploadImageBtnTitle": "Upload New Photos",
+    "errors": {
+      "fileSize": "Your picture can be max {{maxSize}} MB!",
+      "fileFormat": "Please upload JPEG, PNG images.",
+      "uploadFailed": "Please try again."
+    }
+  },
   "filters": {
     "project": {
       "placeholder": "Search by project",

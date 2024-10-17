@@ -1,5 +1,5 @@
 import { FetchPaginatedListQueryParams } from 'services/models/QueryParams';
-import { JobApiListItem } from 'types/montage-jobs';
+import { JobApiListItem, JobPhotoListItem } from 'types/montage-jobs';
 
 export class FetchJobListQueryParams extends FetchPaginatedListQueryParams {
   project_id?: string;
@@ -36,3 +36,9 @@ export class SaveCommentRequestDto {
 }
 
 export class SaveCommentResponseDto {}
+
+export class FetchJobPhotosListResponseDto {
+  items!: JobPhotoListItem[];
+
+  total_count!: number;
+}

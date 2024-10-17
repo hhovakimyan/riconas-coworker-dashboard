@@ -25,10 +25,12 @@ import {
   COMMENT_MAX_LENGTH,
   TUBE_COLORS
 } from 'constants/montageJobs';
+import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
   openOntModal = 'openOntModal',
+  openGalleryModal = 'openGalleryModal',
 }
 
 const cabelTypeOptions = CABEL_TYPES.map(
@@ -199,6 +201,14 @@ const MontageJobsList = () => {
     setModalAction(TableModalActions.openHupModal);
   }
 
+  const onGalleryBtnClick = (jobId: string) => {
+    const targetItem = items.find(
+      (item) => item.id === jobId
+    );
+    setSelectedItem(targetItem);
+    setModalAction(TableModalActions.openGalleryModal);
+  }
+
   // TODO complete this
   const onOntBtnClick = (jobId: string, ontItemId: string) => {
     const targetItem = items.find(
@@ -281,6 +291,7 @@ const MontageJobsList = () => {
                               updateCellData={updateCellData}
                               onHupBtnClick={onHupBtnClick}
                               onOntBtnClick={onOntBtnClick}
+                              onGalleryBtnClick={onGalleryBtnClick}
                             />
                           ))}
                       </TableBody>
@@ -303,6 +314,11 @@ const MontageJobsList = () => {
         modalAction === TableModalActions.openHupModal &&
         selectedItem &&
         <HupModal jobData={selectedItem} onClose={onModalClose} />
+      }
+      {
+        modalAction === TableModalActions.openGalleryModal &&
+        selectedItem &&
+        <JobGalleryModal jobId={selectedItem.id} onClose={onModalClose} />
       }
     </>
   );
