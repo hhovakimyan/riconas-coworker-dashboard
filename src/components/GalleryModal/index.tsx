@@ -23,6 +23,7 @@ import {
 } from 'components/GalleryModal/styles';
 import UploadImage from 'components/UploadImage';
 import DeleteImageConfirmationModal from 'components/GalleryModal/DeleteImageConfirmationModal';
+import { downloadFile } from 'utils/download-files';
 
 type Props = {
   modalTitle: string;
@@ -67,32 +68,6 @@ const GalleryModal = ({
     setSelectedImageId(null);
   }
 
-  const onDownload = (blobUrl: string, filename: string) => {
-    const link = document.createElement("a");
-    link.download = filename;
-    link.href = blobUrl;
-    link.click();
-    link.remove();
-  };
-
-  // Current blob size limit is around 500MB for browsers
-  function downloadResource(url: string) {
-    const filename = url.split('\\')?.pop()?.split('/')?.pop() || '';
-    fetch(url, {
-      headers: new Headers({
-        'Origin': window.location.origin
-      }),
-      mode: 'cors'
-    })
-      .then(response => response.blob())
-      .then(blob => {
-        const blobUrl = window.URL.createObjectURL(blob);
-        onDownload(blobUrl, filename);
-      })
-      .catch(e => console.error(e));
-  }
-
-
   return (
     <>
       <Dialog open fullWidth maxWidth="lg" sx={dialogStyles}>
@@ -123,7 +98,7 @@ const GalleryModal = ({
                         // download='image.jpg'
                         component="button"
                         onClick={() => {
-                          downloadResource(photo.path);
+                          downloadFile(photo.path);
                         }}
                         title={mainT('downloadImage')}
                       >

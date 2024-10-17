@@ -2,6 +2,7 @@ import { Service } from 'services/Service';
 import { httpClient } from 'services/axiosInstance';
 import { ServiceError } from 'services/helperTypes';
 import {
+  DeleteJobPhotoResponseDto,
   FetchJobListQueryParams,
   FetchJobPhotosListResponseDto,
   FetchMontageJobListResponseDto,
@@ -72,6 +73,19 @@ class MontageJobService extends Service {
         undefined,
         FetchJobPhotosListResponseDto,
         true,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async deletePhoto(jobId: string, photoId: string): Promise<DeleteJobPhotoResponseDto | ServiceError> {
+    try {
+      return await httpClient.delete<DeleteJobPhotoResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/photos/${photoId}`,
+        undefined,
+        {},
+        DeleteJobPhotoResponseDto,
       );
     } catch (error: any) {
       return this.getServiceError(error);

@@ -42,3 +42,5 @@ export class FetchJobPhotosListResponseDto {
 
   total_count!: number;
 }
+
+export class DeleteJobPhotoResponseDto {}

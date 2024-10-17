@@ -7,6 +7,7 @@ import { FetchJobPhotosListResponseDto } from 'services/models/MontageJobs';
 import { montageJobService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { JOB_IMAGE_ALLOWED_TYPES, JOB_IMAGE_MAX_SIZE_MB } from 'constants/montageJobs';
+import { ServiceError } from 'services/helperTypes';
 
 type Props = {
   jobId: string;
@@ -44,6 +45,11 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
 
   const onPhotoDelete = async (photoId: string) => {
     if (!photosList) {
+      return false;
+    }
+
+    const deleteResponse = await montageJobService.deletePhoto(jobId, photoId);
+    if (deleteResponse instanceof ServiceError) {
       return false;
     }
 
