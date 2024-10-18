@@ -23,7 +23,8 @@
   "galleryModal": {
     "deleteImage": "Delete Photo",
     "downloadImage": "Download Photo",
-    "noImages": "You don't have any images. Start uploading...",
+    "noImages": "You don't have any photos. Start uploading...",
+    "uploadImageBtnTitle": "Upload New Photos",
     "imageDeleteConfirmationModal": {
       "title": "Delete Photo",
       "content": "Are you sure you want to delete this photo?",

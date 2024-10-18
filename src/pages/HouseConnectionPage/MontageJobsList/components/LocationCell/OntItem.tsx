@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Box, Button, Typography } from '@mui/material';
 
-import { JobOntItem, OntStatus } from 'types/montage-jobs';
+import { JobOntListItem, OntStatus } from 'types/montage-jobs';
 import EmailLink from 'components/EmailLink';
 import PhoneLink from 'components/PhoneLink';
 import {
@@ -10,7 +10,7 @@ import {
 } from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/styles';
 
 type Props = {
-  data: JobOntItem;
+  data: JobOntListItem;
   onOntActivationBtnClick: (ontId: string) => void;
 }
 

@@ -1,33 +1,26 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import GalleryModal from 'components/GalleryModal';
-import { JobPhotoListItem } from 'types/montage-jobs';
-import { FetchJobPhotosListResponseDto } from 'services/models/MontageJobs';
-import { montageJobService } from 'services';
+import { ontService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { JOB_IMAGE_ALLOWED_TYPES, JOB_IMAGE_MAX_SIZE_MB } from 'constants/montageJobs';
 import { ServiceError } from 'services/helperTypes';
+import { OntPhotoListItem } from 'types/ont';
 
 type Props = {
-  jobId: string;
+  ontId: string;
+  photos: OntPhotoListItem[];
   onClose: () => void;
+  onPhotosChange: (newPhotos: OntPhotoListItem[]) => void;
 }
 
-const JobGalleryModal = ({jobId, onClose}: Props) => {
-  const { t } = useTranslation('montage-jobs', { keyPrefix: 'galleryModal' });
+const OntGalleryModal = (
+  {ontId, photos, onClose, onPhotosChange}: Props
+) => {
+  const { t } = useTranslation('montage-jobs', { keyPrefix: 'ontModal.galleryModal' });
 
-  const [photosList, setPhotosList] = useState<JobPhotoListItem[] | null>(null);
-
-  useEffect(() => {
-    montageJobService
-      .fetchPhotosList(jobId)
-      .then((response: FetchJobPhotosListResponseDto) => {
-        if (response.items) {
-          setPhotosList(response.items);
-        }
-      })
-  }, []);
+  const [photosList, setPhotosList] = useState<OntPhotoListItem[] | null>(photos);
 
   const closeModal = () => {
     setPhotosList(null);
@@ -41,7 +34,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       formData.append('files[]', file, file.name);
     });
 
-    const result = await montageJobService.uploadPhotos(jobId, formData);
+    const result = await ontService.uploadPhotos(ontId, formData);
 
     if (result instanceof ServiceError) {
       return false;
@@ -53,6 +46,8 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
     ];
     setPhotosList(newPhotosList);
 
+    onPhotosChange(newPhotosList);
+
     return true;
   }
 
@@ -61,7 +56,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       return false;
     }
 
-    const deleteResponse = await montageJobService.deletePhoto(jobId, photoId);
+    const deleteResponse = await ontService.deletePhoto(ontId, photoId);
     if (deleteResponse instanceof ServiceError) {
       return false;
     }
@@ -70,6 +65,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       (photoItem) => photoItem.id !== photoId
     );
     setPhotosList(newPhotosList);
+    onPhotosChange(newPhotosList);
 
     return true;
   }
@@ -92,4 +88,4 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
   )
 }
 
-export default JobGalleryModal;
+export default OntGalleryModal;

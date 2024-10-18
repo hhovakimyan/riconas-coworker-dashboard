@@ -6,7 +6,7 @@ export enum OntStatus {
   INSTALLED = 'INSTALLED',
 }
 
-export type JobOntItem = {
+export type JobOntListItem = {
   id: string;
   code: string;
   status: OntStatus;
@@ -48,6 +48,6 @@ export type JobApiListItem = {
   hup_customer_phone_number1: string;
   hup_customer_phone_number2: string;
   comment: string;
-  ont: JobOntItem[];
+  ont: JobOntListItem[];
   photos_count: number;
 }

@@ -81,7 +81,6 @@ const HupGalleryModal = (
       modalTitle={t('title')}
       onClose={closeModal}
       photos={photosList}
-      imageUploadBtnTitle={t('uploadImageBtnTitle')}
       imageMaxSizeMb={JOB_IMAGE_MAX_SIZE_MB}
       allowedImageTypes={JOB_IMAGE_ALLOWED_TYPES}
       onImagesUpload={onNewPhotosUpload}

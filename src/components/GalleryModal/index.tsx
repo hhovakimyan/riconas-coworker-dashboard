@@ -29,7 +29,6 @@ type Props = {
   modalTitle: string;
   onClose: () => void;
   photos: { id: string, path: string }[];
-  imageUploadBtnTitle: string;
   imageMaxSizeMb: number;
   allowedImageTypes: string[];
   onImagesUpload: (uploadedImages: FileList | never[]) => Promise<boolean>;
@@ -45,7 +44,6 @@ const GalleryModal = ({
   modalTitle,
   onClose,
   photos,
-  imageUploadBtnTitle,
   imageMaxSizeMb,
   allowedImageTypes,
   onImagesUpload,
@@ -139,7 +137,7 @@ const GalleryModal = ({
             fileMaxSizeMb={imageMaxSizeMb}
             allowedImageTypes={allowedImageTypes}
             onImageUpload={onNewImagesUpload}
-            title={imageUploadBtnTitle}
+            title={mainT('uploadImageBtnTitle')}
             btnId="uploadNewImages"
             t={t}
             isUploading={isUploading}

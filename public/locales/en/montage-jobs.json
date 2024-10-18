@@ -78,9 +78,44 @@
       "submitBtn": "Submit"
     }
   },
+  "ontModal": {
+    "subtitle": "Activation of residential unit: {{ontCode}}",
+    "splitterCode": "Splitter Code:",
+    "splitterFiber": "Splitter Fiber:",
+    "odfCodePlanned": "ODF loading (according to engineering):",
+    "odfPosPlanned": "ODF Pos (according to Engineering ODF Port):",
+    "photos": "ONT photo:",
+    "form": {
+      "odfCode": {
+        "label": "ODF Code (Actual):"
+      },
+      "odfPos": {
+        "label": "ODF Pos (Actual):"
+      },
+      "ontPreInstalled": {
+        "label": "ONT pre-installed:"
+      },
+      "ontInstalled": {
+        "label": "Activation/measurement of residential unit successfully completed:"
+      },
+      "ontType": {
+        "options": {
+          "none": "None",
+          "ONT_TYPE1": "Ont Type 1",
+          "ONT_TYPE2": "Ont Type 2",
+          "ONT_TYPE3": "Ont Type 3"
+        },
+        "label": "ONT Type"
+      },
+      "closeBtn": "Close",
+      "submitBtn": "Submit"
+    },
+    "galleryModal": {
+      "title": "Upload ONT Photos"
+    }
+  },
   "galleryModal": {
     "title": "Upload Job Photos",
-    "uploadImageBtnTitle": "Upload New Photos",
     "errors": {
       "fileSize": "Your picture can be max {{maxSize}} MB!",
       "fileFormat": "Please upload JPEG, PNG images.",

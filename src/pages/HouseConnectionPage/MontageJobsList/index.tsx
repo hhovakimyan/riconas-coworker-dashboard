@@ -15,7 +15,7 @@ import {
   TABLE_DEFAULT_START_PAGE,
   TABLE_ROWS_PER_PAGE_OPTIONS
 } from 'constants/main';
-import { JobApiListItem } from 'types/montage-jobs';
+import { JobApiListItem , JobOntListItem } from 'types/montage-jobs';
 import { FetchJobListQueryParams } from 'services/models/MontageJobs';
 import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
 import JobTableRow from 'pages/HouseConnectionPage/MontageJobsList/components/JobTableRow';
@@ -26,6 +26,7 @@ import {
   TUBE_COLORS
 } from 'constants/montageJobs';
 import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
+import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -127,6 +128,7 @@ const MontageJobsList = () => {
   const [totalCount, setTotalCount] = useState<number>(0);
   const [modalAction, setModalAction] = useState<TableModalActions | null>(null);
   const [selectedItem, setSelectedItem] = useState<JobApiListItem | undefined>(undefined);
+  const [selectedOnt, setSelectedOnt] = useState<JobOntListItem | undefined>(undefined);
 
   // const [filter, setFilter] = useState<MontageJobFilterProps | null>(null);
 
@@ -209,18 +211,30 @@ const MontageJobsList = () => {
     setModalAction(TableModalActions.openGalleryModal);
   }
 
-  // TODO complete this
   const onOntBtnClick = (jobId: string, ontItemId: string) => {
     const targetItem = items.find(
       (item) => item.id === jobId
     );
+    if (!targetItem || !targetItem.ont) {
+      return;
+    }
+    
+    const targetItemOnt = targetItem.ont.find(
+      (ontItem) => ontItem.id === ontItemId
+    );
+    if (!targetItemOnt) {
+      return;
+    }
+
     setSelectedItem(targetItem);
+    setSelectedOnt(targetItemOnt);
     setModalAction(TableModalActions.openOntModal);
   }
 
   const onModalClose = () => {
     setSelectedItem(undefined);
     setModalAction(null);
+    setSelectedOnt(undefined);
   }
 
   const updateCellData = (jobId: string, itemName: string, itemValue: string) => {
@@ -319,6 +333,17 @@ const MontageJobsList = () => {
         modalAction === TableModalActions.openGalleryModal &&
         selectedItem &&
         <JobGalleryModal jobId={selectedItem.id} onClose={onModalClose} />
+      }
+      {
+        modalAction === TableModalActions.openOntModal &&
+        selectedItem &&
+        selectedOnt &&
+        <OntModal
+          ontId={selectedOnt.id}
+          ontCode={selectedOnt.code}
+          onClose={onModalClose}
+          jobData={selectedItem}
+        />
       }
     </>
   );

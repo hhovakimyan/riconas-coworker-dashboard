@@ -13,3 +13,10 @@ export const HUP_LOCATIONS = [
   'utility_room',
   'miscellaneous'
 ];
+
+export const ONT_TYPES = [
+  'none',
+  'ONT_TYPE1',
+  'ONT_TYPE2',
+  'ONT_TYPE3',
+];
