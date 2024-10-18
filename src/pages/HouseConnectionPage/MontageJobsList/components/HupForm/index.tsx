@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
@@ -28,8 +28,6 @@ type Props = {
 };
 
 const defaultFormValuesInitialState: HupEditableProps = {
-  openedHupPhoto: '',
-  closedHupPhoto: '',
   hupType: '',
   hupLocation: '',
   hupPreInstalled: false,
@@ -59,21 +57,11 @@ const HupForm: React.FC<Props> = ({
   });
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'hupModal.form'});
 
-  const [openedHupPhotoFileName, setOpenedHupPhotoFileName] = useState<string>('');
-  const [closedHupPhotoFileName, setClosedHupPhotoFileName] = useState<string>('');
-
   const onFormSubmit = useCallback(
     (data: HupEditableProps) => {
-      onSubmit(
-        {
-          ...data,
-          openedHupPhoto: openedHupPhotoFileName,
-          closedHupPhoto: closedHupPhotoFileName
-        },
-        isDirty
-      );
+      onSubmit(data, isDirty);
     },
-    [onSubmit, isDirty, openedHupPhotoFileName, closedHupPhotoFileName],
+    [onSubmit, isDirty],
   );
 
   return (

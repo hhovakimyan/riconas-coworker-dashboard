@@ -1,4 +1,4 @@
-import { HupDetailsApiItem } from 'types/montage-jobs';
+import { HupDetailsApiItem, HupPhotoListItem } from 'types/hups';
 
 export class FetchHupDetailsResponseDto {
   data!: HupDetailsApiItem;
@@ -12,10 +12,12 @@ export class UpdateHupDetailsRequestDto {
   is_pre_installed?: boolean;
 
   is_installed?: boolean;
-
-  opened_hup_photo_path?: string;
-
-  closed_hup_photo_path?: string;
 }
 
 export class UpdateHupDetailsResponseDto {}
+
+export class DeleteHupPhotoResponseDto {}
+
+export class UploadHupPhotosResponseDto {
+  items!: HupPhotoListItem[];
+}

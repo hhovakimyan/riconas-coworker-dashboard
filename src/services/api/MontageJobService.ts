@@ -2,7 +2,6 @@ import { Service } from 'services/Service';
 import { httpClient } from 'services/axiosInstance';
 import { ServiceError } from 'services/helperTypes';
 import {
-  DeleteJobPhotoResponseDto,
   FetchJobListQueryParams,
   FetchJobPhotosListResponseDto,
   FetchMontageJobListResponseDto,
@@ -10,8 +9,8 @@ import {
   SaveCommentResponseDto,
   UpdateCabelPropsRequestDto,
   UpdateCabelPropsResponseDto,
-  UploadJobPhotosResponseDto,
 } from 'services/models/MontageJobs';
+import { DeleteHupPhotoResponseDto, UploadHupPhotosResponseDto } from 'services/models/Hups';
 
 const apiPath = "/montage-jobs";
 
@@ -80,26 +79,26 @@ class MontageJobService extends Service {
     }
   }
 
-  async deletePhoto(jobId: string, photoId: string): Promise<DeleteJobPhotoResponseDto | ServiceError> {
+  async deletePhoto(jobId: string, photoId: string): Promise<DeleteHupPhotoResponseDto | ServiceError> {
     try {
-      return await httpClient.delete<DeleteJobPhotoResponseDto | ServiceError>(
+      return await httpClient.delete<DeleteHupPhotoResponseDto | ServiceError>(
         `${apiPath}/${jobId}/photos/${photoId}`,
         undefined,
         {},
-        DeleteJobPhotoResponseDto,
+        DeleteHupPhotoResponseDto,
       );
     } catch (error: any) {
       return this.getServiceError(error);
     }
   }
 
-  async uploadPhotos(jobId: string, formData: FormData): Promise<UploadJobPhotosResponseDto | ServiceError> {
+  async uploadPhotos(jobId: string, formData: FormData): Promise<UploadHupPhotosResponseDto | ServiceError> {
     try {
-      return await httpClient.post<UploadJobPhotosResponseDto | ServiceError>(
+      return await httpClient.post<UploadHupPhotosResponseDto | ServiceError>(
         `${apiPath}/${jobId}/photos`,
         undefined,
         formData,
-        UploadJobPhotosResponseDto,
+        UploadHupPhotosResponseDto,
         true,
         { 'Content-Type': 'multipart/form-data' }
       );

@@ -28,3 +28,10 @@ export const actionButtonWrapperStyles = {
   display: 'flex',
   columnGap: '20px',
 }
+
+export const hupPhotosList = {
+  marginTop: '40px',
+  display: 'flex',
+  flexDirection: 'column',
+  rowGap: '10px',
+}

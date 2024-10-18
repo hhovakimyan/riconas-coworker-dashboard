@@ -1,7 +1,7 @@
 import { Box, Button, TableCell, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import { HupStatus, JobApiListItem } from 'types/montage-jobs';
+import { JobApiListItem } from 'types/montage-jobs';
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
 import {
   hupButtonsWrapperStyles,
@@ -11,6 +11,7 @@ import { TableColumnAlign } from 'types/generic';
 import OntItem from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/OntItem';
 import PhoneLink from 'components/PhoneLink';
 import EmailLink from 'components/EmailLink';
+import { HupStatus } from 'types/hups';
 
 type Props = {
   columnAlign?: TableColumnAlign;

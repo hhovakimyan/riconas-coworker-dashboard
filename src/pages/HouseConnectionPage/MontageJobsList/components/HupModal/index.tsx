@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { DialogContent, DialogTitle, Typography } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
-import { HupDetailsApiItem, HupStatus, JobApiListItem } from 'types/montage-jobs';
+import { JobApiListItem } from 'types/montage-jobs';
 import {
   StyledCloseIconButton,
   StyledDialog,
@@ -13,8 +13,9 @@ import { hupService } from 'services';
 import { FetchHupDetailsResponseDto } from 'services/models/Hups';
 import LoadingSpinner from 'components/LoadingSpinner';
 import HupForm from 'pages/HouseConnectionPage/MontageJobsList/components/HupForm';
-import { HupEditableProps } from 'types/hups';
+import { HupDetailsApiItem, HupEditableProps, HupPhotoListItem, HupStatus } from 'types/hups';
 import { ServiceError } from 'services/helperTypes';
+import HupPhotos from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/HupPhotos';
 
 type Props = {
   onClose: () => void;
@@ -26,6 +27,9 @@ const HupModal = ({onClose, jobData}: Props) => {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  const [openedPhotos, setOpenedPhotos] = useState<HupPhotoListItem[]>([]);
+  const [closedPhotos, setClosedPhotos] = useState<HupPhotoListItem[]>([]);
+
   const { t } = useTranslation('montage-jobs');
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
 
@@ -35,6 +39,8 @@ const HupModal = ({onClose, jobData}: Props) => {
         .fetchDetails(jobData.id)
         .then((response: FetchHupDetailsResponseDto) => {
           setHupData(response.data);
+          setOpenedPhotos(response.data.opened_photos);
+          setClosedPhotos(response.data.closed_photos);
         })
     }
   }, [jobData.id]);
@@ -47,6 +53,7 @@ const HupModal = ({onClose, jobData}: Props) => {
 
   const onFormSubmit = async (newData: HupEditableProps, isDataChanged: boolean) => {
     if (!isDataChanged) {
+      closeModal();
       return;
     }
 
@@ -58,8 +65,6 @@ const HupModal = ({onClose, jobData}: Props) => {
         location: newData.hupLocation,
         is_pre_installed: newData.hupPreInstalled,
         is_installed: newData.hupInstalled,
-        opened_hup_photo_path: newData.openedHupPhoto,
-        closed_hup_photo_path: newData.closedHupPhoto,
       }
     );
     setIsLoading(false);
@@ -95,20 +100,27 @@ const HupModal = ({onClose, jobData}: Props) => {
         </Typography>
         {
           hupData ?
-            <HupForm
-              onSubmit={onFormSubmit}
-              submitError={submitError}
-              isLoading={isLoading}
-              closeModal={closeModal}
-              currentData={{
-                hupType: hupData.hup_type || undefined,
-                hupLocation: hupData.location || undefined,
-                closedHupPhoto: undefined,
-                openedHupPhoto: undefined,
-                hupInstalled: hupData.status === HupStatus.INSTALLED,
-                hupPreInstalled: hupData.status === HupStatus.PREINSTALLED,
-              }}
-            /> :
+            <>
+              <HupPhotos
+                jobId={jobData.id}
+                openedStatePhotos={openedPhotos}
+                setOpenedStatePhotos={setOpenedPhotos}
+                closedStatePhotos={closedPhotos}
+                setClosedStatePhotos={setClosedPhotos}
+              />
+              <HupForm
+                onSubmit={onFormSubmit}
+                submitError={submitError}
+                isLoading={isLoading}
+                closeModal={closeModal}
+                currentData={{
+                  hupType: hupData.hup_type || undefined,
+                  hupLocation: hupData.location || undefined,
+                  hupInstalled: hupData.status === HupStatus.INSTALLED,
+                  hupPreInstalled: hupData.status === HupStatus.PREINSTALLED,
+                }}
+              />
+            </> :
             <LoadingSpinner />
         }
       </DialogContent>

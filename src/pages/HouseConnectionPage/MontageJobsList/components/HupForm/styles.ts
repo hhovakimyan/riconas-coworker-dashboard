@@ -3,5 +3,5 @@ export const formStyles = {
   display: 'flex',
   flexDirection: 'column',
   rowGap: '20px',
-  marginTop: '60px'
+  marginTop: '20px'
 };

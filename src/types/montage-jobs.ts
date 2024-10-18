@@ -1,8 +1,4 @@
-export enum HupStatus {
-  NOT_INSTALLED = 'NOT_INSTALLED',
-  PREINSTALLED = 'PREINSTALLED',
-  INSTALLED = 'INSTALLED',
-}
+import { HupStatus } from 'types/hups';
 
 export enum OntStatus {
   NOT_INSTALLED = 'NOT_INSTALLED',
@@ -55,12 +51,3 @@ export type JobApiListItem = {
   ont: JobOntItem[];
   photos_count: number;
 }
-
-export type HupDetailsApiItem = {
-  id: string
-  hup_type: string | null;
-  location: string | null;
-  status: HupStatus;
-  opened_hup_photo_path: string | null;
-  closed_hup_photo_path: string | null;
-};

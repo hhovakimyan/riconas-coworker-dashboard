@@ -6,6 +6,7 @@ import {
   UpdateHupDetailsRequestDto,
   UpdateHupDetailsResponseDto,
 } from 'services/models/Hups';
+import { DeleteJobPhotoResponseDto, UploadJobPhotosResponseDto } from 'services/models/MontageJobs';
 
 const apiPath = "/montage-jobs";
 
@@ -34,6 +35,34 @@ class HupService extends Service {
         requestData,
         UpdateHupDetailsResponseDto,
         true,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async deletePhoto(jobId: string, photoId: string): Promise<DeleteJobPhotoResponseDto | ServiceError> {
+    try {
+      return await httpClient.delete<DeleteJobPhotoResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/hup/photos/${photoId}`,
+        undefined,
+        {},
+        DeleteJobPhotoResponseDto,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async uploadPhotos(jobId: string, formData: FormData): Promise<UploadJobPhotosResponseDto | ServiceError> {
+    try {
+      return await httpClient.post<UploadJobPhotosResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/hup/photos`,
+        undefined,
+        formData,
+        UploadJobPhotosResponseDto,
+        true,
+        { 'Content-Type': 'multipart/form-data' }
       );
     } catch (error: any) {
       return this.getServiceError(error);

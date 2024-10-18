@@ -1,33 +1,27 @@
 import { useTranslation } from 'react-i18next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import GalleryModal from 'components/GalleryModal';
-import { JobPhotoListItem } from 'types/montage-jobs';
-import { FetchJobPhotosListResponseDto } from 'services/models/MontageJobs';
-import { montageJobService } from 'services';
+import { hupService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { JOB_IMAGE_ALLOWED_TYPES, JOB_IMAGE_MAX_SIZE_MB } from 'constants/montageJobs';
 import { ServiceError } from 'services/helperTypes';
+import { HupPhotoListItem, HupPhotoState } from 'types/hups';
 
 type Props = {
   jobId: string;
+  photos: HupPhotoListItem[];
   onClose: () => void;
+  state: HupPhotoState;
+  onPhotosChange: (newPhotos: HupPhotoListItem[]) => void;
 }
 
-const JobGalleryModal = ({jobId, onClose}: Props) => {
+const HupGalleryModal = (
+  {jobId, photos, state, onClose, onPhotosChange}: Props
+) => {
   const { t } = useTranslation('montage-jobs', { keyPrefix: 'galleryModal' });
 
-  const [photosList, setPhotosList] = useState<JobPhotoListItem[] | null>(null);
-
-  useEffect(() => {
-    montageJobService
-      .fetchPhotosList(jobId)
-      .then((response: FetchJobPhotosListResponseDto) => {
-        if (response.items) {
-          setPhotosList(response.items);
-        }
-      })
-  }, []);
+  const [photosList, setPhotosList] = useState<HupPhotoListItem[] | null>(photos);
 
   const closeModal = () => {
     setPhotosList(null);
@@ -37,11 +31,12 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
   const onNewPhotosUpload = async (uploadedPhotos: FileList | never[]) => {
     const formData = new FormData();
 
+    formData.append('state', state);
     Array.from(uploadedPhotos).forEach((file: File) => {
       formData.append('files[]', file, file.name);
     });
 
-    const result = await montageJobService.uploadPhotos(jobId, formData);
+    const result = await hupService.uploadPhotos(jobId, formData);
 
     if (result instanceof ServiceError) {
       return false;
@@ -53,6 +48,8 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
     ];
     setPhotosList(newPhotosList);
 
+    onPhotosChange(newPhotosList);
+
     return true;
   }
 
@@ -61,7 +58,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       return false;
     }
 
-    const deleteResponse = await montageJobService.deletePhoto(jobId, photoId);
+    const deleteResponse = await hupService.deletePhoto(jobId, photoId);
     if (deleteResponse instanceof ServiceError) {
       return false;
     }
@@ -70,6 +67,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       (photoItem) => photoItem.id !== photoId
     );
     setPhotosList(newPhotosList);
+    onPhotosChange(newPhotosList);
 
     return true;
   }
@@ -93,4 +91,4 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
   )
 }
 
-export default JobGalleryModal;
+export default HupGalleryModal;
