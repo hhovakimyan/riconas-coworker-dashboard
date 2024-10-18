@@ -14,6 +14,7 @@ type Props = {
   btnId: string;
   title: string;
   t: TFunction;
+  isUploading?: boolean;
   multiple?: boolean;
   sx?: Record<string, unknown>;
 };
@@ -24,6 +25,7 @@ const UploadImage: React.FC<Props> = ({
   onImageUpload,
   btnId,
   title,
+  isUploading = false,
   t,
   multiple = false,
   sx,
@@ -46,6 +48,7 @@ const UploadImage: React.FC<Props> = ({
         title={title}
         sx={sx}
         multiple={multiple}
+        loading={isUploading}
       />
       {uploadError && (
         <UploadFileErrorSnackbar

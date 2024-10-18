@@ -18,8 +18,6 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
   const { t } = useTranslation('montage-jobs', { keyPrefix: 'galleryModal' });
 
   const [photosList, setPhotosList] = useState<JobPhotoListItem[] | null>(null);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
     montageJobService
@@ -31,14 +29,27 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
 
   const closeModal = () => {
     setPhotosList(null);
-    setSubmitError(null);
     onClose();
   };
 
   const onNewPhotosUpload = async (uploadedPhotos: FileList | never[]) => {
-    setSubmitError(null);
-    setIsLoading(true);
-    console.log(uploadedPhotos);
+    const formData = new FormData();
+
+    Array.from(uploadedPhotos).forEach((file: File) => {
+      formData.append('files[]', file, file.name);
+    });
+
+    const result = await montageJobService.uploadPhotos(jobId, formData);
+
+    if (result instanceof ServiceError) {
+      return false;
+    }
+
+    const newPhotosList = [
+      ...(photosList || []),
+      ...result.items,
+    ];
+    setPhotosList(newPhotosList);
 
     return true;
   }
@@ -62,7 +73,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
   }
 
   if (photosList === null) {
-    return <LoadingSpinner />
+    return <LoadingSpinner />;
   }
 
   return (

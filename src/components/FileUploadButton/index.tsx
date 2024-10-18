@@ -1,5 +1,6 @@
 import React, { ChangeEvent, ReactNode } from 'react';
-import { Button, styled } from '@mui/material';
+import { styled } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 
 type Props = {
   id: string;
@@ -7,6 +8,7 @@ type Props = {
   icon: ReactNode;
   accept: string;
   multiple: boolean;
+  loading: boolean;
   sx?: Record<string, unknown>;
   title?: string;
 }
@@ -31,8 +33,9 @@ const FileUploadButton: React.FC<Props> = ({
   sx,
   id,
   title,
+  loading,
 }) => (
-  <Button
+  <LoadingButton
     id={id}
     component="label"
     color="primary"
@@ -41,6 +44,7 @@ const FileUploadButton: React.FC<Props> = ({
     tabIndex={-1}
     startIcon={icon}
     sx={sx}
+    loading={loading}
   >
     {title}
     <VisuallyHiddenInput
@@ -49,7 +53,7 @@ const FileUploadButton: React.FC<Props> = ({
       multiple={multiple}
       accept={accept}
     />
-  </Button>
+  </LoadingButton>
 );
 
 export default FileUploadButton;

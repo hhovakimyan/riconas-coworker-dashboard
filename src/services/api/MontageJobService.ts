@@ -10,6 +10,7 @@ import {
   SaveCommentResponseDto,
   UpdateCabelPropsRequestDto,
   UpdateCabelPropsResponseDto,
+  UploadJobPhotosResponseDto,
 } from 'services/models/MontageJobs';
 
 const apiPath = "/montage-jobs";
@@ -86,6 +87,21 @@ class MontageJobService extends Service {
         undefined,
         {},
         DeleteJobPhotoResponseDto,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async uploadPhotos(jobId: string, formData: FormData): Promise<UploadJobPhotosResponseDto | ServiceError> {
+    try {
+      return await httpClient.post<UploadJobPhotosResponseDto | ServiceError>(
+        `${apiPath}/${jobId}/photos`,
+        undefined,
+        formData,
+        UploadJobPhotosResponseDto,
+        true,
+        { 'Content-Type': 'multipart/form-data' }
       );
     } catch (error: any) {
       return this.getServiceError(error);

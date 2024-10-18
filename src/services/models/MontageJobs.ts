@@ -44,3 +44,7 @@ export class FetchJobPhotosListResponseDto {
 }
 
 export class DeleteJobPhotoResponseDto {}
+
+export class UploadJobPhotosResponseDto {
+  items!: JobPhotoListItem[];
+}

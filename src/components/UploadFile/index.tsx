@@ -42,6 +42,7 @@ const UploadFile: React.FC<Props> = ({
         id={btnId}
         title={t('title')}
         multiple={multiple}
+        loading={false} // TODO replace this later
       />
       {uploadError && (
         <UploadFileErrorSnackbar

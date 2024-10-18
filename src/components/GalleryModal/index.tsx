@@ -57,6 +57,7 @@ const GalleryModal = ({
 
   const [modalAction, setModalAction] = useState<ModalActions | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const onDelete = (imageId: string) => {
     setModalAction(ModalActions.openDeleteConfirmModal);
@@ -66,6 +67,16 @@ const GalleryModal = ({
   const onDeleteModalClose = () => {
     setModalAction(null);
     setSelectedImageId(null);
+  }
+
+  const onNewImagesUpload = async (uploadedImages: FileList | never[]) => {
+    setIsUploading(true);
+
+    const result = await onImagesUpload(uploadedImages);
+
+    setIsUploading(false);
+
+    return result;
   }
 
   return (
@@ -127,10 +138,11 @@ const GalleryModal = ({
           <UploadImage
             fileMaxSizeMb={imageMaxSizeMb}
             allowedImageTypes={allowedImageTypes}
-            onImageUpload={onImagesUpload}
+            onImageUpload={onNewImagesUpload}
             title={imageUploadBtnTitle}
             btnId="uploadNewImages"
             t={t}
+            isUploading={isUploading}
             multiple
           />
         </DialogContent>
