@@ -40,6 +40,7 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
         .fetchDetails(ontId)
         .then((response: FetchOntDetailsResponseDto) => {
           setOntData(response.data);
+          setPhotos(response.data.photos);
         })
     }
   }, [ontId]);

@@ -10,6 +10,7 @@ export type JobOntListItem = {
   id: string;
   code: string;
   status: OntStatus;
+  is_active: boolean;
   customer_name: string | null;
   customer_email: string | null;
   customer_phone1: string | null;

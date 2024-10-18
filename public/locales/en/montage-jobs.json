@@ -76,6 +76,14 @@
       },
       "closeBtn": "Close",
       "submitBtn": "Submit"
+    },
+    "galleryModal": {
+      "title": "Upload HUP Photos",
+      "errors": {
+        "fileSize": "Your picture can be max {{maxSize}} MB!",
+        "fileFormat": "Please upload JPEG, PNG images.",
+        "uploadFailed": "Please try again."
+      }
     }
   },
   "ontModal": {
@@ -111,7 +119,12 @@
       "submitBtn": "Submit"
     },
     "galleryModal": {
-      "title": "Upload ONT Photos"
+      "title": "Upload ONT Photos",
+      "errors": {
+        "fileSize": "Your picture can be max {{maxSize}} MB!",
+        "fileFormat": "Please upload JPEG, PNG images.",
+        "uploadFailed": "Please try again."
+      }
     }
   },
   "galleryModal": {

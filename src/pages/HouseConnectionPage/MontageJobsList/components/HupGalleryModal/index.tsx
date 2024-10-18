@@ -19,7 +19,7 @@ type Props = {
 const HupGalleryModal = (
   {jobId, photos, state, onClose, onPhotosChange}: Props
 ) => {
-  const { t } = useTranslation('montage-jobs', { keyPrefix: 'galleryModal' });
+  const { t } = useTranslation('montage-jobs', { keyPrefix: 'hupModal.galleryModal' });
 
   const [photosList, setPhotosList] = useState<HupPhotoListItem[] | null>(photos);
 

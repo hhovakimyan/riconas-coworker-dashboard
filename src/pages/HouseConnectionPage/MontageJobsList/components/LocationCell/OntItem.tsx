@@ -38,6 +38,7 @@ const OntItem = ({data, onOntActivationBtnClick}: Props) => {
       <Box sx={hupButtonsWrapperStyles}>
         <Button
           variant="contained"
+          disabled={!data.is_active}
           color={data.status === OntStatus.INSTALLED ? 'success' : 'info'}
           onClick={() => { onOntActivationBtnClick(data.id) }}
         >
