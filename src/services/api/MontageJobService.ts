@@ -16,8 +16,20 @@ const apiPath = "/montage-jobs";
 
 class MontageJobService extends Service {
   async fetchList(queryParams: FetchJobListQueryParams): Promise<FetchMontageJobListResponseDto | ServiceError> {
+    if (!queryParams.client_id) {
+      delete queryParams.client_id;
+    }
+
     if (!queryParams.project_id) {
       delete queryParams.project_id;
+    }
+
+    if (!queryParams.subproject_id) {
+      delete queryParams.subproject_id;
+    }
+
+    if (!queryParams.nvt_id) {
+      delete queryParams.nvt_id;
     }
 
     try {

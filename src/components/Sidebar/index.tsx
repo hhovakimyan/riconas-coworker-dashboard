@@ -11,9 +11,10 @@ import ViewTypeSelect from 'components/Sidebar/ViewTypeSelect';
 type Props = {
   viewType: string;
   setViewType: React.Dispatch<SetStateAction<string>>;
+  onFilterSelect: (filter: Record<string, string>) => void;
 }
 
-const Sidebar = ({viewType, setViewType}: Props) => {
+const Sidebar = ({viewType, setViewType, onFilterSelect}: Props) => {
   const [projects, setProjects] = useState<FetchProjectsListResponseDto | null>(null);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const Sidebar = ({viewType, setViewType}: Props) => {
       <ViewTypeSelect viewType={viewType} setViewType={setViewType} />
       {
         projects ?
-          <ProjectTree treeItems={projects} /> :
+          <ProjectTree treeItems={projects} onFilterSelect={onFilterSelect} /> :
           <LoadingSpinner />
       }
     </Drawer>

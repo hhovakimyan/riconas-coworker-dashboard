@@ -21,3 +21,10 @@ export enum TableCellMode {
   normal = 'normal',
   edit = 'edit',
 }
+
+export type SidebarFilterProps = {
+  clientId?: string;
+  projectId?: string;
+  subprojectId?: string;
+  nvtId?: string;
+}

@@ -1,5 +1,5 @@
 import { Table, TableBody, TableContainer, TablePagination } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LoadingSpinner from 'components/LoadingSpinner';
@@ -7,7 +7,7 @@ import NoDataMessage from 'components/NoDataMessage';
 import { ServiceError } from 'services/helperTypes';
 import { useSnackbarContext } from 'providers/Snackbar';
 import TableWrapper from 'components/TableWrapper';
-import { TableColumn } from 'types/generic';
+import { SidebarFilterProps, TableColumn } from 'types/generic';
 import TableHeader from 'components/TableHeader';
 import { montageJobService } from 'services';
 import {
@@ -120,7 +120,11 @@ const tableColumns: TableColumn[] = [
   }
 ];
 
-const MontageJobsList = () => {
+type Props = {
+  sidebarFilter: SidebarFilterProps | null;
+};
+
+const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState<number>(TABLE_DEFAULT_ROWS_PER_PAGE);
   const [items, setItems] = useState<JobApiListItem[]>([]);
@@ -136,14 +140,24 @@ const MontageJobsList = () => {
 
   const { setSnackbarOpen, setSnackbarMessage } = useSnackbarContext();
 
-  const fetchItems = async (
+  const fetchItems = useCallback(async (
     newPage: number = TABLE_DEFAULT_START_PAGE,
     newPerPage: number = TABLE_DEFAULT_ROWS_PER_PAGE,
     // newFilter: MontageJobFilterProps | null = null,
   ) => {
-    // const projectId = newFilter?.project ? newFilter.project.value : undefined;
+    const clientId = sidebarFilter?.clientId || undefined;
+    const projectId = sidebarFilter?.projectId || undefined;
+    const subprojectId = sidebarFilter?.subprojectId || undefined;
+    const nvtId = sidebarFilter?.nvtId || undefined;
     const fetchListResponse = await montageJobService.fetchList(
-      new FetchJobListQueryParams(newPage, newPerPage),
+      new FetchJobListQueryParams(
+        newPage,
+        newPerPage,
+        clientId,
+        projectId,
+        subprojectId,
+        nvtId
+      ),
     );
     setIsLoadingList(false);
     if (fetchListResponse instanceof ServiceError) {
@@ -158,12 +172,12 @@ const MontageJobsList = () => {
 
     setItems(fetchListResponse.items);
     setTotalCount(fetchListResponse.total_count);
-  };
+  }, [sidebarFilter])
 
   useEffect(() => {
     setIsLoadingList(true);
     fetchItems();
-  }, []);
+  }, [fetchItems]);
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);

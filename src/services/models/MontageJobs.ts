@@ -2,12 +2,28 @@ import { FetchPaginatedListQueryParams } from 'services/models/QueryParams';
 import { JobApiListItem, JobPhotoListItem } from 'types/montage-jobs';
 
 export class FetchJobListQueryParams extends FetchPaginatedListQueryParams {
+  client_id?: string;
+
   project_id?: string;
 
-  constructor(page: number, perPage: number, projectId?: string) {
+  subproject_id?: string;
+
+  nvt_id?: string;
+
+  constructor(
+    page: number,
+    perPage: number,
+    clientId?: string,
+    projectId?: string,
+    subprojectId?: string,
+    nvtId?: string
+  ) {
     super(page, perPage);
 
+    this.client_id = clientId;
     this.project_id = projectId;
+    this.subproject_id = subprojectId;
+    this.nvt_id = nvtId;
   }
 }
 
