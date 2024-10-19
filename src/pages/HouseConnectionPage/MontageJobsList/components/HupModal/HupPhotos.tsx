@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import CollectionsIcon from '@mui/icons-material/Collections';
 import React, { SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { HupPhotoListItem, HupPhotoState } from 'types/hups';
 import { hupPhotosList } from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/styles';
@@ -23,6 +24,8 @@ const HupPhotos: React.FC<Props> = (
     setClosedStatePhotos
   }
 ) => {
+  const { t } = useTranslation('montage-jobs', { keyPrefix: 'hupModal' });
+
   const [galleryModalState, setGalleryModalState] = useState<HupPhotoState | null>(null);
 
   const onOpenedPhotosBtnClick = () => {
@@ -41,7 +44,7 @@ const HupPhotos: React.FC<Props> = (
     <>
       <Box sx={hupPhotosList}>
         <Box>
-          <Typography>Opened Photos</Typography>
+          <Typography>{t('openedPhotos')}</Typography>
           <Button
             variant="outlined"
             color="info"
@@ -52,7 +55,7 @@ const HupPhotos: React.FC<Props> = (
           </Button>
         </Box>
         <Box>
-          <Typography>Closed Photos</Typography>
+          <Typography>{t('closedPhotos')}</Typography>
           <Button
             variant="outlined"
             color="info"

@@ -1,11 +1,13 @@
 import { Box, Button, TableCell, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 
 import { JobApiListItem } from 'types/montage-jobs';
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
 import {
   hupButtonsWrapperStyles,
   ontItemsListStyles,
+  reportFileWrapperStyles,
 } from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/styles';
 import { TableColumnAlign } from 'types/generic';
 import OntItem from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell/OntItem';
@@ -22,6 +24,12 @@ type Props = {
 
 const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Props) => {
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'table.locationCell'});
+
+   const openHbFile = () => {
+     if (rowData.hb_file_path) {
+       window.location.href = rowData.hb_file_path;
+     }
+   }
 
   return (
     <TableCell
@@ -64,6 +72,18 @@ const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Prop
                 }}
               />
             )
+          }
+        </Box>
+        <Box className="reportFiles" sx={reportFileWrapperStyles}>
+          {
+            rowData.hb_file_path &&
+            <Button
+              variant="outlined"
+              onClick={openHbFile}
+              startIcon={<PictureAsPdfIcon />}
+            >
+              HB
+            </Button>
           }
         </Box>
       </Box>

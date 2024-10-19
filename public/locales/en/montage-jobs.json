@@ -41,6 +41,8 @@
   },
   "hupModal": {
     "subtitle": "HÜP-Assembly Building for {{buildingType}}",
+    "openedPhotos": "Opened Photos",
+    "closedPhotos": "Closed Photos",
     "form": {
       "hupType": {
         "label": "HUP Type",

@@ -22,3 +22,9 @@ export const onItemStyles = {
   display: 'flex',
   flexDirection: 'column',
 }
+
+export const reportFileWrapperStyles = {
+  marginTop: '40px',
+  display: 'flex',
+  justifyContent: 'flex-end'
+};
