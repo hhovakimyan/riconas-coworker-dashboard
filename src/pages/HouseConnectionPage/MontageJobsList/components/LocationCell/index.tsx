@@ -31,6 +31,12 @@ const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Prop
      }
    }
 
+   const openTbFile = () => {
+     if (rowData.tb_file_path) {
+       window.location.href = rowData.tb_file_path;
+     }
+   }
+
   return (
     <TableCell
       align={columnAlign}
@@ -75,6 +81,17 @@ const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Prop
           }
         </Box>
         <Box className="reportFiles" sx={reportFileWrapperStyles}>
+          {
+            rowData.tb_file_path &&
+            <Button
+              color="warning"
+              variant="outlined"
+              onClick={openTbFile}
+              startIcon={<PictureAsPdfIcon />}
+            >
+              TB
+            </Button>
+          }
           {
             rowData.hb_file_path &&
             <Button

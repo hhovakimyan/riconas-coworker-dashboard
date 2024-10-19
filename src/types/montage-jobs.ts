@@ -28,6 +28,7 @@ export type JobApiListItem = {
   address_line2: string;
   building_type: string;
   hb_file_path: string | null;
+  tb_file_path: string | null;
   registration_date: string;
   nvt_code: string;
   subproject_code: string;

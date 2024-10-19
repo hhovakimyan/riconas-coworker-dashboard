@@ -26,5 +26,6 @@ export const onItemStyles = {
 export const reportFileWrapperStyles = {
   marginTop: '40px',
   display: 'flex',
-  justifyContent: 'flex-end'
+  justifyContent: 'flex-end',
+  columnGap: '10px',
 };
