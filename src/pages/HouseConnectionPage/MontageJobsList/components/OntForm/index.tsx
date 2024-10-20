@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
@@ -18,6 +18,7 @@ import { formStyles } from 'pages/HouseConnectionPage/MontageJobsList/components
 import { actionButtonWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal/styles';
 import { OntDetailsProps, OntEditableProps, OntStatus } from 'types/ont';
 import OntFormValidationSchema from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm/validationSchema';
+import CoworkerSignature from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm/CoworkerSignature';
 
 type Props = {
   onSubmit: (newData: OntEditableProps, isDataChanged: boolean) => void;
@@ -63,6 +64,8 @@ const OntForm: React.FC<Props> = ({
     resolver: yupResolver(OntFormValidationSchema),
   });
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'ontModal'});
+
+  const [signature, setSignature] = useState<string | null>(null);
 
   const onFormSubmit = useCallback(
     (data: OntEditableProps) => {
@@ -148,7 +151,7 @@ const OntForm: React.FC<Props> = ({
         }
         label={t('form.ontType.label')}
       />
-
+      <CoworkerSignature signature={signature} setSignature={setSignature} />
       <Controller
        name="ontInstalled"
        control={control}

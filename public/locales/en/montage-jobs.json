@@ -95,6 +95,7 @@
     "odfCodePlanned": "ODF loading (according to engineering):",
     "odfPosPlanned": "ODF Pos (according to Engineering ODF Port):",
     "photos": "ONT photo:",
+    "signature": "Customer Signature",
     "form": {
       "odfCode": {
         "label": "ODF Code (Actual):"
