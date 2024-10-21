@@ -1,0 +1,158 @@
+{
+  "title": "Montagejobs",
+  "buildingType": {
+    "options": {
+      "MULTI_HOUSE": "Mehrfamilienhaus",
+      "SINGLE_HOUSE": "Einfamilienhaus oder Zweifamilienhaus"
+    }
+  },
+  "cabelPositions": {
+    "1": "1 - Kabel im Haus (ohne Fehler)",
+    "2": "2 - Kabel vor dem Haus/Hauseinführung fehlt",
+    "3": "3 - Kabel am Grundstück / Anschluss fehlt",
+    "4": "4 - Kabel am Grundstück/Grundstücksübergang fehlt",
+    "5": "5 – Behinderung durch NVT (mit m-Angabe)",
+    "6": "6 – Behinderung durch Gebäude (mit m-Anzeige)",
+    "none": "Keiner"
+  },
+  "table": {
+    "headers": {
+      "location": "Standort",
+      "cabelTypePlanned": "Kabeltyp geplant",
+      "cabelType": "Kabeltyp ist",
+      "cabelCodePlanned": "Kabelcode geplant",
+      "cabelCode": "Kabelcode",
+      "tubeColorPlanned": "Rohrfarbe geplant",
+      "tubeColor": "Tubenfarbe ist",
+      "cabelLength": "Blaslänge",
+      "comment": "Kommentar",
+      "cabelPosition": "Kabelposition",
+      "disabilityLength": "Behinderungslänge (m)",
+      "completeDate": "Fertigstellungsdatum",
+      "photos": "Fotos"
+    },
+    "locationCell": {
+      "hupAssembly": "HÜP-Versammlung",
+      "dispatcherFeedback": "Rückmeldung an den Disponenten",
+      "ontActivation": "ONT-Aktivierung"
+    },
+    "noRecords": "Keine Daten gefunden",
+    "failedToLoadItems": "Jobliste konnte nicht geladen werden. "
+  },
+  "hupModal": {
+    "subtitle": "HÜP-Versammlungsgebäude für {{buildingType}}",
+    "openedPhotos": "Geöffnete Fotos",
+    "closedPhotos": "Geschlossene Fotos",
+    "form": {
+      "hupType": {
+        "label": "HUP-Typ",
+        "options": {
+          "none": "Keiner",
+          "SINGLE": "HUP",
+          "WITH_ONT": "HUP & ONT"
+        }
+      },
+      "hupLocation": {
+        "label": "HUP-Standort",
+        "options": {
+          "none": "Keiner",
+          "basement": "Keller",
+          "living_room": "Wohnzimmer",
+          "corridor": "Korridor",
+          "bureau": "Büro",
+          "utility_room": "Hauswirtschaftsraum",
+          "miscellaneous": "Verschiedenes"
+        }
+      },
+      "hupPreInstalled": {
+        "label": "Vorinstalliert"
+      },
+      "hupInstalled": {
+        "label": "Installiert"
+      },
+      "openedHupPhoto": {
+        "title": "Laden Sie ein offenes HUP-Foto hoch"
+      },
+      "closedHupPhoto": {
+        "title": "Laden Sie ein geschlossenes HUP-Foto hoch"
+      },
+      "closeBtn": "Schließen",
+      "submitBtn": "Einreichen"
+    },
+    "galleryModal": {
+      "title": "Laden Sie HUP-Fotos hoch",
+      "errors": {
+        "fileSize": "Ihr Bild darf max {{maxSize}} MB!",
+        "fileFormat": "Bitte laden Sie JPEG- und PNG-Bilder hoch.",
+        "uploadFailed": "Bitte versuchen Sie es erneut."
+      }
+    }
+  },
+  "ontModal": {
+    "subtitle": "Aktivierung Wohneinheit: {{ontCode}}",
+    "splitterCode": "Splittercode:",
+    "splitterFiber": "Splitterfaser:",
+    "odfCodePlanned": "ODF-Beladung (laut Technik):",
+    "odfPosPlanned": "ODF Pos (gemäß Engineering ODF Port):",
+    "photos": "ONT-Foto:",
+    "signature": "Unterschrift des Kunden",
+    "form": {
+      "odfCode": {
+        "label": "ODF-Code (aktuell):"
+      },
+      "odfPos": {
+        "label": "ODF-Position (Ist):"
+      },
+      "ontPreInstalled": {
+        "label": "ONT vorinstalliert:"
+      },
+      "ontInstalled": {
+        "label": "Aktivierung/Vermessung der Wohneinheit erfolgreich abgeschlossen:"
+      },
+      "ontType": {
+        "options": {
+          "none": "Keiner",
+          "ONT_TYPE1": "Ont Typ 1",
+          "ONT_TYPE2": "Ont Typ 2",
+          "ONT_TYPE3": "Ont Typ 3"
+        },
+        "label": "ONT-Typ"
+      },
+      "closeBtn": "Schließen",
+      "submitBtn": "Einreichen"
+    },
+    "galleryModal": {
+      "title": "Laden Sie ONT-Fotos hoch",
+      "errors": {
+        "fileSize": "Ihr Bild darf max {{maxSize}} MB!",
+        "fileFormat": "Bitte laden Sie JPEG- und PNG-Bilder hoch.",
+        "uploadFailed": "Bitte versuchen Sie es erneut."
+      }
+    }
+  },
+  "galleryModal": {
+    "title": "Laden Sie Jobfotos hoch",
+    "errors": {
+      "fileSize": "Ihr Bild darf max {{maxSize}} MB!",
+      "fileFormat": "Bitte laden Sie JPEG- und PNG-Bilder hoch.",
+      "uploadFailed": "Bitte versuchen Sie es erneut."
+    }
+  },
+  "filters": {
+    "project": {
+      "placeholder": "Suche nach Projekt",
+      "noOptionsText": "Keine Projekte gefunden"
+    }
+  },
+  "hupDispatcherModal": {
+    "title": "Rückmeldung an den Disponenten: {{addressLine1}} {{addressLine2}}",
+    "form": {
+      "jobStatus": {
+        "label": "Neuen Status anfordern:",
+        "options": {
+          "appointment_booked": "Termin gebucht"
+        }
+      }
+    }
+  }
+}

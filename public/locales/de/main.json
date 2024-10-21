@@ -15,5 +15,23 @@
   "form": {
     "cancelBtn": "Stornieren",
     "submitBtn": "Einreichen"
+  },
+  "fileUploadErrorSnackbar": {
+    "error": "Fehler",
+    "tryAgain": "Versuchen Sie es erneut"
+  },
+  "galleryModal": {
+    "deleteImage": "Foto löschen",
+    "downloadImage": "Foto herunterladen",
+    "noImages": "Sie haben keine Fotos. ",
+    "uploadImageBtnTitle": "Laden Sie neue Fotos hoch",
+    "imageDeleteConfirmationModal": {
+      "title": "Foto löschen",
+      "content": "Möchten Sie dieses Foto wirklich löschen?",
+      "successMessage": "Foto erfolgreich gelöscht.",
+      "failureMessage": "Das Löschen des Fotos ist fehlgeschlagen. ",
+      "cancelText": "Stornieren",
+      "confirmText": "Bestätigen"
+    }
   }
 }

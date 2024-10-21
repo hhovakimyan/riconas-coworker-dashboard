@@ -143,5 +143,16 @@
       "placeholder": "Search by project",
       "noOptionsText": "No projects found"
     }
+  },
+  "hupDispatcherModal": {
+    "title": "Feedback to dispatcher: {{addressLine1}} {{addressLine2}}",
+    "form": {
+      "jobStatus": {
+        "label": "Request new status:",
+        "options": {
+          "appointment_booked": "Appointment Booked"
+        }
+      }
+    }
   }
 }

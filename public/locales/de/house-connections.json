@@ -1,0 +1,9 @@
+{
+  "viewType": {
+    "label": "Sicht",
+    "options": {
+      "overview": "Überblick",
+      "mounting": "Montage von HA"
+    }
+  }
+}
