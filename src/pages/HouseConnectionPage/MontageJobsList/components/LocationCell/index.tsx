@@ -19,10 +19,19 @@ type Props = {
   columnAlign?: TableColumnAlign;
   rowData: JobApiListItem;
   onHupBtnClick: (jobId: string) => void;
+  onHupDispatcherBtnClick: (jobId: string) => void;
   onOntBtnClick: (jobId: string, ontId: string) => void;
 }
 
-const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Props) => {
+const LocationCell = (
+  {
+    rowData,
+    columnAlign,
+    onHupBtnClick,
+    onHupDispatcherBtnClick,
+    onOntBtnClick
+  }: Props
+) => {
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'table.locationCell'});
 
    const openHbFile = () => {
@@ -64,7 +73,13 @@ const LocationCell = ({rowData, columnAlign, onHupBtnClick, onOntBtnClick}: Prop
             >
                 {t('hupAssembly')}
             </Button>
-            <Button variant="contained" color="warning">{t('dispatcherFeedback')}</Button>
+            <Button
+              variant="contained"
+              color="warning"
+              onClick={() => { onHupDispatcherBtnClick(rowData.id) }}
+            >
+              {t('dispatcherFeedback')}
+            </Button>
           </Box>
         </Box>
         <Box className="ontItemsList" sx={ontItemsListStyles}>

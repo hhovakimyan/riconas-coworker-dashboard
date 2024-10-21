@@ -150,9 +150,37 @@
       "jobStatus": {
         "label": "Request new status:",
         "options": {
-          "appointment_booked": "Appointment Booked"
+          "appointment_booked": "Appointment booked",
+          "alternative_date_required": "Alternative date required",
+          "not_reached": "Not reached",
+          "not_reached2": "Not reached (note call time)",
+          "customer_not_found": "Customer not found despite appointment",
+          "card_inserted": "Card inserted",
+          "appointment_suggested": "Appointment suggestion email sent",
+          "clarification_with_customer": "Clarification with the customer",
+          "clarification_with_network_operator": "Clarification with network operator",
+          "phone_incorrect": "Phone number wrong",
+          "email_incorrect": "Email address incorrect",
+          "customer_unreachable": "1 Customer/Owner is not reachable",
+          "clarification_with_2nd_customer": "2 Clarification with customer",
+          "building_demolished": "2a. Building is demolished",
+          "customer_refused_sign": "2b. Customer does not want to sign",
+          "customer_not_satisfied": "2c. Customer is not satisfied with the proposed structural solutions",
+          "multi_utility_connection": "2d. Customer wants to use multi-utility connection or empty pipe, but has no proper plans",
+          "owner_not_agree": "2e. Owner does not agree.",
+          "customer_data_incorrect": "3 Customer data is incorrect",
+          "connection_refused": "4 Customer refuses connection",
+          "apartment_not_finished": "5 New building - apartment not yet finished",
+          "connection_not_possible": "6 Technical hindrance / connection not possible",
+          "connection_built": "Connection already built",
+          "clarification_gu": "Clarification at GU"
         }
-      }
+      },
+      "note": {
+        "label": "Note to dispatcher:"
+      },
+      "closeBtn": "Close",
+      "submitBtn": "Submit"
     }
   }
 }

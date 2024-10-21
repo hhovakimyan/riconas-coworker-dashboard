@@ -27,11 +27,13 @@ import {
 } from 'constants/montageJobs';
 import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
 import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
+import HupDispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupDispatcherModal';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
   openOntModal = 'openOntModal',
   openGalleryModal = 'openGalleryModal',
+  openHupDispatcherModal = 'openHupDispatcherModal'
 }
 
 const cabelTypeOptions = CABEL_TYPES.map(
@@ -217,6 +219,14 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setModalAction(TableModalActions.openHupModal);
   }
 
+  const onHupDispatcherBtnClick = (jobId: string) => {
+    const targetItem = items.find(
+      (item) => item.id === jobId
+    );
+    setSelectedItem(targetItem);
+    setModalAction(TableModalActions.openHupDispatcherModal);
+  }
+
   const onGalleryBtnClick = (jobId: string) => {
     const targetItem = items.find(
       (item) => item.id === jobId
@@ -318,6 +328,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
                               rowData={row}
                               updateCellData={updateCellData}
                               onHupBtnClick={onHupBtnClick}
+                              onHupDispatcherBtnClick={onHupDispatcherBtnClick}
                               onOntBtnClick={onOntBtnClick}
                               onGalleryBtnClick={onGalleryBtnClick}
                             />
@@ -358,6 +369,11 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
           onClose={onModalClose}
           jobData={selectedItem}
         />
+      }
+      {
+        modalAction === TableModalActions.openHupDispatcherModal &&
+        selectedItem &&
+        <HupDispatcherModal jobData={selectedItem} onClose={onModalClose} />
       }
     </>
   );

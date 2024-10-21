@@ -53,3 +53,8 @@ export type JobApiListItem = {
   ont: JobOntListItem[];
   photos_count: number;
 }
+
+export type DispatcherFields = {
+  jobStatus: string;
+  note: string;
+}

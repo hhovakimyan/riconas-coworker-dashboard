@@ -150,9 +150,37 @@
       "jobStatus": {
         "label": "Neuen Status anfordern:",
         "options": {
-          "appointment_booked": "Termin gebucht"
+          "appointment_booked": "Termin gebucht",
+          "alternative_date_required": "Ersatztermin erforderlich",
+          "not_reached": "Nicht erreicht",
+          "not_reached2": "Nicht erreicht (Anrufzeit beachten)",
+          "customer_not_found": "Kunde trotz Termin nicht gefunden",
+          "card_inserted": "Karte eingelegt",
+          "appointment_suggested": "E-Mail mit Terminvorschlag gesendet",
+          "clarification_with_customer": "Klärung mit dem Kunden",
+          "clarification_with_network_operator": "Abklärung mit Netzbetreiber",
+          "phone_incorrect": "Telefonnummer falsch",
+          "email_incorrect": "E-Mail-Adresse falsch",
+          "customer_unreachable": "1 Kunde/Eigentümer ist nicht erreichbar",
+          "clarification_with_2nd_customer": "2 Klärung mit dem Kunden",
+          "building_demolished": "2a. Gebäude wird abgerissen",
+          "customer_refused_sign": "2b. Kunde will nicht unterschreiben",
+          "customer_not_satisfied": "2c. Der Kunde ist mit den vorgeschlagenen bautechnischen Lösungen nicht zufrieden",
+          "multi_utility_connection": "2d. Kunde will Mehrspartenanschluss oder Leerrohr verwenden, aber hat keine richtige Pläne",
+          "owner_not_agree": "2e. Eigentümer ist nicht einverstanden.",
+          "customer_data_incorrect": "3 Kundendaten sind falsch",
+          "connection_refused": "4 Der Kunde lehnt die Verbindung ab",
+          "apartment_not_finished": "5 Neubau - Wohnung noch nicht fertig",
+          "connection_not_possible": "6 Technische Behinderung / Verbindung nicht möglich",
+          "connection_built": "Verbindung bereits aufgebaut",
+          "clarification_gu": "Klärung bei GU"
         }
-      }
+      },
+      "note": {
+        "label": "Hinweis für den Disponenten:"
+      },
+      "closeBtn": "Schließen",
+      "submitBtn": "Einreichen"
     }
   }
 }

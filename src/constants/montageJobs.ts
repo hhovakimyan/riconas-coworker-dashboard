@@ -46,3 +46,30 @@ export const COMMENT_MAX_LENGTH = 100;
 export const JOB_IMAGE_MAX_SIZE_MB = 4;
 
 export const JOB_IMAGE_ALLOWED_TYPES = ['image/jpeg', 'image/png'];
+
+export const JOB_STATUSES = [
+  'appointment_booked',
+  'alternative_date_required',
+  'not_reached',
+  'not_reached2',
+  'customer_not_found',
+  'card_inserted',
+  'appointment_suggested',
+  'clarification_with_customer',
+  'clarification_with_network_operator',
+  'phone_incorrect',
+  'email_incorrect',
+  'customer_unreachable',
+  'clarification_with_2nd_customer',
+  'building_demolished',
+  'customer_refused_sign',
+  'customer_not_satisfied',
+  'multi_utility_connection',
+  'owner_not_agree',
+  'customer_data_incorrect',
+  'connection_refused',
+  'apartment_not_finished',
+  'connection_not_possible',
+  'connection_built',
+  'clarification_gu',
+];

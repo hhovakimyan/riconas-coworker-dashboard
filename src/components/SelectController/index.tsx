@@ -7,7 +7,7 @@ type Props = {
   name: string;
   control: Control<any, any>,
   options: { value: string, label: string }[];
-  label: string;
+  label?: string;
   errorMessage?: string;
   styles?: Record<string, unknown>;
 }
