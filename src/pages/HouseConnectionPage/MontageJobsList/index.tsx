@@ -112,7 +112,7 @@ const tableColumns: TableColumn[] = [
     options: cabelPositionOptions,
   },
   {
-    id: 'completeDate',
+    id: 'complete_date',
     label: 'table.headers.completeDate',
     minWidth: 100,
   },
