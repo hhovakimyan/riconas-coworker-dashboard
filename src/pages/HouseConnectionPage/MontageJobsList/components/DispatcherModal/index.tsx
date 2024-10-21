@@ -5,16 +5,17 @@ import React, { useState } from 'react';
 
 import { StyledCloseIconButton } from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/styles';
 import { DispatcherFields, JobApiListItem } from 'types/montage-jobs';
-import DispatcherForm from 'pages/HouseConnectionPage/MontageJobsList/components/HupDispatcherModal/DispatcherForm';
-import { dialogStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/HupDispatcherModal/styles';
+import DispatcherForm from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal/DispatcherForm';
+import { dialogStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal/styles';
 
 type Props = {
   jobData: JobApiListItem;
   onClose: () => void;
+  submitFormData: (data: DispatcherFields) => void;
 }
 
-const HupDispatcherModal: React.FC<Props> = ({jobData, onClose}) => {
-  const { t } = useTranslation('montage-jobs', {keyPrefix: 'hupDispatcherModal'});
+const DispatcherModal: React.FC<Props> = ({jobData, onClose}) => {
+  const { t } = useTranslation('montage-jobs', {keyPrefix: 'dispatcherModal'});
 
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -65,4 +66,4 @@ const HupDispatcherModal: React.FC<Props> = ({jobData, onClose}) => {
   )
 }
 
-export default HupDispatcherModal;
+export default DispatcherModal;

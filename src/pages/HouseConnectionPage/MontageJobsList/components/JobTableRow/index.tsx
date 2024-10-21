@@ -15,6 +15,7 @@ type Props = {
   updateCellData: (jobId: string, itemName: string, itemValue: string) => void;
   onHupBtnClick: (jobId: string) => void;
   onHupDispatcherBtnClick: (jobId: string) => void;
+  onOntDispatcherBtnClick: (jobId: string, ontId: string) => void;
   onOntBtnClick: (jobId: string, ontId: string) => void;
   onGalleryBtnClick: (jobId: string) => void;
 }
@@ -26,6 +27,7 @@ const JobTableRow = (
     updateCellData,
     onHupBtnClick,
     onHupDispatcherBtnClick,
+    onOntDispatcherBtnClick,
     onOntBtnClick,
     onGalleryBtnClick
   }: Props
@@ -46,6 +48,7 @@ const JobTableRow = (
               columnAlign={column.align}
               onHupBtnClick={onHupBtnClick}
               onHupDispatcherBtnClick={onHupDispatcherBtnClick}
+              onOntDispatcherBtnClick={onOntDispatcherBtnClick}
               onOntBtnClick={onOntBtnClick}
             />
           )

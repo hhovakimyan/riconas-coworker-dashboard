@@ -144,7 +144,7 @@
       "noOptionsText": "No projects found"
     }
   },
-  "hupDispatcherModal": {
+  "dispatcherModal": {
     "title": "Feedback to dispatcher: {{addressLine1}} {{addressLine2}}",
     "form": {
       "jobStatus": {

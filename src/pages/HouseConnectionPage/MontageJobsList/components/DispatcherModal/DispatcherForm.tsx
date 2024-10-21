@@ -23,7 +23,7 @@ const defaultFormValuesInitialState: DispatcherFields = {
 };
 
 const DispatcherForm: React.FC<Props> = ({onSubmit, submitError, isLoading, onClose}) => {
-  const { t } = useTranslation('montage-jobs', {keyPrefix: 'hupDispatcherModal.form'});
+  const { t } = useTranslation('montage-jobs', {keyPrefix: 'dispatcherModal.form'});
 
   const { handleSubmit, control } = useForm({ defaultValues: defaultFormValuesInitialState });
 

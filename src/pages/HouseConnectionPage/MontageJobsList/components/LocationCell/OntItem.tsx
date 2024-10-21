@@ -12,9 +12,10 @@ import {
 type Props = {
   data: JobOntListItem;
   onOntActivationBtnClick: (ontId: string) => void;
+  onOntDispatcherBtnClick: (ontId: string) => void;
 }
 
-const OntItem = ({data, onOntActivationBtnClick}: Props) => {
+const OntItem = ({data, onOntActivationBtnClick, onOntDispatcherBtnClick}: Props) => {
   const { t } = useTranslation('montage-jobs', { keyPrefix: 'table.locationCell' });
 
   return (
@@ -44,7 +45,13 @@ const OntItem = ({data, onOntActivationBtnClick}: Props) => {
         >
           {t('ontActivation')}
         </Button>
-        <Button variant="contained" color="warning">{t('dispatcherFeedback')}</Button>
+        <Button
+          variant="contained"
+          color="warning"
+          onClick={() => {
+            onOntDispatcherBtnClick(data.id)
+          }}
+        >{t('dispatcherFeedback')}</Button>
       </Box>
     </Box>
   )

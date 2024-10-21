@@ -27,13 +27,14 @@ import {
 } from 'constants/montageJobs';
 import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
 import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
-import HupDispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupDispatcherModal';
+import DispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
   openOntModal = 'openOntModal',
   openGalleryModal = 'openGalleryModal',
-  openHupDispatcherModal = 'openHupDispatcherModal'
+  openHupDispatcherModal = 'openHupDispatcherModal',
+  openOntDispatcherModal = 'openOntDispatcherModal',
 }
 
 const cabelTypeOptions = CABEL_TYPES.map(
@@ -227,6 +228,26 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setModalAction(TableModalActions.openHupDispatcherModal);
   }
 
+  const onOntDispatcherBtnClick = (jobId: string, ontItemId: string) => {
+    const targetItem = items.find(
+      (item) => item.id === jobId
+    );
+    if (!targetItem || !targetItem.ont) {
+      return;
+    }
+
+    const targetItemOnt = targetItem.ont.find(
+      (ontItem) => ontItem.id === ontItemId
+    );
+    if (!targetItemOnt) {
+      return;
+    }
+
+    setSelectedItem(targetItem);
+    setSelectedOnt(targetItemOnt);
+    setModalAction(TableModalActions.openOntDispatcherModal);
+  }
+
   const onGalleryBtnClick = (jobId: string) => {
     const targetItem = items.find(
       (item) => item.id === jobId
@@ -329,6 +350,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
                               updateCellData={updateCellData}
                               onHupBtnClick={onHupBtnClick}
                               onHupDispatcherBtnClick={onHupDispatcherBtnClick}
+                              onOntDispatcherBtnClick={onOntDispatcherBtnClick}
                               onOntBtnClick={onOntBtnClick}
                               onGalleryBtnClick={onGalleryBtnClick}
                             />
@@ -373,7 +395,25 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
       {
         modalAction === TableModalActions.openHupDispatcherModal &&
         selectedItem &&
-        <HupDispatcherModal jobData={selectedItem} onClose={onModalClose} />
+        <DispatcherModal
+          jobData={selectedItem}
+          onClose={onModalClose}
+          submitFormData={(data) => {
+            console.log(data)
+          }}
+        />
+      }
+      {
+        modalAction === TableModalActions.openOntDispatcherModal &&
+        selectedItem &&
+        selectedOnt &&
+        <DispatcherModal
+          jobData={selectedItem}
+          onClose={onModalClose}
+          submitFormData={(data) => {
+            console.log(data)
+          }}
+        />
       }
     </>
   );

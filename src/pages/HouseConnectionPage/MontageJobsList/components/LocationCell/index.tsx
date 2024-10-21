@@ -21,6 +21,7 @@ type Props = {
   onHupBtnClick: (jobId: string) => void;
   onHupDispatcherBtnClick: (jobId: string) => void;
   onOntBtnClick: (jobId: string, ontId: string) => void;
+  onOntDispatcherBtnClick: (jobId: string, ontId: string) => void;
 }
 
 const LocationCell = (
@@ -29,6 +30,7 @@ const LocationCell = (
     columnAlign,
     onHupBtnClick,
     onHupDispatcherBtnClick,
+    onOntDispatcherBtnClick,
     onOntBtnClick
   }: Props
 ) => {
@@ -90,6 +92,9 @@ const LocationCell = (
                 data={ontItem}
                 onOntActivationBtnClick={(ontId: string) => {
                   onOntBtnClick(rowData.id, ontId);
+                }}
+                onOntDispatcherBtnClick={(ontId: string) => {
+                  onOntDispatcherBtnClick(rowData.id, ontId);
                 }}
               />
             )
