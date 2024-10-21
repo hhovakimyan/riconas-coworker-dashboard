@@ -1,0 +1,37 @@
+{
+  "title": "Bienvenido al Panel de Riconas",
+  "errors": {
+    "somethingWentWrong": "Algo salió mal. "
+  },
+  "header": {
+    "signOut": "Desconectar",
+    "changePassword": "Cambiar la contraseña"
+  },
+  "backBtn": "Atrás",
+  "deleteModal": {
+    "cancelText": "Cancelar",
+    "confirmText": "Confirmar"
+  },
+  "form": {
+    "cancelBtn": "Cancelar",
+    "submitBtn": "Entregar"
+  },
+  "fileUploadErrorSnackbar": {
+    "error": "Error",
+    "tryAgain": "Intentar otra vez"
+  },
+  "galleryModal": {
+    "deleteImage": "Eliminar foto",
+    "downloadImage": "Descargar foto",
+    "noImages": "No tienes fotos. ",
+    "uploadImageBtnTitle": "Subir nuevas fotos",
+    "imageDeleteConfirmationModal": {
+      "title": "Eliminar foto",
+      "content": "¿Estás seguro de que quieres eliminar esta foto?",
+      "successMessage": "Foto eliminada con éxito.",
+      "failureMessage": "Error al eliminar la foto. ",
+      "cancelText": "Cancelar",
+      "confirmText": "Confirmar"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "title": "Iniciar sesión",
+  "form": {
+    "email": {
+      "label": "Dirección de correo electrónico",
+      "errors": {
+        "required": "La dirección de correo electrónico es un campo obligatorio",
+        "invalid": "La dirección de correo electrónico debe ser un correo electrónico válido."
+      }
+    },
+    "password": {
+      "label": "Contraseña",
+      "errors": {
+        "required": "La contraseña es un campo obligatorio",
+        "invalid": "La contraseña debe contener un mínimo de ocho caracteres, al menos una letra, un número y un carácter."
+      }
+    },
+    "submitBtnTitle": "Entregar",
+    "errors": {
+      "incorrect_credentials": "Se proporcionaron credenciales incorrectas."
+    }
+  },
+  "footerLink": "¿Has olvidado tu contraseña?"
+}

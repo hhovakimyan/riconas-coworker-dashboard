@@ -1,0 +1,9 @@
+{
+  "viewType": {
+    "label": "Vista",
+    "options": {
+      "overview": "Descripción general",
+      "mounting": "Montaje HA"
+    }
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "title": "Trabajos de montaje",
+  "buildingType": {
+    "options": {
+      "MULTI_HOUSE": "Casa multifamiliar",
+      "SINGLE_HOUSE": "Vivienda unifamiliar o bifamiliar"
+    }
+  },
+  "cabelPositions": {
+    "1": "1 - cable en casa (sin error)",
+    "2": "2 - falta el cable delante de la casa / entrada de la casa",
+    "3": "3 - cable en la propiedad / falta conexión",
+    "4": "4 - falta el cable en la propiedad / cruce de propiedad",
+    "5": "5 - Discapacidad por NVT (con indicación m)",
+    "6": "6 - Obstrucción del edificio (con indicación m)",
+    "none": "Ninguno"
+  },
+  "table": {
+    "headers": {
+      "location": "Ubicación",
+      "cabelTypePlanned": "Tipo de cable planeado",
+      "cabelType": "El tipo de cable es",
+      "cabelCodePlanned": "Código de cable planeado",
+      "cabelCode": "Código de cable",
+      "tubeColorPlanned": "Color del tubo planeado",
+      "tubeColor": "El color del tubo es",
+      "cabelLength": "Longitud de soplado",
+      "comment": "Comentario",
+      "cabelPosition": "Posición del cable",
+      "disabilityLength": "Longitud de invalidez (m)",
+      "completeDate": "Fecha de finalización",
+      "photos": "Fotos"
+    },
+    "locationCell": {
+      "hupAssembly": "Asamblea HÜP",
+      "dispatcherFeedback": "retroalimentación al despachador",
+      "ontActivation": "Activación ONT"
+    },
+    "noRecords": "No se encontraron datos",
+    "failedToLoadItems": "No se pudo cargar la lista de trabajos. "
+  },
+  "hupModal": {
+    "subtitle": "HÜP-Edificio de Asambleas para {{buildingType}}",
+    "openedPhotos": "Fotos abiertas",
+    "closedPhotos": "Fotos cerradas",
+    "form": {
+      "hupType": {
+        "label": "Tipo HUP",
+        "options": {
+          "none": "Ninguno",
+          "SINGLE": "HUP",
+          "WITH_ONT": "HUP Y ONT"
+        }
+      },
+      "hupLocation": {
+        "label": "Ubicación del HUP",
+        "options": {
+          "none": "Ninguno",
+          "basement": "Sótano",
+          "living_room": "Sala de estar",
+          "corridor": "Corredor",
+          "bureau": "Oficina",
+          "utility_room": "cuarto de servicio",
+          "miscellaneous": "Misceláneas"
+        }
+      },
+      "hupPreInstalled": {
+        "label": "Preinstalado"
+      },
+      "hupInstalled": {
+        "label": "Instalado"
+      },
+      "openedHupPhoto": {
+        "title": "Subir foto HUP abierta"
+      },
+      "closedHupPhoto": {
+        "title": "Subir foto HUP cerrada"
+      },
+      "closeBtn": "Cerca",
+      "submitBtn": "Entregar"
+    },
+    "galleryModal": {
+      "title": "Subir fotos de HUP",
+      "errors": {
+        "fileSize": "Tu foto puede ser máxima. {{maxSize}} ¡MEGABYTE!",
+        "fileFormat": "Cargue imágenes JPEG, PNG.",
+        "uploadFailed": "Por favor inténtalo de nuevo."
+      }
+    }
+  },
+  "ontModal": {
+    "subtitle": "Activación de unidad residencial: {{ontCode}}",
+    "splitterCode": "Código divisor:",
+    "splitterFiber": "Fibra divisora:",
+    "odfCodePlanned": "Carga ODF (según ingeniería):",
+    "odfPosPlanned": "Pos ODF (según Ingeniería Puerto ODF):",
+    "photos": "Foto ONT:",
+    "signature": "Firma del cliente",
+    "form": {
+      "odfCode": {
+        "label": "Código ODF (real):"
+      },
+      "odfPos": {
+        "label": "Pos. ODF (real):"
+      },
+      "ontPreInstalled": {
+        "label": "ONT preinstalado:"
+      },
+      "ontInstalled": {
+        "label": "Activación/medición de unidad residencial completada con éxito:"
+      },
+      "ontType": {
+        "options": {
+          "none": "Ninguno",
+          "ONT_TYPE1": "Tipo 1",
+          "ONT_TYPE2": "Tipo 2",
+          "ONT_TYPE3": "Tipo 3"
+        },
+        "label": "Tipo ONT"
+      },
+      "closeBtn": "Cerca",
+      "submitBtn": "Entregar"
+    },
+    "galleryModal": {
+      "title": "Subir fotos de la ONT",
+      "errors": {
+        "fileSize": "Tu foto puede ser máxima. {{maxSize}} ¡MEGABYTE!",
+        "fileFormat": "Cargue imágenes JPEG, PNG.",
+        "uploadFailed": "Por favor inténtalo de nuevo."
+      }
+    }
+  },
+  "galleryModal": {
+    "title": "Subir fotos de trabajo",
+    "errors": {
+      "fileSize": "Tu foto puede ser máxima. {{maxSize}} ¡MEGABYTE!",
+      "fileFormat": "Cargue imágenes JPEG, PNG.",
+      "uploadFailed": "Por favor inténtalo de nuevo."
+    }
+  },
+  "filters": {
+    "project": {
+      "placeholder": "Buscar por proyecto",
+      "noOptionsText": "No se encontraron proyectos"
+    }
+  },
+  "dispatcherModal": {
+    "title": "Comentarios al despachador: {{addressLine1}} {{addressLine2}}",
+    "form": {
+      "jobStatus": {
+        "label": "Solicitar nuevo estado:",
+        "options": {
+          "appointment_booked": "Cita reservada",
+          "alternative_date_required": "Se requiere fecha alternativa",
+          "not_reached": "No alcanzado",
+          "not_reached2": "No alcanzado (tenga en cuenta el tiempo de llamada)",
+          "customer_not_found": "Cliente no encontrado a pesar de la cita",
+          "card_inserted": "Tarjeta insertada",
+          "appointment_suggested": "Correo electrónico de sugerencia de cita enviado",
+          "clarification_with_customer": "Aclaración con el cliente.",
+          "clarification_with_network_operator": "Aclaración con el operador de red",
+          "phone_incorrect": "Número de teléfono incorrecto",
+          "email_incorrect": "Dirección de correo electrónico incorrecta",
+          "customer_unreachable": "1 Cliente/Propietario no es accesible",
+          "clarification_with_2nd_customer": "2 Aclaración con el cliente",
+          "building_demolished": "2a. ",
+          "customer_refused_sign": "2b. ",
+          "customer_not_satisfied": "2c. ",
+          "multi_utility_connection": "2do. ",
+          "owner_not_agree": "2e. ",
+          "customer_data_incorrect": "3 Los datos del cliente son incorrectos",
+          "connection_refused": "4 El cliente rechaza la conexión",
+          "apartment_not_finished": "5 Edificio nuevo - apartamento aún no terminado",
+          "connection_not_possible": "6 Problema técnico/conexión imposible",
+          "connection_built": "Conexión ya construida",
+          "clarification_gu": "Aclaración en GU"
+        }
+      },
+      "note": {
+        "label": "Nota para el despachador:"
+      },
+      "closeBtn": "Cerca",
+      "submitBtn": "Entregar"
+    }
+  }
+}

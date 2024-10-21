@@ -1,0 +1,21 @@
+{
+  "title": "Establecer contraseña para activar su cuenta",
+  "form": {
+    "password": {
+      "label": "Contraseña",
+      "errors": {
+        "required": "La contraseña es un campo obligatorio",
+        "invalid": "La contraseña debe contener un mínimo de ocho caracteres, al menos una letra, un número y un carácter."
+      }
+    },
+    "confirmPassword": {
+      "label": "confirmar Contraseña",
+      "errors": {
+        "required": "Confirmar contraseña es un campo obligatorio",
+        "notMatch": "Las contraseñas deben coincidir"
+      }
+    },
+    "submitBtnTitle": "Entregar"
+  },
+  "accountActivatedMessage": "Su cuenta se activó exitosamente.  <0>Iniciar sesión</0> con la contraseña que estableciste"
+}
