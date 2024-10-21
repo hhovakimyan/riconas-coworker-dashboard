@@ -13,3 +13,6 @@ export const VIEW_TYPES = [
   'overview',
   VIEW_TYPE_MOUNTING,
 ];
+
+// This is the maximum size of all files which are being uploaded in one chunk
+export const TOTAL_UPLOADED_FILES_MAX_SIZE = 30;

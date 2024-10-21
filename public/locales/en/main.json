@@ -1,7 +1,8 @@
 {
   "title": "Welcome to Riconas Dashboard",
   "errors": {
-    "somethingWentWrong": "Something went wrong. Please try later!"
+    "somethingWentWrong": "Something went wrong. Please try later!",
+    "totalFileSize": "The total uploaded files size can not exceed {{max}} MB"
   },
   "header": {
     "signOut": "Sign Out",
