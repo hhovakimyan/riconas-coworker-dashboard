@@ -51,12 +51,7 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
     onClose();
   };
 
-  const onFormSubmit = async (newData: OntEditableProps, isDataChanged: boolean) => {
-    if (!isDataChanged) {
-      closeModal();
-      return;
-    }
-
+  const onFormSubmit = async (newData: OntEditableProps) => {
     setIsLoading(true);
     const updateResponseDto = await ontService.updateDetails(
       ontId,
@@ -66,6 +61,7 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
         odf_pos: newData.odfPos,
         is_pre_installed: newData.ontPreInstalled,
         is_installed: newData.ontInstalled,
+        signature: newData.signature || null,
       }
     );
     setIsLoading(false);

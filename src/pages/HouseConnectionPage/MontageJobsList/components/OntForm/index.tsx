@@ -1,5 +1,5 @@
 import { Controller, useForm } from 'react-hook-form';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
@@ -11,6 +11,7 @@ import {
   Switch, TextField, Typography,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import SignatureCanvas from 'react-signature-canvas';
 
 import SelectController from 'components/SelectController';
 import { ONT_TYPES } from 'constants/hup';
@@ -18,10 +19,10 @@ import { formStyles } from 'pages/HouseConnectionPage/MontageJobsList/components
 import { actionButtonWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal/styles';
 import { OntDetailsProps, OntEditableProps, OntStatus } from 'types/ont';
 import OntFormValidationSchema from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm/validationSchema';
-import CoworkerSignature from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm/CoworkerSignature';
+import CustomerSignature from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm/CustomerSignature';
 
 type Props = {
-  onSubmit: (newData: OntEditableProps, isDataChanged: boolean) => void;
+  onSubmit: (newData: OntEditableProps) => void;
   currentData?: OntDetailsProps | null;
   submitError: string | null;
   isLoading: boolean;
@@ -32,6 +33,7 @@ const defaultFormValuesInitialState: OntEditableProps = {
   ontType: '',
   odfCode: '',
   odfPos: '',
+  signature: '',
   ontPreInstalled: false,
   ontInstalled: false,
 };
@@ -49,6 +51,7 @@ const OntForm: React.FC<Props> = ({
       ontType: currentData.type || undefined,
       odfCode: currentData.odf_code || undefined,
       odfPos: currentData.odf_pos || undefined,
+      signature: currentData.signature || '',
       ontInstalled: currentData.status === OntStatus.INSTALLED,
       ontPreInstalled: currentData.status === OntStatus.PREINSTALLED,
     };
@@ -56,7 +59,6 @@ const OntForm: React.FC<Props> = ({
 
   const {
     handleSubmit,
-    formState: { isDirty },
     control,
     setValue,
   } = useForm({
@@ -65,13 +67,20 @@ const OntForm: React.FC<Props> = ({
   });
   const { t } = useTranslation('montage-jobs', {keyPrefix: 'ontModal'});
 
-  const [signature, setSignature] = useState<string | null>(null);
+  const signatureCanvasRef = useRef<SignatureCanvas>(null);
 
   const onFormSubmit = useCallback(
     (data: OntEditableProps) => {
-      onSubmit(data, isDirty);
+      const signatureCanvas = signatureCanvasRef!.current;
+
+      onSubmit(
+        {
+          ...data,
+          signature: signatureCanvas!.isEmpty() ? '' : signatureCanvas!.toDataURL(),
+        }
+      );
     },
-    [onSubmit, isDirty],
+    [onSubmit, signatureCanvasRef?.current],
   );
 
   return (
@@ -151,7 +160,10 @@ const OntForm: React.FC<Props> = ({
         }
         label={t('form.ontType.label')}
       />
-      <CoworkerSignature signature={signature} setSignature={setSignature} />
+      <CustomerSignature
+        signature={currentData?.signature || ''}
+        signatureCanvasRef={signatureCanvasRef}
+      />
       <Controller
        name="ontInstalled"
        control={control}

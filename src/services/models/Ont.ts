@@ -14,6 +14,8 @@ export class UpdateOntDetailsRequestDto {
   is_pre_installed?: boolean;
 
   is_installed?: boolean;
+
+  signature?: string | null;
 }
 
 export class UpdateOntDetailsResponseDto {}

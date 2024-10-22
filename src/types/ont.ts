@@ -21,6 +21,7 @@ export type OntDetailsProps = {
   type: string;
   status: OntStatus;
   photos: OntPhotoListItem[];
+  signature: string | null;
 }
 
 export type OntEditableProps = {
@@ -29,4 +30,5 @@ export type OntEditableProps = {
   odfPos?: string;
   ontPreInstalled?: boolean;
   ontInstalled?: boolean;
+  signature?: string;
 }
