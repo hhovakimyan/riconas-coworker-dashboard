@@ -28,6 +28,7 @@ import {
 import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
 import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
 import DispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal';
+import { tableContainerStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -337,8 +338,8 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
               <NoDataMessage message={t('table.noRecords')} /> :
               <TableWrapper>
                 <>
-                  <TableContainer>
-                    <Table>
+                  <TableContainer sx={tableContainerStyles}>
+                    <Table stickyHeader>
                       <TableHeader columns={tableColumnsLocalized} />
                       <TableBody>
                         {items

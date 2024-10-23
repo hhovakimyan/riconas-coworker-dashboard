@@ -1,4 +1,4 @@
-export const tableContainerStyles = {
+export const tableWrapperStyles = {
   width: '100%',
   height: '100%',
   '.MuiDataGrid-root': {
