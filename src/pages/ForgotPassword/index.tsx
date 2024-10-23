@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Container, Link, Typography } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 
 import ForgotPasswordForm from 'pages/ForgotPassword/components/ForgotPasswordForm';
@@ -16,7 +16,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <Box className="forgotPasswordPage" sx={forgotPasswordPageStyles}>
+    <Container maxWidth="sm" sx={forgotPasswordPageStyles}>
       <Box className="innerContent">
         <PageTitle className="title">{t('title')}</PageTitle>
         {
@@ -37,7 +37,7 @@ const ForgotPassword = () => {
           <Link href="/login">{t('footerLink')}</Link>
         </div>
       </Box>
-    </Box>
+    </Container>
   )
 };
 

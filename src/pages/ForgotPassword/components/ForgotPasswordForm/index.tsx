@@ -1,11 +1,11 @@
-import { Alert, TextField } from '@mui/material';
+import { Alert, Box, TextField } from '@mui/material';
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import 'pages/ForgotPassword/components/ForgotPasswordForm/styles.css';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 
+import { formStyles } from 'pages/ForgotPassword/components/ForgotPasswordForm/styles';
 import ForgotPasswordSchema from 'pages/ForgotPassword/components/ForgotPasswordForm/validationSchema';
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
@@ -50,7 +50,12 @@ const ForgotPasswordForm = ({onSubmit}: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="forgotPasswordForm" autoComplete="off">
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onFormSubmit)}
+      autoComplete="off"
+      sx={formStyles}
+    >
       <Controller
         name="email"
         control={control}
@@ -78,7 +83,7 @@ const ForgotPasswordForm = ({onSubmit}: Props) => {
       >
         {t('submitBtnTitle')}
       </LoadingButton>
-    </form>
+    </Box>
   );
 }
 

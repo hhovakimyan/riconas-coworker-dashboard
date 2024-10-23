@@ -6,7 +6,7 @@ export const forgotPasswordPageStyles = {
     paddingTop: '40px',
 
     '& .innerContent': {
-        minWidth: '640px',
+        width: '100%',
 
         '& .title': {
             textAlign: 'center',
