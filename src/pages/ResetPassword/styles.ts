@@ -6,6 +6,6 @@ export const resetPasswordPageStyles = {
   paddingTop: '40px',
 
   '& .innerContent': {
-    minWidth: '640px',
+    width: '100%',
   },
 };

@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from '@mui/material';
+import { Box, Container, Link, Typography } from '@mui/material';
 import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <Box sx={resetPasswordPageStyles}>
+    <Container maxWidth="sm" sx={resetPasswordPageStyles}>
       <Box className="innerContent">
         <PageTitle className="title">{t('title')}</PageTitle>
         {
@@ -42,7 +42,7 @@ const ResetPassword = () => {
             />
         }
       </Box>
-    </Box>
+    </Container>
   )
 }
 

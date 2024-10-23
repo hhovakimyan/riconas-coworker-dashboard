@@ -1,15 +1,14 @@
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { Alert, TextField } from '@mui/material';
+import { Alert, Box, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
 import ResetPasswordSchema from 'pages/ResetPassword/ResetPasswordForm/validationSchema';
-
-import 'pages/ResetPassword/ResetPasswordForm/styles.css';
+import { formStyles } from 'pages/ResetPassword/ResetPasswordForm/styles';
 
 type Props = {
   passwordResetCode: string;
@@ -45,7 +44,12 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="resetPasswordForm" autoComplete="off">
+    <Box
+      onSubmit={handleSubmit(onFormSubmit)}
+      component="form"
+      autoComplete="off"
+      sx={formStyles}
+    >
       <Controller
         name="password"
         control={control}
@@ -88,7 +92,7 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
       >
         {t('submitBtnTitle')}
       </LoadingButton>
-    </form>
+    </Box>
   );
 }
 
