@@ -1,23 +1,22 @@
-import { Link } from '@mui/material';
+import { Container, Link } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import LoginForm from 'pages/Login/components/LoginForm';
 import PageTitle from 'components/PageTitle';
-
-import 'pages/Login/styles.css';
+import { pageStyles } from 'pages/Login/styles';
 
 const Login = () => {
   const { t } = useTranslation('login');
 
   return (
-    <div className="loginPage">
-      <PageTitle className="loginFormTitle">{t('title')}</PageTitle>
+    <Container maxWidth="sm" sx={pageStyles}>
+      <PageTitle className="title">{t('title')}</PageTitle>
       <LoginForm />
-      <div className="loginPageFooter">
+      <div className="footer">
         <Link href="/forgot-password">{t('footerLink')}</Link>
       </div>
-    </div>
-  )
+    </Container>
+  );
 }
 
 export default Login;

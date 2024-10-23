@@ -1,12 +1,12 @@
-import { Alert, TextField } from '@mui/material';
+import { Alert, Box, TextField } from '@mui/material';
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import 'pages/Login/components/LoginForm/styles.css';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
 
+import { formStyles } from 'pages/Login/components/LoginForm/styles';
 import LoginSchema from 'pages/Login/components/LoginForm/validationSchema';
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
@@ -50,7 +50,12 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="loginForm" autoComplete="off">
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onFormSubmit)}
+      autoComplete="off"
+      sx={formStyles}
+    >
       <Controller
         name="email"
         control={control}
@@ -92,7 +97,7 @@ const LoginForm = () => {
       >
         {t('submitBtnTitle')}
       </LoadingButton>
-    </form>
+    </Box>
   );
 }
 
