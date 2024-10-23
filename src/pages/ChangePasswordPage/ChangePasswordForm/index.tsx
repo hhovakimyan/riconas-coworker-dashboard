@@ -1,14 +1,13 @@
 import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
-import { Alert, TextField } from '@mui/material';
+import { Alert, Box, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useTranslation } from 'react-i18next';
 
 import { userService } from 'services';
 import { ServiceError } from 'services/helperTypes';
-
-import 'pages/ChangePasswordPage/ChangePasswordForm/styles.css';
+import { formStyles } from 'pages/ChangePasswordPage/ChangePasswordForm/styles';
 import ChangePasswordSchema from 'pages/ChangePasswordPage/ChangePasswordForm/validationSchema';
 
 type Props = {
@@ -50,7 +49,12 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)} className="changePasswordForm" autoComplete="off">
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onFormSubmit)}
+      sx={formStyles}
+      autoComplete="off"
+    >
       <Controller
         name="oldPassword"
         control={control}
@@ -108,7 +112,7 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
       >
         {t('submitBtnTitle')}
       </LoadingButton>
-    </form>
+    </Box>
   );
 }
 
