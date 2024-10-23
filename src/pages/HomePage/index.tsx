@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { GetUserDetailsResponseDto } from 'services/models/User';
 import { projectService, userService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
-import { cardListWrapperStyles, wrapperStyles } from 'pages/HomePage/styles';
+import { StyledCardListWrapper, wrapperStyles } from 'pages/HomePage/styles';
 import { FetchProjectsListResponseDto } from 'services/models/Projects';
 import ProjectTree from 'pages/HomePage/ProjectTree';
 
@@ -47,7 +47,7 @@ const HomePage = () => {
 
   return (
     <Box sx={wrapperStyles}>
-      <Box sx={cardListWrapperStyles}>
+      <StyledCardListWrapper>
         <Card>
           <CardHeader title={t('myTeam.title')} />
           <CardContent>
@@ -68,7 +68,7 @@ const HomePage = () => {
             }
           </CardContent>
         </Card>
-      </Box>
+      </StyledCardListWrapper>
       <Box>
         <Button variant="contained" color="info" onClick={onBrowseBtnClick}>
           {t('houseConnectionsBtn')}
