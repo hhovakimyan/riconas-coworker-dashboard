@@ -1,0 +1,37 @@
+{
+  "title": "Blow In Jobs",
+  "table": {
+    "headers": {
+      "location": "POP/Band/DP",
+      "isNvtSet": "NVT Set",
+      "cabelTypePlanned": "Cabel Type Planned",
+      "cabelType": "Cabel Type Is",
+      "bandColorPlanned": "Band + Color Planned",
+      "bandCode": "Band",
+      "cabelColor": "Cabel Color Is",
+      "cabelStart": "Cabel Start",
+      "cabelEnd": "Cabel End",
+      "cabelTotalLength": "Cabel Total Length",
+      "isBlowInDone": "Blow-In Done",
+      "comment": "Comment",
+      "completeDate": "Completion Date",
+      "photos": "Photos"
+    },
+    "noRecords": "No data found",
+    "failedToLoadItems": "Failed to load jobs list. Please try again later!"
+  },
+  "galleryModal": {
+    "title": "Upload Job Photos",
+    "errors": {
+      "fileSize": "Your picture can be max {{maxSize}} MB!",
+      "fileFormat": "Please upload JPEG, PNG images.",
+      "uploadFailed": "Please try again."
+    }
+  },
+  "filters": {
+    "project": {
+      "placeholder": "Search by project",
+      "noOptionsText": "No projects found"
+    }
+  }
+}

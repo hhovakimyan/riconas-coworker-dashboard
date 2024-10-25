@@ -3,7 +3,8 @@
     "label": "Sicht",
     "options": {
       "overview": "Überblick",
-      "mounting": "Montage von HA"
+      "mounting": "Montage von HA",
+      "blow_in": "Einblasen POP ↔ NVT"
     }
   }
 }

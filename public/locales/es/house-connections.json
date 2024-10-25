@@ -3,7 +3,8 @@
     "label": "Vista",
     "options": {
       "overview": "Descripción general",
-      "mounting": "Montaje HA"
+      "mounting": "Montaje HA",
+      "blow_in": "POP soplado ↔ NVT"
     }
   }
 }

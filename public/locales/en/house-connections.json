@@ -3,7 +3,8 @@
     "label": "View",
     "options": {
       "overview": "Overview",
-      "mounting": "Mounting HA"
+      "mounting": "Mounting HA",
+      "blow_in": "Blow-in POP ↔ NVT"
     }
   }
 }
