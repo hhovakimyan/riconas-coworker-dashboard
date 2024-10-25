@@ -9,7 +9,7 @@ import { SidebarFilterProps } from 'types/generic';
 import BlowInJobsList from 'pages/HouseConnectionPage/BlowInJobsList';
 
 const HouseConnectionPage = () => {
-  const [viewType, setViewType] = useState<string>(VIEW_TYPE_MOUNTING);
+  const [viewType, setViewType] = useState<string>(VIEW_TYPE_BLOW_IN);
   const [sidebarFilter, setSidebarFilter] = useState<SidebarFilterProps | null>(null);
 
   return (

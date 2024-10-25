@@ -9,7 +9,7 @@ import { useSnackbarContext } from 'providers/Snackbar';
 import TableWrapper from 'components/TableWrapper';
 import { SidebarFilterProps, TableColumn } from 'types/generic';
 import TableHeader from 'components/TableHeader';
-import { blowInJobService, montageJobService } from 'services';
+import { blowInJobService } from 'services';
 import {
   TABLE_DEFAULT_ROWS_PER_PAGE,
   TABLE_DEFAULT_START_PAGE,
@@ -68,7 +68,7 @@ const tableColumns: TableColumn[] = [
   {
     id: 'band_color_planned',
     label: 'table.headers.bandColorPlanned',
-    minWidth: 40,
+    minWidth: 20,
   },
   {
     id: 'band_code',
@@ -219,16 +219,12 @@ const BlowInJobsList: React.FC<Props> = ({sidebarFilter}) => {
       return item;
     });
 
-    if (itemName === "comment") {
-      montageJobService.saveComment(jobId, { comment: itemValue });
-    } else {
-      montageJobService.updateCabelProps(
-        jobId,
-        {
-          [itemName]: itemValue,
-        }
-      );
-    }
+    blowInJobService.updateProps(
+      jobId,
+      {
+        [itemName]: itemValue,
+      }
+    );
 
     setItems(newItems);
   }

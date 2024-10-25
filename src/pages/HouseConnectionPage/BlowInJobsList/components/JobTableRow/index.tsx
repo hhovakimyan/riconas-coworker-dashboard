@@ -30,7 +30,7 @@ const JobTableRow = (
       key={`job-${rowData.id}`}
     >
       {tableColumns.map((column) => {
-        const value = rowData[column.id as keyof object];
+        let value: string = rowData[column.id as keyof object];
         if (column.id === "location") {
           return (
             <LocationCell
@@ -39,6 +39,10 @@ const JobTableRow = (
               columnAlign={column.align}
             />
           )
+        }
+
+        if (column.id === "band_color_planned") {
+          value = `${rowData.band_code_planned} ${rowData.cabel_color_planned}`;
         }
 
         if (["cabel_type", "cabel_color", "band_code"].includes(column.id)) {

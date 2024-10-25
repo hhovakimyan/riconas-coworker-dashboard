@@ -32,3 +32,25 @@ export class FetchJobListResponseDto {
 
   total_count!: number;
 }
+
+export class UpdatePropsRequestDto {
+  cabel_type?: string;
+
+  band_code?: string;
+
+  cabel_color?: string;
+
+  cabel_start?: number;
+
+  cabel_end?: number;
+
+  cabel_total_length?: number;
+
+  comment?: string;
+
+  is_nvt_set?: boolean | null;
+
+  is_blow_in_done?: boolean | null;
+}
+
+export class UpdatePropsResponseDto {}

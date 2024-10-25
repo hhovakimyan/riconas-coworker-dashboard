@@ -1,12 +1,18 @@
 import { Service } from 'services/Service';
 import { httpClient } from 'services/axiosInstance';
 import { ServiceError } from 'services/helperTypes';
-import { FetchJobListQueryParams, FetchJobListResponseDto } from 'services/models/BlowInJobs';
+import {
+  FetchJobListQueryParams,
+  FetchJobListResponseDto,
+  UpdatePropsRequestDto
+} from 'services/models/BlowInJobs';
 
 const apiPath = "/blow-in-jobs";
 
 class BlowInJobService extends Service {
-  async fetchList(queryParams: FetchJobListQueryParams): Promise<FetchJobListResponseDto | ServiceError> {
+  async fetchList(queryParams: FetchJobListQueryParams):
+    Promise<FetchJobListResponseDto | ServiceError>
+  {
     if (!queryParams.client_id) {
       delete queryParams.client_id;
     }
@@ -28,6 +34,23 @@ class BlowInJobService extends Service {
         apiPath,
         queryParams,
         FetchJobListResponseDto,
+        true,
+      );
+    } catch (error: any) {
+      return this.getServiceError(error);
+    }
+  }
+
+  async updateProps(
+    jobId: string,
+    requestData: UpdatePropsRequestDto
+  ): Promise<UpdatePropsRequestDto | ServiceError> {
+    try {
+      return await httpClient.put<UpdatePropsRequestDto | ServiceError>(
+        `${apiPath}/${jobId}`,
+        undefined,
+        requestData,
+        UpdatePropsRequestDto,
         true,
       );
     } catch (error: any) {
