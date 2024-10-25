@@ -14,7 +14,7 @@ import { LoadingButton } from '@mui/lab';
 
 import SelectController from 'components/SelectController';
 import HopFormValidationSchema from 'pages/HouseConnectionPage/MontageJobsList/components/HupForm/validationSchema';
-import { HUP_LOCATIONS, HUP_TYPES } from 'constants/hup';
+import { HUP_LOCATIONS, HUP_TYPES } from 'constants/montageHup';
 import { HupEditableProps } from 'types/hups';
 import { formStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/HupForm/styles';
 import { actionButtonWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/styles';

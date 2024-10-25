@@ -14,7 +14,7 @@ import { LoadingButton } from '@mui/lab';
 import SignatureCanvas from 'react-signature-canvas';
 
 import SelectController from 'components/SelectController';
-import { ONT_TYPES } from 'constants/hup';
+import { ONT_TYPES } from 'constants/montageHup';
 import { formStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm/styles';
 import { actionButtonWrapperStyles } from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal/styles';
 import { OntDetailsProps, OntEditableProps, OntStatus } from 'types/ont';
