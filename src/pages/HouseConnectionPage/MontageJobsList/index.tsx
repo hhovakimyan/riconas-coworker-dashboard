@@ -28,7 +28,10 @@ import {
 import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
 import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
 import DispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal';
-import { tableContainerStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
+import {
+  tableContainerStyles,
+  tableStyles
+} from 'pages/HouseConnectionPage/MontageJobsList/styles';
 import { HupStatus } from 'types/hups';
 import { OntStatus } from 'types/ont';
 
@@ -397,7 +400,6 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
 
   return (
     <>
-      {/* <JobFilterBlock onFilter={onFilter} filter={filter} /> */}
       {
         isLoadingList ?
           <LoadingSpinner /> :
@@ -407,7 +409,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
               <TableWrapper>
                 <>
                   <TableContainer sx={tableContainerStyles}>
-                    <Table stickyHeader>
+                    <Table stickyHeader sx={tableStyles}>
                       <TableHeader columns={tableColumnsLocalized} />
                       <TableBody>
                         {items
