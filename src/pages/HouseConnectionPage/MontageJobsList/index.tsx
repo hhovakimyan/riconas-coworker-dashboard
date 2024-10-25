@@ -29,6 +29,7 @@ import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/component
 import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
 import DispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal';
 import { tableContainerStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
+import { HupStatus } from 'types/hups';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -283,6 +284,25 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setSelectedOnt(undefined);
   }
 
+  const onHupModalClose = (newHupStatus?: HupStatus) => {
+    if (newHupStatus) {
+      const newItems = items.map((item) => {
+        if (item.id === selectedItem?.id) {
+          return {
+            ...item,
+            hup_status: newHupStatus,
+          };
+        }
+
+        return item;
+      });
+
+      setItems(newItems);
+    }
+
+    onModalClose();
+  }
+
   const onJobGalleryModalClose = (photosCount: number) => {
     const newItems = items.map((item) => {
       if (item.id === selectedItem?.id) {
@@ -392,7 +412,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
       {
         modalAction === TableModalActions.openHupModal &&
         selectedItem &&
-        <HupModal jobData={selectedItem} onClose={onModalClose} />
+        <HupModal jobData={selectedItem} onClose={onHupModalClose} />
       }
       {
         modalAction === TableModalActions.openGalleryModal &&

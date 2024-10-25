@@ -1,4 +1,4 @@
-import { HupDetailsApiItem, HupPhotoListItem } from 'types/hups';
+import { HupDetailsApiItem, HupPhotoListItem, HupStatus } from 'types/hups';
 
 export class FetchHupDetailsResponseDto {
   data!: HupDetailsApiItem;
@@ -14,7 +14,14 @@ export class UpdateHupDetailsRequestDto {
   is_installed?: boolean;
 }
 
-export class UpdateHupDetailsResponseDto {}
+export class UpdateHupDetailsResponseDto {
+  data!: {
+    id: string
+    hup_type: string | null;
+    location: string | null;
+    status: HupStatus;
+  }
+}
 
 export class DeleteHupPhotoResponseDto {}
 

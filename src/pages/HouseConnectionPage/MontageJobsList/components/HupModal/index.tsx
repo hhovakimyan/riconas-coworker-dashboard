@@ -18,7 +18,7 @@ import { ServiceError } from 'services/helperTypes';
 import HupPhotos from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/HupPhotos';
 
 type Props = {
-  onClose: () => void;
+  onClose: (newHupStatus?: HupStatus) => void;
   jobData: JobApiListItem;
 }
 
@@ -45,10 +45,10 @@ const HupModal = ({onClose, jobData}: Props) => {
     }
   }, [jobData.id]);
 
-  const closeModal = () => {
+  const closeModal = (hupStatus?: HupStatus) => {
     setHupData(null);
 
-    onClose();
+    onClose(hupStatus);
   };
 
   const onFormSubmit = async (newData: HupEditableProps, isDataChanged: boolean) => {
@@ -67,12 +67,13 @@ const HupModal = ({onClose, jobData}: Props) => {
         is_installed: newData.hupInstalled,
       }
     );
+
     setIsLoading(false);
     if (updateResponseDto instanceof ServiceError) {
       setSubmitError(mainT('somethingWentWrong'));
     } else {
       setSubmitError(null);
-      closeModal();
+      closeModal(updateResponseDto.data.status);
     }
   };
 
@@ -82,7 +83,9 @@ const HupModal = ({onClose, jobData}: Props) => {
         {jobData.address_line1} {jobData.address_line2} [{jobData.hup_code}]
         <StyledCloseIconButton
           aria-label="close"
-          onClick={closeModal}
+          onClick={() => {
+            closeModal();
+          }}
         >
           <Close />
         </StyledCloseIconButton>
