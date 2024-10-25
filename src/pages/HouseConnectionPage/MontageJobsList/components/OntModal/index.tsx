@@ -13,12 +13,12 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import { ServiceError } from 'services/helperTypes';
 import { JobApiListItem } from 'types/montage-jobs';
 import { FetchOntDetailsResponseDto } from 'services/models/Ont';
-import { OntDetailsProps, OntEditableProps, OntPhotoListItem } from 'types/ont';
+import { OntDetailsProps, OntEditableProps, OntPhotoListItem, OntStatus } from 'types/ont';
 import OntForm from 'pages/HouseConnectionPage/MontageJobsList/components/OntForm';
 import OntPhotos from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal/OntPhotos';
 
 type Props = {
-  onClose: () => void;
+  onClose: (newOntStatus?: OntStatus) => void;
   ontId: string;
   ontCode: string;
   jobData: JobApiListItem;
@@ -45,10 +45,10 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
     }
   }, [ontId]);
 
-  const closeModal = () => {
+  const closeModal = (newOntStatus?: OntStatus) => {
     setOntData(null);
 
-    onClose();
+    onClose(newOntStatus);
   };
 
   const onFormSubmit = async (newData: OntEditableProps) => {
@@ -69,7 +69,7 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
       setSubmitError(mainT('somethingWentWrong'));
     } else {
       setSubmitError(null);
-      closeModal();
+      closeModal(updateResponseDto.data.status);
     }
   };
 
@@ -79,7 +79,9 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
         {jobData.address_line1} {jobData.address_line2} [{ontCode}]
         <StyledCloseIconButton
           aria-label="close"
-          onClick={closeModal}
+          onClick={() => {
+            closeModal();
+          }}
         >
           <Close />
         </StyledCloseIconButton>

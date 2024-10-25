@@ -1,4 +1,4 @@
-import { OntDetailsProps, OntPhotoListItem } from 'types/ont';
+import { OntDetailsProps, OntPhotoListItem, OntStatus } from 'types/ont';
 
 export class FetchOntDetailsResponseDto {
   data!: OntDetailsProps;
@@ -18,7 +18,11 @@ export class UpdateOntDetailsRequestDto {
   signature?: string | null;
 }
 
-export class UpdateOntDetailsResponseDto {}
+export class UpdateOntDetailsResponseDto {
+  data!: {
+    status: OntStatus;
+  }
+}
 
 export class DeleteOntPhotoResponseDto {}
 

@@ -30,6 +30,7 @@ import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntMo
 import DispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal';
 import { tableContainerStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
 import { HupStatus } from 'types/hups';
+import { OntStatus } from 'types/ont';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -303,6 +304,36 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     onModalClose();
   }
 
+  const onOntModalClose = (newOntStatus?: OntStatus) => {
+    if (newOntStatus) {
+      const newItems = items.map((item) => {
+        if (item.id === selectedItem?.id) {
+          const newOntItems = item.ont.map((itemOnt) => {
+            if (itemOnt.id === selectedOnt?.id) {
+              return {
+                ...itemOnt,
+                status: newOntStatus,
+              }
+            }
+
+            return itemOnt;
+          })
+
+          return {
+            ...item,
+            ont: newOntItems,
+          }
+        }
+
+        return item;
+      });
+
+      setItems(newItems);
+    }
+
+    onModalClose();
+  }
+
   const onJobGalleryModalClose = (photosCount: number) => {
     const newItems = items.map((item) => {
       if (item.id === selectedItem?.id) {
@@ -429,7 +460,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
         <OntModal
           ontId={selectedOnt.id}
           ontCode={selectedOnt.code}
-          onClose={onModalClose}
+          onClose={onOntModalClose}
           jobData={selectedItem}
         />
       }
