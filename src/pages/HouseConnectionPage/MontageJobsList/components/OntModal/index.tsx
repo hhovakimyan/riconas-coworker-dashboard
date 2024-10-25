@@ -8,7 +8,7 @@ import {
   StyledDialog,
   subtitleStyles,
 } from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal/styles';
-import { ontService } from 'services';
+import { montageOntService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { ServiceError } from 'services/helperTypes';
 import { JobApiListItem } from 'types/montage-jobs';
@@ -36,7 +36,7 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
 
   useEffect(() => {
     if (ontId) {
-      ontService
+      montageOntService
         .fetchDetails(ontId)
         .then((response: FetchOntDetailsResponseDto) => {
           setOntData(response.data);
@@ -53,7 +53,7 @@ const OntModal = ({onClose, ontId, ontCode, jobData}: Props) => {
 
   const onFormSubmit = async (newData: OntEditableProps) => {
     setIsLoading(true);
-    const updateResponseDto = await ontService.updateDetails(
+    const updateResponseDto = await montageOntService.updateDetails(
       ontId,
       {
         ont_type: newData.ontType,

@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
 import GalleryModal from 'components/GalleryModal';
-import { ontService } from 'services';
+import { montageOntService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { JOB_IMAGE_ALLOWED_TYPES, JOB_IMAGE_MAX_SIZE_MB } from 'constants/montageJobs';
 import { ServiceError } from 'services/helperTypes';
@@ -34,7 +34,7 @@ const OntGalleryModal = (
       formData.append('files[]', file, file.name);
     });
 
-    const result = await ontService.uploadPhotos(ontId, formData);
+    const result = await montageOntService.uploadPhotos(ontId, formData);
 
     if (result instanceof ServiceError) {
       return false;
@@ -56,7 +56,7 @@ const OntGalleryModal = (
       return false;
     }
 
-    const deleteResponse = await ontService.deletePhoto(ontId, photoId);
+    const deleteResponse = await montageOntService.deletePhoto(ontId, photoId);
     if (deleteResponse instanceof ServiceError) {
       return false;
     }

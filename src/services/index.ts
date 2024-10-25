@@ -6,8 +6,8 @@ import AuthenticationService from 'services/api/AuthenticationService';
 import UserService from 'services/api/UserService';
 import ProjectService from 'services/api/ProjectService';
 import MontageJobService from 'services/api/MontageJobService';
-import HupService from 'services/api/HupService';
-import OntService from 'services/api/OntService';
+import MontageHupService from 'services/api/MontageHupService';
+import MontageOntService from 'services/api/MontageOntService';
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -46,6 +46,6 @@ export const projectService = traceMethod(new ProjectService());
 
 export const montageJobService = traceMethod(new MontageJobService());
 
-export const hupService = traceMethod(new HupService());
+export const montageHupService = traceMethod(new MontageHupService());
 
-export const ontService = traceMethod(new OntService());
+export const montageOntService = traceMethod(new MontageOntService());

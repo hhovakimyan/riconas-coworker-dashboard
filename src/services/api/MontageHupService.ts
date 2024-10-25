@@ -10,7 +10,7 @@ import { DeleteJobPhotoResponseDto, UploadJobPhotosResponseDto } from 'services/
 
 const apiPath = "/montage-jobs";
 
-class HupService extends Service {
+class MontageHupService extends Service {
   async fetchDetails(jobId: string): Promise<FetchHupDetailsResponseDto | ServiceError> {
     try {
       return await httpClient.get<FetchHupDetailsResponseDto | ServiceError>(
@@ -70,4 +70,4 @@ class HupService extends Service {
   }
 }
 
-export default HupService;
+export default MontageHupService;

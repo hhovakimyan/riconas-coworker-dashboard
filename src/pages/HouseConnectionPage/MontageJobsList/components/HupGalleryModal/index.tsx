@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 
 import GalleryModal from 'components/GalleryModal';
-import { hupService } from 'services';
+import { montageHupService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { JOB_IMAGE_ALLOWED_TYPES, JOB_IMAGE_MAX_SIZE_MB } from 'constants/montageJobs';
 import { ServiceError } from 'services/helperTypes';
@@ -36,7 +36,7 @@ const HupGalleryModal = (
       formData.append('files[]', file, file.name);
     });
 
-    const result = await hupService.uploadPhotos(jobId, formData);
+    const result = await montageHupService.uploadPhotos(jobId, formData);
 
     if (result instanceof ServiceError) {
       return false;
@@ -58,7 +58,7 @@ const HupGalleryModal = (
       return false;
     }
 
-    const deleteResponse = await hupService.deletePhoto(jobId, photoId);
+    const deleteResponse = await montageHupService.deletePhoto(jobId, photoId);
     if (deleteResponse instanceof ServiceError) {
       return false;
     }

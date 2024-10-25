@@ -11,7 +11,7 @@ import {
 
 const apiPath = "/montage-jobs/ont";
 
-class OntService extends Service {
+class MontageOntService extends Service {
   async fetchDetails(ontId: string): Promise<FetchOntDetailsResponseDto | ServiceError> {
     try {
       return await httpClient.get<FetchOntDetailsResponseDto | ServiceError>(
@@ -71,4 +71,4 @@ class OntService extends Service {
   }
 }
 
-export default OntService;
+export default MontageOntService;

@@ -9,7 +9,7 @@ import {
   StyledDialog,
   subtitleStyles,
 } from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal/styles';
-import { hupService } from 'services';
+import { montageHupService } from 'services';
 import { FetchHupDetailsResponseDto } from 'services/models/Hups';
 import LoadingSpinner from 'components/LoadingSpinner';
 import HupForm from 'pages/HouseConnectionPage/MontageJobsList/components/HupForm';
@@ -35,7 +35,7 @@ const HupModal = ({onClose, jobData}: Props) => {
 
   useEffect(() => {
     if (jobData.id) {
-      hupService
+      montageHupService
         .fetchDetails(jobData.id)
         .then((response: FetchHupDetailsResponseDto) => {
           setHupData(response.data);
@@ -58,7 +58,7 @@ const HupModal = ({onClose, jobData}: Props) => {
     }
 
     setIsLoading(true);
-    const updateResponseDto = await hupService.updateDetails(
+    const updateResponseDto = await montageHupService.updateDetails(
       jobData.id,
       {
         hup_type: newData.hupType,
