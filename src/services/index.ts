@@ -8,6 +8,7 @@ import ProjectService from 'services/api/ProjectService';
 import MontageJobService from 'services/api/MontageJobService';
 import MontageHupService from 'services/api/MontageHupService';
 import MontageOntService from 'services/api/MontageOntService';
+import BlowInJobService from 'services/api/BlowInJobService';
 
 const baseURL = process.env.REACT_APP_BASE_URL;
 
@@ -49,3 +50,5 @@ export const montageJobService = traceMethod(new MontageJobService());
 export const montageHupService = traceMethod(new MontageHupService());
 
 export const montageOntService = traceMethod(new MontageOntService());
+
+export const blowInJobService = traceMethod(new BlowInJobService());
