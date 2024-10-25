@@ -283,6 +283,23 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setSelectedOnt(undefined);
   }
 
+  const onJobGalleryModalClose = (photosCount: number) => {
+    const newItems = items.map((item) => {
+      if (item.id === selectedItem?.id) {
+        return {
+          ...item,
+          photos_count: photosCount,
+        };
+      }
+
+      return item;
+    });
+
+    setItems(newItems);
+
+    onModalClose();
+  }
+
   const updateCellData = (jobId: string, itemName: string, itemValue: string) => {
     const newItems = items.map((item) => {
       if (item.id === jobId) {
@@ -380,7 +397,10 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
       {
         modalAction === TableModalActions.openGalleryModal &&
         selectedItem &&
-        <JobGalleryModal jobId={selectedItem.id} onClose={onModalClose} />
+        <JobGalleryModal
+          jobId={selectedItem.id}
+          onClose={onJobGalleryModalClose}
+        />
       }
       {
         modalAction === TableModalActions.openOntModal &&

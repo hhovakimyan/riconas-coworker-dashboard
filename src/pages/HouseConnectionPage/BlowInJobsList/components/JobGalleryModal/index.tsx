@@ -11,7 +11,7 @@ import { ServiceError } from 'services/helperTypes';
 
 type Props = {
   jobId: string;
-  onClose: () => void;
+  onClose: (photosCount: number) => void;
 }
 
 const JobGalleryModal = ({jobId, onClose}: Props) => {
@@ -31,7 +31,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
 
   const closeModal = () => {
     setPhotosList(null);
-    onClose();
+    onClose(photosList?.length || 0);
   };
 
   const onNewPhotosUpload = async (uploadedPhotos: FileList | never[]) => {
