@@ -1,5 +1,5 @@
 import { FetchPaginatedListQueryParams } from 'services/models/QueryParams';
-import { JobApiListItem } from 'types/blow-in-jobs';
+import { JobApiListItem, JobPhotoListItem } from 'types/blow-in-jobs';
 
 export class FetchJobListQueryParams extends FetchPaginatedListQueryParams {
   client_id?: string;
@@ -54,3 +54,15 @@ export class UpdatePropsRequestDto {
 }
 
 export class UpdatePropsResponseDto {}
+
+export class FetchJobPhotosListResponseDto {
+  items!: JobPhotoListItem[];
+
+  total_count!: number;
+}
+
+export class DeletePhotoResponseDto {}
+
+export class UploadPhotosResponseDto {
+  items!: JobPhotoListItem[];
+}

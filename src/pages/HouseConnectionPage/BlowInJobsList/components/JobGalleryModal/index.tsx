@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 
 import GalleryModal from 'components/GalleryModal';
 import { JobPhotoListItem } from 'types/blow-in-jobs';
-import { FetchJobPhotosListResponseDto } from 'services/models/MontageJobs';
-import { montageJobService } from 'services';
+import { FetchJobPhotosListResponseDto } from 'services/models/BlowInJobs';
+import { blowInJobService } from 'services';
 import LoadingSpinner from 'components/LoadingSpinner';
 import { JOB_IMAGE_ALLOWED_TYPES, JOB_IMAGE_MAX_SIZE_MB } from 'constants/blowInJobs';
 import { ServiceError } from 'services/helperTypes';
@@ -20,7 +20,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
   const [photosList, setPhotosList] = useState<JobPhotoListItem[] | null>(null);
 
   useEffect(() => {
-    montageJobService
+    blowInJobService
       .fetchPhotosList(jobId)
       .then((response: FetchJobPhotosListResponseDto) => {
         if (response.items) {
@@ -41,7 +41,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       formData.append('files[]', file, file.name);
     });
 
-    const result = await montageJobService.uploadPhotos(jobId, formData);
+    const result = await blowInJobService.uploadPhotos(jobId, formData);
 
     if (result instanceof ServiceError) {
       return false;
@@ -61,7 +61,7 @@ const JobGalleryModal = ({jobId, onClose}: Props) => {
       return false;
     }
 
-    const deleteResponse = await montageJobService.deletePhoto(jobId, photoId);
+    const deleteResponse = await blowInJobService.deletePhoto(jobId, photoId);
     if (deleteResponse instanceof ServiceError) {
       return false;
     }
