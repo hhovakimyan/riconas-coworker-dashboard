@@ -3,7 +3,8 @@ import {
   FormHelperText,
   InputLabel,
   MenuItem,
-  Select, SelectChangeEvent,
+  Select,
+  SelectChangeEvent,
 } from '@mui/material';
 import React from 'react';
 

@@ -4,7 +4,4 @@ export const tableWrapperStyles = {
   '.MuiDataGrid-root': {
     height: 'auto',
   },
-  '& .MuiTableCell-root': {
-    paddingLeft: 0,
-  },
 };

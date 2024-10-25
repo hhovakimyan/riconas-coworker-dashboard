@@ -25,7 +25,10 @@ import {
   COMMENT_MAX_LENGTH,
 } from 'constants/blowInJobs';
 import JobGalleryModal from 'pages/HouseConnectionPage/BlowInJobsList/components/JobGalleryModal';
-import { tableContainerStyles } from 'pages/HouseConnectionPage/BlowInJobsList/styles';
+import {
+  tableContainerStyles,
+  tableStyles
+} from 'pages/HouseConnectionPage/BlowInJobsList/styles';
 
 enum TableModalActions {
   openGalleryModal = 'openGalleryModal',
@@ -262,7 +265,7 @@ const BlowInJobsList: React.FC<Props> = ({sidebarFilter}) => {
               <TableWrapper>
                 <>
                   <TableContainer sx={tableContainerStyles}>
-                    <Table stickyHeader>
+                    <Table stickyHeader sx={tableStyles}>
                       <TableHeader columns={tableColumnsLocalized} />
                       <TableBody>
                         {items

@@ -1,3 +1,4 @@
+import React from 'react';
 
 import { TableColumnAlign } from 'types/generic';
 import SelectInput from 'components/SelectInput';
@@ -14,7 +15,7 @@ type Props = {
 const EditableSelectCell = (
   {cellName, cellValue, onChange, options, columnAlign}: Props
 ) => (
-    <EditableCell cellValue={cellValue} columnAlign={columnAlign}>
+    <EditableCell cellValue={cellValue} columnAlign={columnAlign} type="select">
       <SelectInput
         value={cellValue || options[0].value}
         name={cellName}
@@ -23,7 +24,7 @@ const EditableSelectCell = (
         size="small"
       />
     </EditableCell>
-);
+  );
 
 
 export default EditableSelectCell;

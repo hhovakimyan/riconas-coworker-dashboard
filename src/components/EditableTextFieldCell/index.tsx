@@ -34,7 +34,7 @@ const EditableTextFieldCell = (
   const inputProps = maxLength ? { maxLength } : {}
 
   return (
-    <EditableCell cellValue={cellValue} columnAlign={columnAlign}>
+    <EditableCell cellValue={cellValue} columnAlign={columnAlign} type="input">
       <TextField
         type={inputType || 'text'}
         name={cellName}
