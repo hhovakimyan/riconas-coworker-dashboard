@@ -6,7 +6,7 @@ import EditableSelectCell from 'components/EditableSelectCell';
 import EditableTextFieldCell from 'components/EditableTextFieldCell';
 import { JobApiListItem } from 'types/blow-in-jobs';
 import { TableColumn } from 'types/generic';
-import PhotosCell from 'pages/HouseConnectionPage/MontageJobsList/components/PhotosCell';
+import TablePhotosCell from 'components/TablePhotosCell';
 
 type Props = {
   rowData: JobApiListItem;
@@ -77,7 +77,7 @@ const JobTableRow = (
 
         if (column.id === "photos") {
           return (
-            <PhotosCell
+            <TablePhotosCell
               key={column.id}
               photosCount={rowData.photos_count}
               onGalleryBtnClick={() => {

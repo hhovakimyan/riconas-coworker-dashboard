@@ -7,7 +7,7 @@ import EditableTextFieldCell from 'components/EditableTextFieldCell';
 import { JobApiListItem } from 'types/montage-jobs';
 import { TableColumn } from 'types/generic';
 import CabelCodePlannedCell from 'pages/HouseConnectionPage/MontageJobsList/components/CabelCodeCell';
-import PhotosCell from 'pages/HouseConnectionPage/MontageJobsList/components/PhotosCell';
+import TablePhotosCell from 'components/TablePhotosCell';
 
 type Props = {
   rowData: JobApiListItem;
@@ -94,7 +94,7 @@ const JobTableRow = (
 
         if (column.id === "photos") {
           return (
-            <PhotosCell
+            <TablePhotosCell
               key={column.id}
               photosCount={rowData.photos_count}
               onGalleryBtnClick={() => {

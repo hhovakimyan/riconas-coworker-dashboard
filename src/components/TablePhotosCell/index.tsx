@@ -6,7 +6,7 @@ type Props = {
   onGalleryBtnClick: () => void;
 }
 
-const PhotosCell = ({photosCount, onGalleryBtnClick}: Props) => (
+const TablePhotosCell = ({photosCount, onGalleryBtnClick}: Props) => (
     <TableCell>
       <Button
         variant="outlined"
@@ -19,4 +19,4 @@ const PhotosCell = ({photosCount, onGalleryBtnClick}: Props) => (
     </TableCell>
 );
 
-export default PhotosCell;
+export default TablePhotosCell;
