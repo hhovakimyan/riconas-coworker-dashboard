@@ -1,7 +1,9 @@
 import { TableCell } from '@mui/material';
 import { ReactNode, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TableCellMode, TableColumnAlign } from 'types/generic';
+import { editableCellStyles } from 'components/EditableCell/styles';
 import { useOutsideClick } from 'hooks/outside-click';
 
 type Props = {
@@ -12,6 +14,8 @@ type Props = {
 }
 
 const EditableCell = ({columnAlign, children, type, cellValue}: Props) => {
+  const { t: mainT } = useTranslation('main');
+
   const [mode, setMode] = useState<string>(TableCellMode.normal);
 
   const ref = useOutsideClick(() => {
@@ -34,6 +38,8 @@ const EditableCell = ({columnAlign, children, type, cellValue}: Props) => {
       onDoubleClick={onDoubleClick}
       onClick={onClick}
       ref={ref}
+      sx={editableCellStyles}
+      title={mode === TableCellMode.normal ? mainT('table.editableCellTitle') : ''}
     >
       { mode === TableCellMode.normal ? cellValue : children }
     </TableCell>

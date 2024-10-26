@@ -33,5 +33,8 @@
       "cancelText": "Stornieren",
       "confirmText": "Bestätigen"
     }
+  },
+  "table": {
+    "editableCellTitle": "Doppelklicken Sie, um den Zellenwert zu bearbeiten"
   }
 }

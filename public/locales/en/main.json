@@ -34,5 +34,8 @@
       "cancelText": "Cancel",
       "confirmText": "Confirm"
     }
+  },
+  "table": {
+    "editableCellTitle": "Double click to edit cell value"
   }
 }
