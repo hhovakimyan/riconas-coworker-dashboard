@@ -38,5 +38,9 @@
   "table": {
     "editableCellTitle": "Double click to edit cell value"
   },
-  "selectEmptyLabel": "None"
+  "selectEmptyLabel": "None",
+  "yesNoSelectOptions": {
+    "yes": "Yes",
+    "no": "No"
+  }
 }

@@ -19,3 +19,8 @@ export const VIEW_TYPES = [
 
 // This is the maximum size of all files which are being uploaded in one chunk
 export const TOTAL_UPLOADED_FILES_MAX_SIZE = 30;
+
+export const YES_NO_OPTIONS = [
+  'yes',
+  'no'
+];

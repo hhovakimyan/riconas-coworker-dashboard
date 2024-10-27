@@ -7,7 +7,6 @@
     }
   },
   "cabelPositions": {
-    "none": "None",
     "1": "1 - cable in house (without error)",
     "2": "2 - cable in front of the house / house entry missing",
     "3": "3 - cabel on the property / connection missing",

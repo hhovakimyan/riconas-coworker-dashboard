@@ -4,12 +4,12 @@ import React from 'react';
 import LocationCell from 'pages/HouseConnectionPage/BlowInJobsList/components/LocationCell';
 import EditableSelectCell from 'components/EditableSelectCell';
 import EditableTextFieldCell from 'components/EditableTextFieldCell';
-import { JobApiListItem } from 'types/blow-in-jobs';
+import { JobUiListItem } from 'types/blow-in-jobs';
 import { TableColumn } from 'types/generic';
 import TablePhotosCell from 'components/TablePhotosCell';
 
 type Props = {
-  rowData: JobApiListItem;
+  rowData: JobUiListItem;
   tableColumns: TableColumn[];
   updateCellData: (jobId: string, itemName: string, itemValue: string) => void;
   onGalleryBtnClick: (jobId: string) => void;
@@ -45,7 +45,7 @@ const JobTableRow = (
           value = `${rowData.band_code_planned} ${rowData.cabel_color_planned}`;
         }
 
-        if (["cabel_type", "cabel_color", "band_code"].includes(column.id)) {
+        if (["cabel_type", "cabel_color", "band_code", "is_nvt_set", "is_blow_in_done"].includes(column.id)) {
           return (
             <EditableSelectCell
               key={column.id}

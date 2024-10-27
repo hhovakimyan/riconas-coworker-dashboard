@@ -13,9 +13,10 @@ import { blowInJobService } from 'services';
 import {
   TABLE_DEFAULT_ROWS_PER_PAGE,
   TABLE_DEFAULT_START_PAGE,
-  TABLE_ROWS_PER_PAGE_OPTIONS
+  TABLE_ROWS_PER_PAGE_OPTIONS,
+  YES_NO_OPTIONS,
 } from 'constants/main';
-import { JobApiListItem  } from 'types/blow-in-jobs';
+import { JobApiListItem, JobUiListItem } from 'types/blow-in-jobs';
 import { FetchJobListQueryParams } from 'services/models/BlowInJobs';
 import JobTableRow from 'pages/HouseConnectionPage/BlowInJobsList/components/JobTableRow';
 import {
@@ -33,6 +34,10 @@ import {
 enum TableModalActions {
   openGalleryModal = 'openGalleryModal',
 }
+
+const yesNoOptions = YES_NO_OPTIONS.map(
+  (option) => ({label: option, value: option})
+);
 
 const cabelTypeOptions = CABEL_TYPES.map(
   (cabelType) => ({label: cabelType, value: cabelType})
@@ -53,9 +58,10 @@ const tableColumns: TableColumn[] = [
     minWidth: 200,
   },
   {
-    id: 'isNvtSet',
+    id: 'is_nvt_set',
     label: 'table.headers.isNvtSet',
     minWidth: 40,
+    options: yesNoOptions,
   },
   {
     id: 'cabel_type_planned',
@@ -104,6 +110,12 @@ const tableColumns: TableColumn[] = [
     inputType: 'number',
   },
   {
+    id: 'is_blow_in_done',
+    label: 'table.headers.isBlowInDone',
+    minWidth: 40,
+    options: yesNoOptions,
+  },
+  {
     id: 'comment',
     label: 'table.headers.comment',
     minWidth: 40,
@@ -128,15 +140,27 @@ type Props = {
 const BlowInJobsList: React.FC<Props> = ({sidebarFilter}) => {
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState<number>(TABLE_DEFAULT_ROWS_PER_PAGE);
-  const [items, setItems] = useState<JobApiListItem[]>([]);
+  const [items, setItems] = useState<JobUiListItem[]>([]);
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [modalAction, setModalAction] = useState<TableModalActions | null>(null);
-  const [selectedItem, setSelectedItem] = useState<JobApiListItem | undefined>(undefined);
+  const [selectedItem, setSelectedItem] = useState<JobUiListItem | undefined>(undefined);
 
   const { t } = useTranslation('blow-in-jobs');
+  const { t: mainT } = useTranslation('main', { keyPrefix: 'yesNoSelectOptions' });
 
   const { setSnackbarOpen, setSnackbarMessage } = useSnackbarContext();
+
+
+  const mapApiListItemToUiListItem = (apiItem: JobApiListItem): JobUiListItem => ({
+      ...apiItem,
+      is_nvt_set: apiItem.is_nvt_set === null ?
+        '' :
+        (apiItem.is_nvt_set ? mainT('yes') : mainT('no')),
+      is_blow_in_done: apiItem.is_blow_in_done === null ?
+        '' :
+        (apiItem.is_blow_in_done ? mainT('yes') : mainT('no')),
+  });
 
   const fetchItems = useCallback(async (
     newPage: number = TABLE_DEFAULT_START_PAGE,
@@ -168,7 +192,11 @@ const BlowInJobsList: React.FC<Props> = ({sidebarFilter}) => {
       return;
     }
 
-    setItems(fetchListResponse.items);
+    const uiData = fetchListResponse.items.map(
+      (item: JobApiListItem) => mapApiListItemToUiListItem(item)
+    );
+
+    setItems(uiData);
     setTotalCount(fetchListResponse.total_count);
   }, [sidebarFilter])
 
@@ -249,10 +277,23 @@ const BlowInJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setItems(newItems);
   }
 
-  const tableColumnsLocalized = tableColumns.map((tableColumn) => ({
+  const tableColumnsLocalized = tableColumns.map((tableColumn) => {
+    if (tableColumn.id === "is_nvt_set" || tableColumn.id === "is_blow_in_done") {
+      return {
+        ...tableColumn,
+        label: t(tableColumn.label),
+        options: tableColumn.options?.map((option) => ({
+            label: mainT(option.label),
+            value: option.value,
+        }))
+      }
+    }
+
+    return {
       ...tableColumn,
       label: t(tableColumn.label)
-  }));
+    }
+  });
 
   return (
     <>
