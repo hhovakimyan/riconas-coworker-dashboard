@@ -1,5 +1,5 @@
 import { TableCell } from '@mui/material';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { TableCellMode, TableColumnAlign } from 'types/generic';
@@ -11,9 +11,18 @@ type Props = {
   children: ReactNode;
   type: 'select' | 'input',
   cellValue: string | undefined;
+  cellEditFinished?: boolean;
 }
 
-const EditableCell = ({columnAlign, children, type, cellValue}: Props) => {
+const EditableCell = (
+  {
+    columnAlign,
+    children,
+    type,
+    cellValue,
+    cellEditFinished
+  }: Props
+) => {
   const { t: mainT } = useTranslation('main');
 
   const [mode, setMode] = useState<string>(TableCellMode.normal);
@@ -31,6 +40,12 @@ const EditableCell = ({columnAlign, children, type, cellValue}: Props) => {
   const onClick = () => {
     setMode((prev) => prev === TableCellMode.edit ? TableCellMode.normal : prev);
   }
+
+  useEffect(() => {
+    if (cellEditFinished) {
+      setMode(TableCellMode.normal);
+    }
+  }, [cellEditFinished]);
 
   return (
     <TableCell
