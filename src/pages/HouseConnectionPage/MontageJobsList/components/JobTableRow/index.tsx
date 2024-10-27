@@ -54,7 +54,7 @@ const JobTableRow = (
           )
         }
 
-        if (["cabel_type", "tube_color", "cabel_position"].includes(column.id)) {
+        if (column.isEditable && column.options) {
           return (
             <EditableSelectCell
               key={column.id}
@@ -68,10 +68,7 @@ const JobTableRow = (
           )
         }
 
-        if (
-          ["cabel_code", "cabel_length", "disability_length", "comment"]
-            .includes(column.id)
-        ) {
+        if (column.isEditable) {
           return (
             <EditableTextFieldCell
               key={column.id}

@@ -71,6 +71,7 @@ const tableColumns: TableColumn[] = [
     label: 'table.headers.cabelType',
     minWidth: 40,
     options: cabelTypeOptions,
+    isEditable: true,
   },
   {
     id: 'cabel_code_planned',
@@ -81,6 +82,7 @@ const tableColumns: TableColumn[] = [
     id: 'cabel_code',
     label: 'table.headers.cabelCode',
     minWidth: 100,
+    isEditable: true,
   },
   {
     id: 'tube_color_planned',
@@ -92,30 +94,35 @@ const tableColumns: TableColumn[] = [
     label: 'table.headers.tubeColor',
     minWidth: 40,
     options: tubeColorOptions,
+    isEditable: true,
   },
   {
     id: 'cabel_length',
     label: 'table.headers.cabelLength',
     minWidth: 40,
     inputType: 'number',
+    isEditable: true,
   },
   {
     id: 'comment',
     label: 'table.headers.comment',
     minWidth: 40,
     maxLength: COMMENT_MAX_LENGTH,
+    isEditable: true,
   },
   {
     id: 'disability_length',
     label: 'table.headers.disabilityLength',
     minWidth: 40,
     inputType: 'number',
+    isEditable: true,
   },
   {
     id: 'cabel_position',
     label: 'table.headers.cabelPosition',
     minWidth: 80,
     options: cabelPositionOptions,
+    isEditable: true,
   },
   {
     id: 'complete_date',

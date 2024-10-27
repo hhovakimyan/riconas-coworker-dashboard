@@ -45,7 +45,7 @@ const JobTableRow = (
           value = `${rowData.band_code_planned} ${rowData.cabel_color_planned}`;
         }
 
-        if (["cabel_type", "cabel_color", "band_code", "is_nvt_set", "is_blow_in_done"].includes(column.id)) {
+        if (column.isEditable && column.options) {
           return (
             <EditableSelectCell
               key={column.id}
@@ -59,10 +59,7 @@ const JobTableRow = (
           )
         }
 
-        if (
-          ["cabel_end", "cabel_start", "cabel_total_length", "comment"]
-            .includes(column.id)
-        ) {
+        if (column.isEditable) {
           return (
             <EditableTextFieldCell
               key={column.id}
