@@ -26,8 +26,17 @@ const EditableSelectCell = (
     ...options,
   ];
 
+  const selectedOption = options.find(
+    (option) => option.value === cellValue
+  );
+
   return (
-    <EditableCell cellValue={cellValue} columnAlign={columnAlign} type="select">
+    <EditableCell
+      cellValue={cellValue}
+      cellLabel={selectedOption?.label}
+      columnAlign={columnAlign}
+      type="select"
+    >
       <SelectInput
         value={cellValue || 'none'}
         name={cellName}

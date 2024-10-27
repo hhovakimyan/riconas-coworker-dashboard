@@ -32,7 +32,6 @@ export const TUBE_COLORS = [
 ];
 
 export const CABEL_POSITIONS = [
-  "none",
   "1",
   "2",
   "3",

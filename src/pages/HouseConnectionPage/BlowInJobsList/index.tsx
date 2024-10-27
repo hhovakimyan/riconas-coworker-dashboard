@@ -165,10 +165,10 @@ const BlowInJobsList: React.FC<Props> = ({sidebarFilter}) => {
       ...apiItem,
       is_nvt_set: apiItem.is_nvt_set === null ?
         '' :
-        (apiItem.is_nvt_set ? mainT('yes') : mainT('no')),
+        (apiItem.is_nvt_set ? 'yes' : 'no'),
       is_blow_in_done: apiItem.is_blow_in_done === null ?
         '' :
-        (apiItem.is_blow_in_done ? mainT('yes') : mainT('no')),
+        (apiItem.is_blow_in_done ? 'yes' : 'no'),
   });
 
   const fetchItems = useCallback(async (

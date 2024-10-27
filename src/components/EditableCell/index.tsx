@@ -11,6 +11,7 @@ type Props = {
   children: ReactNode;
   type: 'select' | 'input',
   cellValue: string | undefined;
+  cellLabel?: string | undefined;
   cellEditFinished?: boolean;
 }
 
@@ -20,6 +21,7 @@ const EditableCell = (
     children,
     type,
     cellValue,
+    cellLabel,
     cellEditFinished
   }: Props
 ) => {
@@ -56,7 +58,7 @@ const EditableCell = (
       sx={editableCellStyles}
       title={mode === TableCellMode.normal ? mainT('table.editableCellTitle') : ''}
     >
-      { mode === TableCellMode.normal ? cellValue : children }
+      { mode === TableCellMode.normal ? (cellLabel || cellValue) : children }
     </TableCell>
   )
 }
