@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { TableColumnAlign } from 'types/generic';
 import SelectInput from 'components/SelectInput';
@@ -14,17 +15,36 @@ type Props = {
 
 const EditableSelectCell = (
   {cellName, cellValue, onChange, options, columnAlign}: Props
-) => (
+) => {
+  const { t } = useTranslation('main');
+
+  const allOptions = [
+    {
+      label: t('selectEmptyLabel'),
+      value: 'none'
+    },
+    ...options,
+  ];
+
+  return (
     <EditableCell cellValue={cellValue} columnAlign={columnAlign} type="select">
       <SelectInput
-        value={cellValue || options[0].value}
+        value={cellValue || 'none'}
         name={cellName}
-        options={options}
-        onChange={onChange}
+        options={allOptions}
+        onChange={(changedValue: string) => {
+          let newCellValue = changedValue;
+          if (changedValue === 'none') {
+            newCellValue = '';
+          }
+
+          onChange(newCellValue);
+        }}
         size="small"
       />
     </EditableCell>
   );
+};
 
 
 export default EditableSelectCell;

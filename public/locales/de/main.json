@@ -36,5 +36,6 @@
   },
   "table": {
     "editableCellTitle": "Doppelklicken Sie, um den Zellenwert zu bearbeiten"
-  }
+  },
+  "selectEmptyLabel": "Nichts"
 }

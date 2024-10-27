@@ -37,5 +37,6 @@
   },
   "table": {
     "editableCellTitle": "Double click to edit cell value"
-  }
+  },
+  "selectEmptyLabel": "None"
 }
