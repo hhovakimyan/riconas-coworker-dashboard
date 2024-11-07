@@ -39,15 +39,19 @@
     "eject": "react-scripts eject",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
-    "prepare": "husky install",
-    "pre-commit": "lint-staged",
-    "pre-push": "react-scripts build"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
       "eslint --cache --fix",
       "prettier --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run build"
+    }
   },
   "eslintConfig": {
     "extends": [
