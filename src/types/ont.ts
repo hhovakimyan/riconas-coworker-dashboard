@@ -1,13 +1,12 @@
+import { BasePhotoListItem } from 'types/generic';
+
 export enum OntStatus {
   NOT_INSTALLED = 'NOT_INSTALLED',
   PREINSTALLED = 'PREINSTALLED',
   INSTALLED = 'INSTALLED',
 }
 
-export type OntPhotoListItem = {
-  id: string;
-  path: string;
-};
+export type OntPhotoListItem = BasePhotoListItem;
 
 export type OntDetailsProps = {
   id: string;

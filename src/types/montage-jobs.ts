@@ -1,4 +1,5 @@
 import { HupStatus } from 'types/hups';
+import { BasePhotoListItem } from 'types/generic';
 
 export enum OntStatus {
   NOT_INSTALLED = 'NOT_INSTALLED',
@@ -17,10 +18,7 @@ export type JobOntListItem = {
   customer_phone2: string | null;
 }
 
-export type JobPhotoListItem = {
-  id: string;
-  path: string;
-};
+export type JobPhotoListItem = BasePhotoListItem;
 
 export type JobApiListItem = {
   id: string;

@@ -1,3 +1,5 @@
+import { BasePhotoListItem } from 'types/generic';
+
 export enum HupStatus {
   NOT_INSTALLED = 'NOT_INSTALLED',
   PREINSTALLED = 'PREINSTALLED',
@@ -11,10 +13,7 @@ export type HupEditableProps = {
   hupInstalled?: boolean;
 }
 
-export type HupPhotoListItem = {
-  id: string;
-  path: string;
-};
+export type HupPhotoListItem = BasePhotoListItem;
 
 export type HupDetailsApiItem = {
   id: string

@@ -29,3 +29,8 @@ export type SidebarFilterProps = {
   subprojectId?: string;
   nvtId?: string;
 }
+
+export type BasePhotoListItem = {
+  id: string;
+  path: string;
+}

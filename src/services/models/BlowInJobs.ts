@@ -48,9 +48,9 @@ export class UpdatePropsRequestDto {
 
   comment?: string;
 
-  is_nvt_set?: boolean | null;
+  is_nvt_set?: string | null;
 
-  is_blow_in_done?: boolean | null;
+  is_blow_in_done?: string | null;
 }
 
 export class UpdatePropsResponseDto {}
