@@ -40,7 +40,8 @@
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "prepare": "husky install",
-    "pre-commit": "lint-staged"
+    "pre-commit": "lint-staged",
+    "pre-push": "react-scripts build"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

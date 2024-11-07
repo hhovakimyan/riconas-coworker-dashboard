@@ -6,7 +6,7 @@ import { TableColumnAlign } from 'types/generic';
 
 type Props = {
   columnAlign?: TableColumnAlign;
-  rowData: JobUiListItem;
+  rowData: Pick<JobUiListItem, 'subproject_code' | 'nvt_code'>;
 }
 
 const LocationCell = ({ rowData, columnAlign }: Props) => (

@@ -6,7 +6,7 @@ import { subprojectNvtCodesStyles } from 'pages/HouseConnectionPage/MontageJobsL
 
 type Props = {
   columnAlign?: TableColumnAlign;
-  rowData: JobApiListItem;
+  rowData: Pick<JobApiListItem, 'subproject_code' | 'nvt_code' | 'cabel_code_planned'>;
 }
 
 const CabelCodePlannedCell = ({columnAlign, rowData}: Props) => (
