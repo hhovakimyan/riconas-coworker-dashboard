@@ -1,5 +1,5 @@
 export class QueryParams {
-  getParamsFromRequest(request: QueryParams = this): object {
+  getParamsFromRequest(request: QueryParams = this): URLSearchParams {
     const entries = Object.entries(request);
     const params = new URLSearchParams();
 
