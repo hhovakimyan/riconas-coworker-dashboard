@@ -18,9 +18,10 @@ interface ConfirmationDialogProps {
   content: ReactNode;
   onSubmit: () => void;
   onClose: () => void;
-  showCancelButton?: boolean;
-  cancelText?: string;
-  cancelBtnVariant?: "text" | "contained";
+  cancelBtnProps?: {
+    text?: string;
+    variant: 'text' | 'contained';
+  };
   confirmText?: string;
   isLoading?: boolean;
   customStyles?: Record<string, unknown>;
@@ -31,12 +32,10 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   content,
   onSubmit,
   onClose,
-  showCancelButton = true,
-  cancelText,
-  cancelBtnVariant = 'text',
+  cancelBtnProps,
   confirmText,
   isLoading = false,
-  customStyles
+  customStyles,
 }) => {
   const { t } = useTranslation('main');
 
@@ -49,24 +48,24 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   };
 
   return (
-    <Dialog sx={{...dialogStyles, ...customStyles}} maxWidth="xs" open>
+    <Dialog sx={{ ...dialogStyles, ...customStyles }} maxWidth="xs" open>
       <StyledDialogTitle>{title}</StyledDialogTitle>
       <StyledCloseIconButton aria-label="close" onClick={handleCancel}>
         <Close color="secondary" />
       </StyledCloseIconButton>
       <DialogContent>{content}</DialogContent>
       <StyledDialogActions>
-        {showCancelButton ? (
+        {cancelBtnProps ? (
           <Button
             autoFocus
             size="small"
             onClick={handleCancel}
             disabled={isLoading}
-            variant={cancelBtnVariant}
+            variant={cancelBtnProps.variant}
             sx={actionButtonStyles}
             color="info"
           >
-            {cancelText || t('confirmDialog.cancelText')}
+            {cancelBtnProps.text || t('confirmDialog.cancelText')}
           </Button>
         ) : null}
         <Button

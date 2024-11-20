@@ -12,13 +12,15 @@ type Props = {
 };
 
 const DeleteImageConfirmationModal: React.FC<Props> = ({
-   imageId,
-   onClose,
-   onDelete
+  imageId,
+  onClose,
+  onDelete,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const { t: mainT } = useTranslation('main', { keyPrefix: 'galleryModal.imageDeleteConfirmationModal' });
+  const { t: mainT } = useTranslation('main', {
+    keyPrefix: 'galleryModal.imageDeleteConfirmationModal',
+  });
   const { setSnackbarOpen, setSnackbarMessage } = useSnackbarContext();
 
   const onSubmit = async () => {
@@ -29,15 +31,11 @@ const DeleteImageConfirmationModal: React.FC<Props> = ({
 
     if (isDeleted) {
       setSnackbarMessage(
-        <Alert severity="success">
-          {mainT('successMessage')}
-        </Alert>,
+        <Alert severity="success">{mainT('successMessage')}</Alert>,
       );
     } else {
       setSnackbarMessage(
-        <Alert severity="error">
-          {mainT('failureMessage')}
-        </Alert>,
+        <Alert severity="error">{mainT('failureMessage')}</Alert>,
       );
     }
 
@@ -48,7 +46,10 @@ const DeleteImageConfirmationModal: React.FC<Props> = ({
   return (
     <ConfirmationDialog
       title={mainT('title')}
-      cancelText={mainT('cancelText')}
+      cancelBtnProps={{
+        text: mainT('cancelText'),
+        variant: 'text',
+      }}
       confirmText={mainT('confirmText')}
       content={<Typography>{mainT('content')}</Typography>}
       onSubmit={onSubmit}
