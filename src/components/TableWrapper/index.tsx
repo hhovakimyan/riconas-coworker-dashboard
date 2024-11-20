@@ -5,12 +5,10 @@ import { tableWrapperStyles } from 'components/TableWrapper/styles';
 
 type Props = {
   children: ReactElement;
-}
+};
 
-const TableWrapper = ({children}: Props) => (
-    <Box sx={tableWrapperStyles}>
-      {children}
-    </Box>
-  )
+const TableWrapper = ({ children }: Props) => (
+  <Box sx={tableWrapperStyles}>{children}</Box>
+);
 
 export default TableWrapper;
