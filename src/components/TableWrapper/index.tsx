@@ -8,7 +8,9 @@ type Props = {
 };
 
 const TableWrapper = ({ children }: Props) => (
-  <Box sx={tableWrapperStyles}>{children}</Box>
+  <Box data-testid="tableWrapper" sx={tableWrapperStyles}>
+    {children}
+  </Box>
 );
 
 export default TableWrapper;
