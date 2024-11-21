@@ -5,7 +5,8 @@ import {
   IconButton,
   ImageList,
   ImageListItem,
-  ImageListItemBar, Link,
+  ImageListItemBar,
+  Link,
   Typography,
 } from '@mui/material';
 import { Close } from '@mui/icons-material';
@@ -28,7 +29,7 @@ import { downloadFile } from 'utils/download-files';
 type Props = {
   modalTitle: string;
   onClose: () => void;
-  photos: { id: string, path: string }[];
+  photos: { id: string; path: string }[];
   imageMaxSizeMb: number;
   allowedImageTypes: string[];
   onImagesUpload: (uploadedImages: FileList | never[]) => Promise<boolean>;
@@ -48,9 +49,8 @@ const GalleryModal = ({
   allowedImageTypes,
   onImagesUpload,
   onImageDelete,
-  t
-}: Props
-) => {
+  t,
+}: Props) => {
   const { t: mainT } = useTranslation('main', { keyPrefix: 'galleryModal' });
 
   const [modalAction, setModalAction] = useState<ModalActions | null>(null);
@@ -60,12 +60,12 @@ const GalleryModal = ({
   const onDelete = (imageId: string) => {
     setModalAction(ModalActions.openDeleteConfirmModal);
     setSelectedImageId(imageId);
-  }
+  };
 
   const onDeleteModalClose = () => {
     setModalAction(null);
     setSelectedImageId(null);
-  }
+  };
 
   const onNewImagesUpload = async (uploadedImages: FileList | never[]) => {
     setIsUploading(true);
@@ -75,22 +75,23 @@ const GalleryModal = ({
     setIsUploading(false);
 
     return result;
-  }
+  };
 
   return (
     <>
       <Dialog open fullWidth maxWidth="lg" sx={dialogStyles}>
         <DialogTitle>
           {modalTitle}
-          <StyledCloseIconButton
-            aria-label="close"
-            onClick={onClose}
-          >
+          <StyledCloseIconButton aria-label="close" onClick={onClose}>
             <Close />
           </StyledCloseIconButton>
         </DialogTitle>
         <DialogContent>
-          <ImageList sx={imagesListStyles} cols={photos.length === 0 ? 1 : 3} rowHeight={164}>
+          <ImageList
+            sx={imagesListStyles}
+            cols={photos.length === 0 ? 1 : 3}
+            rowHeight={164}
+          >
             {photos.map((photo, index) => (
               <ImageListItem key={`photo-${photo.id}`}>
                 <img
@@ -103,8 +104,6 @@ const GalleryModal = ({
                   actionIcon={
                     <>
                       <Link
-                        // href={photo.path}
-                        // download='image.jpg'
                         component="button"
                         onClick={() => {
                           downloadFile(photo.path);
@@ -126,12 +125,11 @@ const GalleryModal = ({
                 />
               </ImageListItem>
             ))}
-            {
-              photos.length === 0 &&
+            {photos.length === 0 && (
               <Typography sx={noImagesTextStyles} component="h2">
                 {mainT('noImages')}
               </Typography>
-            }
+            )}
           </ImageList>
           <UploadImage
             fileMaxSizeMb={imageMaxSizeMb}
@@ -145,17 +143,16 @@ const GalleryModal = ({
           />
         </DialogContent>
       </Dialog>
-      {
-        modalAction === ModalActions.openDeleteConfirmModal &&
-        selectedImageId &&
-        <DeleteImageConfirmationModal
-          imageId={selectedImageId}
-          onClose={onDeleteModalClose}
-          onDelete={onImageDelete}
-        />
-      }
+      {modalAction === ModalActions.openDeleteConfirmModal &&
+        selectedImageId && (
+          <DeleteImageConfirmationModal
+            imageId={selectedImageId}
+            onClose={onDeleteModalClose}
+            onDelete={onImageDelete}
+          />
+        )}
     </>
-  )
-}
+  );
+};
 
-export default GalleryModal
+export default GalleryModal;
