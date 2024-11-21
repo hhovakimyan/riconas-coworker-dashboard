@@ -16,7 +16,7 @@ export type JobOntListItem = {
   customer_email: string | null;
   customer_phone1: string | null;
   customer_phone2: string | null;
-}
+};
 
 export type JobPhotoListItem = BasePhotoListItem;
 
@@ -27,11 +27,9 @@ export type JobApiListItem = {
   building_type: string;
   hb_file_path: string | null;
   tb_file_path: string | null;
-  registration_date: string;
+  complete_date: string;
   nvt_code: string;
   subproject_code: string;
-  project_name: string;
-  coworker_name: string;
   cabel_type: string;
   cabel_type_planned: string;
   cabel_code: string;
@@ -50,9 +48,9 @@ export type JobApiListItem = {
   comment: string;
   ont: JobOntListItem[];
   photos_count: number;
-}
+};
 
 export type DispatcherFields = {
   jobStatus: string;
   note: string;
-}
+};
