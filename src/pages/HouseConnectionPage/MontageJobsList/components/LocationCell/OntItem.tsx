@@ -25,7 +25,7 @@ const OntItem = ({
   });
 
   return (
-    <Box sx={onItemStyles}>
+    <Box sx={onItemStyles} data-testid="ontItem">
       <Typography data-testid="ontCode">{data.code}</Typography>
       {data.customer_email && (
         <OntCustomerData
