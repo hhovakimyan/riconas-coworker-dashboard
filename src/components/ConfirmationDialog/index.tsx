@@ -50,10 +50,14 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
   return (
     <Dialog sx={{ ...dialogStyles, ...customStyles }} maxWidth="xs" open>
       <StyledDialogTitle>{title}</StyledDialogTitle>
-      <StyledCloseIconButton aria-label="close" onClick={handleCancel}>
+      <StyledCloseIconButton
+        aria-label="close"
+        onClick={handleCancel}
+        data-testid="closeBtn"
+      >
         <Close color="secondary" />
       </StyledCloseIconButton>
-      <DialogContent>{content}</DialogContent>
+      <DialogContent data-testid="dialog-content">{content}</DialogContent>
       <StyledDialogActions>
         {cancelBtnProps ? (
           <Button
@@ -64,6 +68,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             variant={cancelBtnProps.variant}
             sx={actionButtonStyles}
             color="info"
+            data-testid="cancelBtn"
           >
             {cancelBtnProps.text || t('confirmDialog.cancelText')}
           </Button>
@@ -75,6 +80,7 @@ const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
           variant="contained"
           sx={actionButtonStyles}
           color="primary"
+          data-testid="confirmBtn"
         >
           {confirmText || t('confirmDialog.confirmText')}
         </Button>
