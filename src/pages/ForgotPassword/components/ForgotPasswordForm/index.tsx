@@ -1,5 +1,10 @@
 import { Alert, Box, TextField } from '@mui/material';
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,11 +17,20 @@ import { ServiceError } from 'services/helperTypes';
 
 type Props = {
   onSubmit: (email: string) => void;
-}
+};
 
-const ForgotPasswordForm = ({onSubmit}: Props) => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+const defaultFormValues = {
+  email: '',
+};
+
+const ForgotPasswordForm = ({ onSubmit }: Props) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(ForgotPasswordSchema),
+    defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('forgot-password', { keyPrefix: 'form' });
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
@@ -25,11 +39,10 @@ const ForgotPasswordForm = ({onSubmit}: Props) => {
 
   const onFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    const requestNewPasswordResponse = await authenticationService.requestNewPassword(
-      {
+    const requestNewPasswordResponse =
+      await authenticationService.requestNewPassword({
         email: data.email,
-      }
-    );
+      });
 
     setIsLoading(false);
 
@@ -85,6 +98,6 @@ const ForgotPasswordForm = ({onSubmit}: Props) => {
       </LoadingButton>
     </Box>
   );
-}
+};
 
 export default ForgotPasswordForm;

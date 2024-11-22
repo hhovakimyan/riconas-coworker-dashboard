@@ -1,4 +1,9 @@
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
@@ -13,11 +18,21 @@ import { formStyles } from 'pages/AcceptInvitation/SetPasswordForm/styles';
 type Props = {
   acceptInvitationCode: string;
   onSubmit: () => void;
-}
+};
 
-const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+const defaultFormValues = {
+  password: '',
+  confirmPassword: '',
+};
+
+const SetPasswordForm = ({ acceptInvitationCode, onSubmit }: Props) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(SetPasswordSchema),
+    defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('accept-invitation', { keyPrefix: 'form' });
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
@@ -26,12 +41,11 @@ const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
 
   const onFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    const acceptInvitationResponse = await authenticationService.acceptInvitation(
-      {
+    const acceptInvitationResponse =
+      await authenticationService.acceptInvitation({
         code: acceptInvitationCode,
         password: data.password,
-      }
-    );
+      });
 
     setIsLoading(false);
 
@@ -44,7 +58,12 @@ const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onFormSubmit)} sx={formStyles} autoComplete="off">
+    <Box
+      component="form"
+      onSubmit={handleSubmit(onFormSubmit)}
+      sx={formStyles}
+      autoComplete="off"
+    >
       <Controller
         name="password"
         control={control}
@@ -56,7 +75,9 @@ const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.password}
-            helperText={errors?.password?.message ? t(errors.password.message) : ''}
+            helperText={
+              errors?.password?.message ? t(errors.password.message) : ''
+            }
           />
         )}
       />
@@ -71,7 +92,11 @@ const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.confirmPassword}
-            helperText={errors?.confirmPassword?.message ? t(errors.confirmPassword.message) : ''}
+            helperText={
+              errors?.confirmPassword?.message
+                ? t(errors.confirmPassword.message)
+                : ''
+            }
           />
         )}
       />
@@ -88,6 +113,7 @@ const SetPasswordForm = ({acceptInvitationCode, onSubmit}: Props) => {
         {t('submitBtnTitle')}
       </LoadingButton>
     </Box>
-  );}
+  );
+};
 
 export default SetPasswordForm;

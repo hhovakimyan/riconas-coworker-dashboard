@@ -1,4 +1,9 @@
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { Alert, Box, TextField } from '@mui/material';
@@ -12,11 +17,22 @@ import ChangePasswordSchema from 'pages/ChangePasswordPage/ChangePasswordForm/va
 
 type Props = {
   onSubmit: () => void;
-}
+};
 
-const ChangePasswordForm = ({onSubmit}: Props) => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+const formDefaultValues = {
+  oldPassword: '',
+  newPassword: '',
+  confirmPassword: '',
+};
+
+const ChangePasswordForm = ({ onSubmit }: Props) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(ChangePasswordSchema),
+    defaultValues: formDefaultValues,
   });
   const { t } = useTranslation('change-password', { keyPrefix: 'form' });
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
@@ -26,19 +42,17 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
 
   const onFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    const changePasswordResponse = await userService.changePassword(
-      {
-        old_password: data.oldPassword,
-        new_password: data.newPassword,
-      }
-    );
+    const changePasswordResponse = await userService.changePassword({
+      old_password: data.oldPassword,
+      new_password: data.newPassword,
+    });
 
     setIsLoading(false);
 
     if (changePasswordResponse instanceof ServiceError) {
       const errorCode = changePasswordResponse.composedError.code;
-      if (errorCode === "wrong_password") {
-        setServerError(t("errors.wrong_current_password"));
+      if (errorCode === 'wrong_password') {
+        setServerError(t('errors.wrong_current_password'));
       } else {
         setServerError(mainT('somethingWentWrong'));
       }
@@ -66,7 +80,9 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.oldPassword}
-            helperText={errors?.oldPassword?.message ? t(errors.oldPassword.message) : ''}
+            helperText={
+              errors?.oldPassword?.message ? t(errors.oldPassword.message) : ''
+            }
           />
         )}
       />
@@ -81,7 +97,9 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.newPassword}
-            helperText={errors?.newPassword?.message ? t(errors.newPassword.message) : ''}
+            helperText={
+              errors?.newPassword?.message ? t(errors.newPassword.message) : ''
+            }
           />
         )}
       />
@@ -96,7 +114,11 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.confirmPassword}
-            helperText={errors?.confirmPassword?.message ? t(errors.confirmPassword.message) : ''}
+            helperText={
+              errors?.confirmPassword?.message
+                ? t(errors.confirmPassword.message)
+                : ''
+            }
           />
         )}
       />
@@ -114,6 +136,6 @@ const ChangePasswordForm = ({onSubmit}: Props) => {
       </LoadingButton>
     </Box>
   );
-}
+};
 
 export default ChangePasswordForm;

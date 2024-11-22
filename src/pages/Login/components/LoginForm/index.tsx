@@ -1,5 +1,10 @@
 import { Alert, Box, TextField } from '@mui/material';
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,9 +16,19 @@ import LoginSchema from 'pages/Login/components/LoginForm/validationSchema';
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
 
+const defaultFormValues = {
+  email: '',
+  password: '',
+};
+
 const LoginForm = () => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(LoginSchema),
+    defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('login', { keyPrefix: 'form' });
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
@@ -24,12 +39,10 @@ const LoginForm = () => {
 
   const onFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    const signInResponse = await authenticationService.signIn(
-      {
-        email: data.email,
-        password: data.password
-      }
-    );
+    const signInResponse = await authenticationService.signIn({
+      email: data.email,
+      password: data.password,
+    });
 
     setIsLoading(false);
 
@@ -81,7 +94,9 @@ const LoginForm = () => {
             fullWidth
             type="password"
             error={!!errors.password}
-            helperText={errors?.password?.message ? t(errors.password.message) : ''}
+            helperText={
+              errors?.password?.message ? t(errors.password.message) : ''
+            }
           />
         )}
       />
@@ -99,6 +114,6 @@ const LoginForm = () => {
       </LoadingButton>
     </Box>
   );
-}
+};
 
 export default LoginForm;

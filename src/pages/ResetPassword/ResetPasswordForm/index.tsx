@@ -1,4 +1,9 @@
-import { Controller, FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  Controller,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { Alert, Box, TextField } from '@mui/material';
@@ -13,11 +18,21 @@ import { formStyles } from 'pages/ResetPassword/ResetPasswordForm/styles';
 type Props = {
   passwordResetCode: string;
   onSubmit: () => void;
-}
+};
 
-const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
-  const { control, handleSubmit, formState: { errors } } = useForm({
+const defaultFormValues = {
+  password: '',
+  confirmPassword: '',
+};
+
+const ResetPasswordForm = ({ passwordResetCode, onSubmit }: Props) => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(ResetPasswordSchema),
+    defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('reset-password', { keyPrefix: 'form' });
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
@@ -26,12 +41,10 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
 
   const onFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     setIsLoading(true);
-    const resetPasswordResponse = await authenticationService.resetPassword(
-      {
-        code: passwordResetCode,
-        new_password: data.password,
-      }
-    );
+    const resetPasswordResponse = await authenticationService.resetPassword({
+      code: passwordResetCode,
+      new_password: data.password,
+    });
 
     setIsLoading(false);
 
@@ -61,7 +74,9 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.password}
-            helperText={errors?.password?.message ? t(errors.password.message) : ''}
+            helperText={
+              errors?.password?.message ? t(errors.password.message) : ''
+            }
           />
         )}
       />
@@ -76,7 +91,11 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
             fullWidth
             type="password"
             error={!!errors.confirmPassword}
-            helperText={errors?.confirmPassword?.message ? t(errors.confirmPassword.message) : ''}
+            helperText={
+              errors?.confirmPassword?.message
+                ? t(errors.confirmPassword.message)
+                : ''
+            }
           />
         )}
       />
@@ -94,6 +113,6 @@ const ResetPasswordForm = ({passwordResetCode, onSubmit}: Props) => {
       </LoadingButton>
     </Box>
   );
-}
+};
 
 export default ResetPasswordForm;
