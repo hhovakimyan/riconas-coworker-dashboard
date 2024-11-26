@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import OntActivationBtn from 'features/MontageJobs/components/LocationCell/OntActivationBtn';
-import { OntStatus } from 'features/MontageJobs/types/main';
+import { Status as OntStatus } from 'features/MontageJobs/types/ont';
 
 const onActivateBtnClick = jest.fn();
 

@@ -2,7 +2,7 @@ import { TableCell, TableRow } from '@mui/material';
 import React from 'react';
 import LocationCell from 'features/MontageJobs/components/LocationCell';
 import CabelCodePlannedCell from 'features/MontageJobs/components/CabelCodeCell';
-import { JobApiListItem } from 'features/MontageJobs/types/main';
+import { ApiListItem } from 'features/MontageJobs/types/jobs';
 
 import EditableSelectCell from 'components/EditableSelectCell';
 import EditableTextFieldCell from 'components/EditableTextFieldCell';
@@ -10,7 +10,7 @@ import { TableColumn } from 'types/generic';
 import TablePhotosCell from 'components/TablePhotosCell';
 
 type Props = {
-  rowData: JobApiListItem;
+  rowData: ApiListItem;
   tableColumns: TableColumn[];
   updateCellData: (jobId: string, itemName: string, itemValue: string) => void;
   onHupBtnClick: (jobId: string) => void;

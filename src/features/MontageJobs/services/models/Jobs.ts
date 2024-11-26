@@ -1,4 +1,4 @@
-import { JobApiListItem, PhotoListItem } from 'features/MontageJobs/types/main';
+import { ApiListItem, PhotoListItem } from 'features/MontageJobs/types/jobs';
 
 import { FetchPaginatedListQueryParams } from 'services/models/QueryParams';
 
@@ -29,7 +29,7 @@ export class FetchListQueryParams extends FetchPaginatedListQueryParams {
 }
 
 export class FetchListResponseDto {
-  items!: JobApiListItem[];
+  items!: ApiListItem[];
 
   total_count!: number;
 }

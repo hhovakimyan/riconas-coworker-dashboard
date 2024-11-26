@@ -16,26 +16,26 @@ import { LoadingButton } from '@mui/lab';
 import SignatureCanvas from 'react-signature-canvas';
 import { formStyles } from 'features/MontageJobs/components/OntForm/styles';
 import { actionButtonWrapperStyles } from 'features/MontageJobs/components/OntModal/styles';
-import OntFormValidationSchema from 'features/MontageJobs/components/OntForm/validationSchema';
+import FormValidationSchema from 'features/MontageJobs/components/OntForm/validationSchema';
 import CustomerSignature from 'features/MontageJobs/components/OntForm/CustomerSignature';
 import {
-  OntDetailsProps,
-  OntEditableProps,
-  OntStatus,
+  DetailsProps,
+  EditableProps,
+  Status,
 } from 'features/MontageJobs/types/ont';
-import { ONT_TYPES } from 'features/MontageJobs/constants/hup';
+import { TYPES } from 'features/MontageJobs/constants/ont';
 
 import SelectController from 'components/SelectController';
 
 type Props = {
-  onSubmit: (newData: OntEditableProps) => void;
-  currentData?: OntDetailsProps | null;
+  onSubmit: (newData: EditableProps) => void;
+  currentData?: DetailsProps | null;
   submitError: string | null;
   isLoading: boolean;
   closeModal: () => void;
 };
 
-const defaultFormValuesInitialState: OntEditableProps = {
+const defaultFormValuesInitialState: EditableProps = {
   ontType: '',
   odfCode: '',
   odfPos: '',
@@ -58,21 +58,21 @@ const OntForm: React.FC<Props> = ({
       odfCode: currentData.odf_code || undefined,
       odfPos: currentData.odf_pos || undefined,
       signature: currentData.signature || '',
-      ontInstalled: currentData.status === OntStatus.INSTALLED,
-      ontPreInstalled: currentData.status === OntStatus.PREINSTALLED,
+      ontInstalled: currentData.status === Status.INSTALLED,
+      ontPreInstalled: currentData.status === Status.PREINSTALLED,
     };
   }
 
   const { handleSubmit, control, setValue } = useForm({
     defaultValues: defaultFormValues,
-    resolver: yupResolver(OntFormValidationSchema),
+    resolver: yupResolver(FormValidationSchema),
   });
   const { t } = useTranslation('montage-jobs', { keyPrefix: 'ontModal' });
 
   const signatureCanvasRef = useRef<SignatureCanvas>(null);
 
   const onFormSubmit = useCallback(
-    (data: OntEditableProps) => {
+    (data: EditableProps) => {
       const signatureCanvas = signatureCanvasRef!.current;
 
       onSubmit({
@@ -148,7 +148,7 @@ const OntForm: React.FC<Props> = ({
       <SelectController
         name="ontType"
         control={control}
-        options={ONT_TYPES.map((ontType) => ({
+        options={TYPES.map((ontType) => ({
           value: ontType,
           label: t(`form.ontType.options.${ontType}`),
         }))}

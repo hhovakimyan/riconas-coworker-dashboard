@@ -1,14 +1,14 @@
 import { BasePhotoListItem } from 'types/generic';
 
-export enum OntStatus {
+export enum Status {
   NOT_INSTALLED = 'NOT_INSTALLED',
   PREINSTALLED = 'PREINSTALLED',
   INSTALLED = 'INSTALLED',
 }
 
-export type OntPhotoListItem = BasePhotoListItem;
+export type PhotoListItem = BasePhotoListItem;
 
-export type OntDetailsProps = {
+export type DetailsProps = {
   id: string;
   code: string;
   splitter_code: string;
@@ -18,12 +18,12 @@ export type OntDetailsProps = {
   odf_pos_planned: string;
   odf_pos: string;
   type: string;
-  status: OntStatus;
-  photos: OntPhotoListItem[];
+  status: Status;
+  photos: PhotoListItem[];
   signature: string | null;
 };
 
-export type OntEditableProps = {
+export type EditableProps = {
   ontType?: string;
   odfCode?: string;
   odfPos?: string;

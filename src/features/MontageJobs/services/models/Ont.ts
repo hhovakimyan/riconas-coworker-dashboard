@@ -1,11 +1,11 @@
 import {
-  OntDetailsProps,
-  OntPhotoListItem,
-  OntStatus,
+  DetailsProps,
+  PhotoListItem,
+  Status,
 } from 'features/MontageJobs/types/ont';
 
 export class FetchDetailsResponseDto {
-  data!: OntDetailsProps;
+  data!: DetailsProps;
 }
 
 export class UpdateDetailsRequestDto {
@@ -24,12 +24,12 @@ export class UpdateDetailsRequestDto {
 
 export class UpdateDetailsResponseDto {
   data!: {
-    status: OntStatus;
+    status: Status;
   };
 }
 
 export class DeleteOntPhotoResponseDto {}
 
 export class UploadOntPhotosResponseDto {
-  items!: OntPhotoListItem[];
+  items!: PhotoListItem[];
 }

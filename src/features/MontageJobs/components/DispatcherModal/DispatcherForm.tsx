@@ -12,7 +12,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { LoadingButton } from '@mui/lab';
 import { formStyles } from 'features/MontageJobs/components/HupForm/styles';
 import { actionButtonWrapperStyles } from 'features/MontageJobs/components/HupModal/styles';
-import { DispatcherFields } from 'features/MontageJobs/types/main';
+import { DispatcherFields } from 'features/MontageJobs/types/jobs';
 import { JOB_STATUSES } from 'features/MontageJobs/constants/table';
 
 import SelectController from 'components/SelectController';

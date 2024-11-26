@@ -11,11 +11,11 @@ import {
   Switch,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-import HopFormValidationSchema from 'features/MontageJobs/components/HupForm/validationSchema';
+import FormValidationSchema from 'features/MontageJobs/components/HupForm/validationSchema';
 import { formStyles } from 'features/MontageJobs/components/HupForm/styles';
 import { actionButtonWrapperStyles } from 'features/MontageJobs/components/HupModal/styles';
 import { EditableProps } from 'features/MontageJobs/types/hups';
-import { HUP_LOCATIONS, HUP_TYPES } from 'features/MontageJobs/constants/hup';
+import { LOCATIONS, TYPES } from 'features/MontageJobs/constants/hup';
 
 import SelectController from 'components/SelectController';
 
@@ -53,7 +53,7 @@ const HupForm: React.FC<Props> = ({
     setValue,
   } = useForm({
     defaultValues: defaultFormValues,
-    resolver: yupResolver(HopFormValidationSchema),
+    resolver: yupResolver(FormValidationSchema),
   });
   const { t } = useTranslation('montage-jobs', { keyPrefix: 'hupModal.form' });
 
@@ -69,7 +69,7 @@ const HupForm: React.FC<Props> = ({
       <SelectController
         name="hupType"
         control={control}
-        options={HUP_TYPES.map((hupType) => ({
+        options={TYPES.map((hupType) => ({
           value: hupType,
           label: t(`hupType.options.${hupType}`),
         }))}
@@ -78,7 +78,7 @@ const HupForm: React.FC<Props> = ({
       <SelectController
         name="hupLocation"
         control={control}
-        options={HUP_LOCATIONS.map((hupLocation) => ({
+        options={LOCATIONS.map((hupLocation) => ({
           value: hupLocation,
           label: t(`hupLocation.options.${hupLocation}`),
         }))}

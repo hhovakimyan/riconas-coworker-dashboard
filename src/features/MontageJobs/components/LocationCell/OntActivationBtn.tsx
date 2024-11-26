@@ -1,7 +1,7 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { OntStatus } from 'features/MontageJobs/types/main';
+import { Status as OntStatus } from 'features/MontageJobs/types/ont';
 
 type Props = {
   ontId: string;

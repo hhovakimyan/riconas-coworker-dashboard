@@ -5,13 +5,10 @@ import React, { useState } from 'react';
 import { StyledCloseIconButton } from 'features/MontageJobs/components/HupModal/styles';
 import DispatcherForm from 'features/MontageJobs/components/DispatcherModal/DispatcherForm';
 import { dialogStyles } from 'features/MontageJobs/components/DispatcherModal/styles';
-import {
-  DispatcherFields,
-  JobApiListItem,
-} from 'features/MontageJobs/types/main';
+import { DispatcherFields, ApiListItem } from 'features/MontageJobs/types/jobs';
 
 type Props = {
-  jobData: JobApiListItem;
+  jobData: ApiListItem;
   onClose: () => void;
   submitFormData: (data: DispatcherFields) => void;
 };

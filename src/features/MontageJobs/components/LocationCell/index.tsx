@@ -8,7 +8,7 @@ import {
 import OntItem from 'features/MontageJobs/components/LocationCell/OntItem';
 import TbFileButton from 'features/MontageJobs/components/LocationCell/TbFileButton';
 import HbFileButton from 'features/MontageJobs/components/LocationCell/HbFileButton';
-import { JobApiListItem } from 'features/MontageJobs/types/main';
+import { ApiListItem } from 'features/MontageJobs/types/jobs';
 import { Status } from 'features/MontageJobs/types/hups';
 
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
@@ -18,7 +18,7 @@ import EmailLink from 'components/EmailLink';
 
 type Props = {
   columnAlign?: TableColumnAlign;
-  rowData: JobApiListItem;
+  rowData: ApiListItem;
   onHupBtnClick: (jobId: string) => void;
   onHupDispatcherBtnClick: (jobId: string) => void;
   onOntBtnClick: (jobId: string, ontId: string) => void;

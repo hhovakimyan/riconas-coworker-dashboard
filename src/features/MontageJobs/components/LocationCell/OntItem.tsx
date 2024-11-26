@@ -6,10 +6,10 @@ import {
 } from 'features/MontageJobs/components/LocationCell/styles';
 import OntActivationBtn from 'features/MontageJobs/components/LocationCell/OntActivationBtn';
 import OntCustomerData from 'features/MontageJobs/components/LocationCell/OntCustomerData';
-import { JobOntListItem } from 'features/MontageJobs/types/main';
+import { OntListItem } from 'features/MontageJobs/types/jobs';
 
 type Props = {
-  data: JobOntListItem;
+  data: OntListItem;
   onOntActivationBtnClick: (ontId: string) => void;
   onOntDispatcherBtnClick: (ontId: string) => void;
 };

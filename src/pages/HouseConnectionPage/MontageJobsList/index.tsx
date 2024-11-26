@@ -11,12 +11,9 @@ import JobTableRow from 'features/MontageJobs/components/JobTableRow';
 import JobGalleryModal from 'features/MontageJobs/components/JobGalleryModal';
 import OntModal from 'features/MontageJobs/components/OntModal';
 import DispatcherModal from 'features/MontageJobs/components/DispatcherModal';
-import {
-  JobApiListItem,
-  JobOntListItem,
-} from 'features/MontageJobs/types/main';
-import { Status } from 'features/MontageJobs/types/hups';
-import { OntStatus } from 'features/MontageJobs/types/ont';
+import { ApiListItem, OntListItem } from 'features/MontageJobs/types/jobs';
+import { Status as HupStatus } from 'features/MontageJobs/types/hups';
+import { Status as OntStatus } from 'features/MontageJobs/types/ont';
 import {
   CABEL_POSITIONS,
   CABEL_TYPES,
@@ -156,16 +153,16 @@ const MontageJobsList: React.FC<Props> = ({ sidebarFilter }) => {
   const [rowsPerPage, setRowsPerPage] = useState<number>(
     TABLE_DEFAULT_ROWS_PER_PAGE,
   );
-  const [items, setItems] = useState<JobApiListItem[]>([]);
+  const [items, setItems] = useState<ApiListItem[]>([]);
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
   const [modalAction, setModalAction] = useState<TableModalActions | null>(
     null,
   );
-  const [selectedItem, setSelectedItem] = useState<JobApiListItem | undefined>(
+  const [selectedItem, setSelectedItem] = useState<ApiListItem | undefined>(
     undefined,
   );
-  const [selectedOnt, setSelectedOnt] = useState<JobOntListItem | undefined>(
+  const [selectedOnt, setSelectedOnt] = useState<OntListItem | undefined>(
     undefined,
   );
 
@@ -307,7 +304,7 @@ const MontageJobsList: React.FC<Props> = ({ sidebarFilter }) => {
     setSelectedOnt(undefined);
   };
 
-  const onHupModalClose = (newHupStatus?: Status) => {
+  const onHupModalClose = (newHupStatus?: HupStatus) => {
     if (newHupStatus) {
       const newItems = items.map((item) => {
         if (item.id === selectedItem?.id) {

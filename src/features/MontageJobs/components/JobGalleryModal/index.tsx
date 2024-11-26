@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
-import { PhotoListItem } from 'features/MontageJobs/types/main';
+import { PhotoListItem } from 'features/MontageJobs/types/jobs';
 import {
   IMAGE_ALLOWED_TYPES,
   IMAGE_MAX_SIZE_MB,

@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
-import ResetPasswordSchema from 'pages/ResetPassword/ResetPasswordForm/validationSchema';
+import FormValidationSchema from 'pages/ResetPassword/ResetPasswordForm/validationSchema';
 import { formStyles } from 'pages/ResetPassword/ResetPasswordForm/styles';
 
 type Props = {
@@ -31,7 +31,7 @@ const ResetPasswordForm = ({ passwordResetCode, onSubmit }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(ResetPasswordSchema),
+    resolver: yupResolver(FormValidationSchema),
     defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('reset-password', { keyPrefix: 'form' });

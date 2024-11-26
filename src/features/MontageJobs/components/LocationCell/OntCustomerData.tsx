@@ -1,13 +1,13 @@
 import { Typography } from '@mui/material';
 import React from 'react';
-import { JobOntListItem } from 'features/MontageJobs/types/main';
+import { OntListItem } from 'features/MontageJobs/types/jobs';
 
 import EmailLink from 'components/EmailLink';
 import PhoneLink from 'components/PhoneLink';
 
 type Props = {
   customerData: Pick<
-    JobOntListItem,
+    OntListItem,
     'customer_name' | 'customer_email' | 'customer_phone1' | 'customer_phone2'
   > & {
     customer_email: string;

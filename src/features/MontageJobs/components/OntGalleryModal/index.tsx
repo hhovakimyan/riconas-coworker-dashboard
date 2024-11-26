@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
-import { OntPhotoListItem } from 'features/MontageJobs/types/ont';
+import { PhotoListItem } from 'features/MontageJobs/types/ont';
 import {
   IMAGE_ALLOWED_TYPES,
   IMAGE_MAX_SIZE_MB,
@@ -13,9 +13,9 @@ import { ServiceError } from 'services/helperTypes';
 
 type Props = {
   ontId: string;
-  photos: OntPhotoListItem[];
+  photos: PhotoListItem[];
   onClose: () => void;
-  onPhotosChange: (newPhotos: OntPhotoListItem[]) => void;
+  onPhotosChange: (newPhotos: PhotoListItem[]) => void;
 };
 
 const OntGalleryModal = ({ ontId, photos, onClose, onPhotosChange }: Props) => {
@@ -23,9 +23,7 @@ const OntGalleryModal = ({ ontId, photos, onClose, onPhotosChange }: Props) => {
     keyPrefix: 'ontModal.galleryModal',
   });
 
-  const [photosList, setPhotosList] = useState<OntPhotoListItem[] | null>(
-    photos,
-  );
+  const [photosList, setPhotosList] = useState<PhotoListItem[] | null>(photos);
 
   const closeModal = () => {
     setPhotosList(null);

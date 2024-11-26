@@ -1,13 +1,13 @@
 import { TableCell, Typography } from '@mui/material';
 import { subprojectNvtCodesStyles } from 'features/MontageJobs/components/CabelCodeCell/styles';
-import { JobApiListItem } from 'features/MontageJobs/types/main';
+import { ApiListItem } from 'features/MontageJobs/types/jobs';
 
 import { TableColumnAlign } from 'types/generic';
 
 type Props = {
   columnAlign?: TableColumnAlign;
   rowData: Pick<
-    JobApiListItem,
+    ApiListItem,
     'subproject_code' | 'nvt_code' | 'cabel_code_planned'
   >;
 };

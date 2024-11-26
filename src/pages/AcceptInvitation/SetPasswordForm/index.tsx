@@ -12,7 +12,7 @@ import { LoadingButton } from '@mui/lab';
 
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
-import SetPasswordSchema from 'pages/AcceptInvitation/SetPasswordForm/validationSchema';
+import FormValidationSchema from 'pages/AcceptInvitation/SetPasswordForm/validationSchema';
 import { formStyles } from 'pages/AcceptInvitation/SetPasswordForm/styles';
 
 type Props = {
@@ -31,7 +31,7 @@ const SetPasswordForm = ({ acceptInvitationCode, onSubmit }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(SetPasswordSchema),
+    resolver: yupResolver(FormValidationSchema),
     defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('accept-invitation', { keyPrefix: 'form' });

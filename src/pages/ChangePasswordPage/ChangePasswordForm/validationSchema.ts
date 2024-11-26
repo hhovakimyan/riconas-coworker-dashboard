@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 import { PASSWORD_REGEX } from 'constants/main';
 
-const ChangePasswordSchema = yup
+const FormValidationSchema = yup
   .object({
     oldPassword: yup
       .string()
@@ -11,13 +11,13 @@ const ChangePasswordSchema = yup
     newPassword: yup
       .string()
       .matches(PASSWORD_REGEX, 'newPassword.errors.invalid')
-      .notOneOf([yup.ref("oldPassword")], 'newPassword.errors.match')
+      .notOneOf([yup.ref('oldPassword')], 'newPassword.errors.match')
       .required('newPassword.errors.required'),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("newPassword")], 'confirmPassword.errors.notMatch')
+      .oneOf([yup.ref('newPassword')], 'confirmPassword.errors.notMatch')
       .required('confirmPassword.errors.required'),
   })
-  .required()
+  .required();
 
-export default ChangePasswordSchema;
+export default FormValidationSchema;

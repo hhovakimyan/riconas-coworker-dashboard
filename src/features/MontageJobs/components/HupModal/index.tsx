@@ -9,7 +9,7 @@ import {
 } from 'features/MontageJobs/components/HupModal/styles';
 import HupForm from 'features/MontageJobs/components/HupForm';
 import HupPhotos from 'features/MontageJobs/components/HupModal/HupPhotos';
-import { JobApiListItem } from 'features/MontageJobs/types/main';
+import { ApiListItem } from 'features/MontageJobs/types/jobs';
 import {
   DetailsApiItem,
   EditableProps,
@@ -24,7 +24,7 @@ import { ServiceError } from 'services/helperTypes';
 
 type Props = {
   onClose: (newHupStatus?: Status) => void;
-  jobData: JobApiListItem;
+  jobData: ApiListItem;
 };
 
 const HupModal = ({ onClose, jobData }: Props) => {

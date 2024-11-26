@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { LoadingButton } from '@mui/lab';
 
 import { formStyles } from 'pages/Login/components/LoginForm/styles';
-import LoginSchema from 'pages/Login/components/LoginForm/validationSchema';
+import FormValidationSchema from 'pages/Login/components/LoginForm/validationSchema';
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
 
@@ -27,7 +27,7 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(FormValidationSchema),
     defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('login', { keyPrefix: 'form' });

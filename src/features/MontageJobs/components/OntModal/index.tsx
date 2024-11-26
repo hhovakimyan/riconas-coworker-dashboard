@@ -9,12 +9,12 @@ import {
 } from 'features/MontageJobs/components/OntModal/styles';
 import OntForm from 'features/MontageJobs/components/OntForm';
 import OntPhotos from 'features/MontageJobs/components/OntModal/OntPhotos';
-import { JobApiListItem } from 'features/MontageJobs/types/main';
+import { ApiListItem } from 'features/MontageJobs/types/jobs';
 import {
-  OntDetailsProps,
-  OntEditableProps,
-  OntPhotoListItem,
-  OntStatus,
+  DetailsProps,
+  EditableProps,
+  PhotoListItem,
+  Status,
 } from 'features/MontageJobs/types/ont';
 import { FetchDetailsResponseDto } from 'features/MontageJobs/services/models/Ont';
 import { ontService } from 'features/MontageJobs/services';
@@ -23,42 +23,40 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import { ServiceError } from 'services/helperTypes';
 
 type Props = {
-  onClose: (newOntStatus?: OntStatus) => void;
+  onClose: (newOntStatus?: Status) => void;
   ontId: string;
   ontCode: string;
-  jobData: JobApiListItem;
+  jobData: ApiListItem;
 };
 
 const OntModal = ({ onClose, ontId, ontCode, jobData }: Props) => {
-  const [ontData, setOntData] = useState<OntDetailsProps | null>(null);
+  const [ontData, setOntData] = useState<DetailsProps | null>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const [photos, setPhotos] = useState<OntPhotoListItem[]>([]);
+  const [photos, setPhotos] = useState<PhotoListItem[]>([]);
 
   const { t } = useTranslation('montage-jobs');
   const { t: mainT } = useTranslation('main', { keyPrefix: 'errors' });
 
   useEffect(() => {
     if (ontId) {
-      ontService
-        .fetchDetails(ontId)
-        .then((response: FetchDetailsResponseDto | ServiceError) => {
-          if (response instanceof FetchDetailsResponseDto) {
-            setOntData(response.data);
-            setPhotos(response.data.photos);
-          }
-        });
+      ontService.fetchDetails(ontId).then((response) => {
+        if (response instanceof FetchDetailsResponseDto) {
+          setOntData(response.data);
+          setPhotos(response.data.photos);
+        }
+      });
     }
   }, [ontId]);
 
-  const closeModal = (newOntStatus?: OntStatus) => {
+  const closeModal = (newOntStatus?: Status) => {
     setOntData(null);
 
     onClose(newOntStatus);
   };
 
-  const onFormSubmit = async (newData: OntEditableProps) => {
+  const onFormSubmit = async (newData: EditableProps) => {
     setIsLoading(true);
     const updateResponseDto = await ontService.updateDetails(ontId, {
       ont_type: newData.ontType,

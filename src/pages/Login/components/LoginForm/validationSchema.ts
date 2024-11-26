@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const LoginSchema = yup
+const FormValidationSchema = yup
   .object()
   .shape({
     email: yup
@@ -11,10 +11,10 @@ const LoginSchema = yup
       .string()
       .matches(
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-        'password.errors.invalid'
+        'password.errors.invalid',
       )
       .required('password.errors.required'),
   })
-  .required()
+  .required();
 
-export default LoginSchema;
+export default FormValidationSchema;

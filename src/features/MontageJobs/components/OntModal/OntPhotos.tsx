@@ -4,12 +4,12 @@ import React, { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ontPhotosList } from 'features/MontageJobs/components/OntModal/styles';
 import OntGalleryModal from 'features/MontageJobs/components/OntGalleryModal';
-import { OntPhotoListItem } from 'features/MontageJobs/types/ont';
+import { PhotoListItem } from 'features/MontageJobs/types/ont';
 
 type Props = {
   jobId: string;
-  photos: OntPhotoListItem[];
-  setPhotos: React.Dispatch<SetStateAction<OntPhotoListItem[]>>;
+  photos: PhotoListItem[];
+  setPhotos: React.Dispatch<SetStateAction<PhotoListItem[]>>;
 };
 
 const OntPhotos: React.FC<Props> = ({ jobId, photos, setPhotos }) => {

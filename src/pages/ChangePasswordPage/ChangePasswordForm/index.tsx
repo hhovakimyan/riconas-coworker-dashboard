@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { userService } from 'services';
 import { ServiceError } from 'services/helperTypes';
 import { formStyles } from 'pages/ChangePasswordPage/ChangePasswordForm/styles';
-import ChangePasswordSchema from 'pages/ChangePasswordPage/ChangePasswordForm/validationSchema';
+import FormValidationSchema from 'pages/ChangePasswordPage/ChangePasswordForm/validationSchema';
 
 type Props = {
   onSubmit: () => void;
@@ -31,7 +31,7 @@ const ChangePasswordForm = ({ onSubmit }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(ChangePasswordSchema),
+    resolver: yupResolver(FormValidationSchema),
     defaultValues: formDefaultValues,
   });
   const { t } = useTranslation('change-password', { keyPrefix: 'form' });

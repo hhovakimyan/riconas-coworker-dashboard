@@ -1,14 +1,9 @@
-import { Status } from 'features/MontageJobs/types/hups';
+import { Status as HupStatus } from 'features/MontageJobs/types/hups';
+import { Status as OntStatus } from 'features/MontageJobs/types/ont';
 
 import { BasePhotoListItem } from 'types/generic';
 
-export enum OntStatus {
-  NOT_INSTALLED = 'NOT_INSTALLED',
-  PREINSTALLED = 'PREINSTALLED',
-  INSTALLED = 'INSTALLED',
-}
-
-export type JobOntListItem = {
+export type OntListItem = {
   id: string;
   code: string;
   status: OntStatus;
@@ -21,7 +16,7 @@ export type JobOntListItem = {
 
 export type PhotoListItem = BasePhotoListItem;
 
-export type JobApiListItem = {
+export type ApiListItem = {
   id: string;
   address_line1: string;
   address_line2: string;
@@ -41,13 +36,13 @@ export type JobApiListItem = {
   tube_color: string;
   tube_color_planned: string;
   hup_code: string;
-  hup_status: Status;
+  hup_status: HupStatus;
   hup_customer_name: string;
   hup_customer_email: string;
   hup_customer_phone_number1: string;
   hup_customer_phone_number2: string;
   comment: string;
-  ont: JobOntListItem[];
+  ont: OntListItem[];
   photos_count: number;
 };
 

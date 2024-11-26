@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const OntFormValidationSchema = yup.object().shape({
+const FormValidationSchema = yup.object().shape({
   ontType: yup.string(),
   odfCode: yup.string(),
   odfPos: yup.string(),
@@ -9,4 +9,4 @@ const OntFormValidationSchema = yup.object().shape({
   ontInstalled: yup.boolean(),
 });
 
-export default OntFormValidationSchema;
+export default FormValidationSchema;

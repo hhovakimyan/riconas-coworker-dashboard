@@ -1,6 +1,6 @@
-export const HUP_TYPES = ['none', 'SINGLE', 'WITH_ONT'];
+export const TYPES = ['none', 'SINGLE', 'WITH_ONT'];
 
-export const HUP_LOCATIONS = [
+export const LOCATIONS = [
   'none',
   'basement',
   'living_room',
@@ -9,5 +9,3 @@ export const HUP_LOCATIONS = [
   'utility_room',
   'miscellaneous',
 ];
-
-export const ONT_TYPES = ['none', 'ONT_TYPE1', 'ONT_TYPE2', 'ONT_TYPE3'];

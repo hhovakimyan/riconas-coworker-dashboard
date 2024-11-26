@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { LoadingButton } from '@mui/lab';
 
 import { formStyles } from 'pages/ForgotPassword/components/ForgotPasswordForm/styles';
-import ForgotPasswordSchema from 'pages/ForgotPassword/components/ForgotPasswordForm/validationSchema';
+import FormValidationSchema from 'pages/ForgotPassword/components/ForgotPasswordForm/validationSchema';
 import { authenticationService } from 'services';
 import { ServiceError } from 'services/helperTypes';
 
@@ -29,7 +29,7 @@ const ForgotPasswordForm = ({ onSubmit }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(ForgotPasswordSchema),
+    resolver: yupResolver(FormValidationSchema),
     defaultValues: defaultFormValues,
   });
   const { t } = useTranslation('forgot-password', { keyPrefix: 'form' });
