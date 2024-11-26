@@ -5,7 +5,7 @@ import { UiListItem } from 'features/BlowInJobs/types';
 
 import EditableSelectCell from 'components/EditableSelectCell';
 import EditableTextFieldCell from 'components/EditableTextFieldCell';
-import { TableColumn } from 'types/generic';
+import { TableColumn } from 'types/tables';
 import TablePhotosCell from 'components/TablePhotosCell';
 
 type Props = {

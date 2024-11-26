@@ -29,7 +29,7 @@ import NoDataMessage from 'components/NoDataMessage';
 import { ServiceError } from 'services/helperTypes';
 import { useSnackbarContext } from 'providers/Snackbar';
 import TableWrapper from 'components/TableWrapper';
-import { TableColumn } from 'types/generic';
+import { TableColumn } from 'types/tables';
 import TableHeader from 'components/TableHeader';
 import {
   TABLE_DEFAULT_ROWS_PER_PAGE,

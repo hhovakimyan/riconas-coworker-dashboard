@@ -2,29 +2,27 @@ import { TableCell } from '@mui/material';
 import { ReactNode, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { TableCellMode, TableColumnAlign } from 'types/generic';
+import { TableCellMode, TableColumnAlign } from 'types/tables';
 import { editableCellStyles } from 'components/EditableCell/styles';
 import { useOutsideClick } from 'hooks/outside-click';
 
 type Props = {
   columnAlign?: TableColumnAlign;
   children: ReactNode;
-  type: 'select' | 'input',
+  type: 'select' | 'input';
   cellValue: string | undefined;
   cellLabel?: string | undefined;
   cellEditFinished?: boolean;
-}
+};
 
-const EditableCell = (
-  {
-    columnAlign,
-    children,
-    type,
-    cellValue,
-    cellLabel,
-    cellEditFinished
-  }: Props
-) => {
+const EditableCell = ({
+  columnAlign,
+  children,
+  type,
+  cellValue,
+  cellLabel,
+  cellEditFinished,
+}: Props) => {
   const { t: mainT } = useTranslation('main');
 
   const [mode, setMode] = useState<string>(TableCellMode.normal);
@@ -36,12 +34,16 @@ const EditableCell = (
   });
 
   const onDoubleClick = () => {
-    setMode((prev) => prev === TableCellMode.normal ? TableCellMode.edit : prev);
-  }
+    setMode((prev) =>
+      prev === TableCellMode.normal ? TableCellMode.edit : prev,
+    );
+  };
 
   const onClick = () => {
-    setMode((prev) => prev === TableCellMode.edit ? TableCellMode.normal : prev);
-  }
+    setMode((prev) =>
+      prev === TableCellMode.edit ? TableCellMode.normal : prev,
+    );
+  };
 
   useEffect(() => {
     if (cellEditFinished) {
@@ -56,12 +58,13 @@ const EditableCell = (
       onClick={onClick}
       ref={ref}
       sx={editableCellStyles}
-      title={mode === TableCellMode.normal ? mainT('table.editableCellTitle') : ''}
+      title={
+        mode === TableCellMode.normal ? mainT('table.editableCellTitle') : ''
+      }
     >
-      { mode === TableCellMode.normal ? (cellLabel || cellValue) : children }
+      {mode === TableCellMode.normal ? cellLabel || cellValue : children}
     </TableCell>
-  )
-}
-
+  );
+};
 
 export default EditableCell;

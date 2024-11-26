@@ -12,7 +12,7 @@ import { ApiListItem } from 'features/MontageJobs/types/jobs';
 import { Status } from 'features/MontageJobs/types/hups';
 
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/MontageJobsList/styles';
-import { TableColumnAlign } from 'types/generic';
+import { TableColumnAlign } from 'types/tables';
 import PhoneLink from 'components/PhoneLink';
 import EmailLink from 'components/EmailLink';
 

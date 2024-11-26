@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { TableColumnAlign } from 'types/generic';
+import { TableColumnAlign } from 'types/tables';
 import SelectInput from 'components/SelectInput';
 import EditableCell from 'components/EditableCell';
 
@@ -9,26 +9,28 @@ type Props = {
   cellName: string;
   cellValue: string | undefined;
   onChange: (cellNewValue: string) => void;
-  options: {label: string, value: string}[];
+  options: { label: string; value: string }[];
   columnAlign?: TableColumnAlign;
-}
+};
 
-const EditableSelectCell = (
-  {cellName, cellValue, onChange, options, columnAlign}: Props
-) => {
+const EditableSelectCell = ({
+  cellName,
+  cellValue,
+  onChange,
+  options,
+  columnAlign,
+}: Props) => {
   const { t } = useTranslation('main');
 
   const allOptions = [
     {
       label: t('selectEmptyLabel'),
-      value: 'none'
+      value: 'none',
     },
     ...options,
   ];
 
-  const selectedOption = options.find(
-    (option) => option.value === cellValue
-  );
+  const selectedOption = options.find((option) => option.value === cellValue);
 
   return (
     <EditableCell
@@ -54,6 +56,5 @@ const EditableSelectCell = (
     </EditableCell>
   );
 };
-
 
 export default EditableSelectCell;

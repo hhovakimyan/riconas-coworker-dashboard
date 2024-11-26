@@ -2,7 +2,7 @@ import { Box, TableCell, Typography } from '@mui/material';
 import { UiListItem } from 'features/BlowInJobs/types';
 
 import { multiValueCellStyles } from 'pages/HouseConnectionPage/BlowInJobsList/styles';
-import { TableColumnAlign } from 'types/generic';
+import { TableColumnAlign } from 'types/tables';
 
 type Props = {
   columnAlign?: TableColumnAlign;

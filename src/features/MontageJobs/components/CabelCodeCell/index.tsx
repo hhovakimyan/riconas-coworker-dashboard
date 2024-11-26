@@ -2,7 +2,7 @@ import { TableCell, Typography } from '@mui/material';
 import { subprojectNvtCodesStyles } from 'features/MontageJobs/components/CabelCodeCell/styles';
 import { ApiListItem } from 'features/MontageJobs/types/jobs';
 
-import { TableColumnAlign } from 'types/generic';
+import { TableColumnAlign } from 'types/tables';
 
 type Props = {
   columnAlign?: TableColumnAlign;
