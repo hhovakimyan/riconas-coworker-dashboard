@@ -1,10 +1,14 @@
-
 export type SearchedValueType = {
   name: string;
   value: string;
-}
+};
 
-export type TableColumnAlign = 'inherit' | 'left' | 'center' | 'right' | 'justify';
+export type TableColumnAlign =
+  | 'inherit'
+  | 'left'
+  | 'center'
+  | 'right'
+  | 'justify';
 
 export interface TableColumn {
   id: string;
@@ -12,7 +16,7 @@ export interface TableColumn {
   minWidth?: number;
   align?: TableColumnAlign;
   format?: (value: number) => string;
-  options?: {label: string, value: string}[];
+  options?: { label: string; value: string }[];
   inputType?: string;
   maxLength?: number;
   isEditable?: boolean;
@@ -23,14 +27,7 @@ export enum TableCellMode {
   edit = 'edit',
 }
 
-export type SidebarFilterProps = {
-  clientId?: string;
-  projectId?: string;
-  subprojectId?: string;
-  nvtId?: string;
-}
-
 export type BasePhotoListItem = {
   id: string;
   path: string;
-}
+};

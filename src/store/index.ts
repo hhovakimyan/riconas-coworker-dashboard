@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import sidebarFilterReducer from 'store/sidebarFilterSlice';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    sidebarFilter: sidebarFilterReducer,
+  },
 });
 
 export type AppStore = typeof store;

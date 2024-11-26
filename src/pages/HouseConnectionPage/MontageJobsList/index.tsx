@@ -22,13 +22,14 @@ import {
 } from 'features/MontageJobs/constants/table';
 import { FetchListQueryParams } from 'features/MontageJobs/services/models/Jobs';
 import { jobTableService } from 'features/MontageJobs/services';
+import { useAppSelector } from 'store/hooks';
 
 import LoadingSpinner from 'components/LoadingSpinner';
 import NoDataMessage from 'components/NoDataMessage';
 import { ServiceError } from 'services/helperTypes';
 import { useSnackbarContext } from 'providers/Snackbar';
 import TableWrapper from 'components/TableWrapper';
-import { SidebarFilterProps, TableColumn } from 'types/generic';
+import { TableColumn } from 'types/generic';
 import TableHeader from 'components/TableHeader';
 import {
   TABLE_DEFAULT_ROWS_PER_PAGE,
@@ -144,11 +145,9 @@ const tableColumns: TableColumn[] = [
   },
 ];
 
-type Props = {
-  sidebarFilter: SidebarFilterProps | null;
-};
+const MontageJobsList = () => {
+  const sidebarFilter = useAppSelector((state) => state.sidebarFilter);
 
-const MontageJobsList: React.FC<Props> = ({ sidebarFilter }) => {
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState<number>(
     TABLE_DEFAULT_ROWS_PER_PAGE,
