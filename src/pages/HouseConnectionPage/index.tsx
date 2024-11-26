@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { useState } from 'react';
+import { useAppSelector } from 'store/hooks';
 
 import Sidebar from 'components/Sidebar';
 import { mainContentStyles } from 'pages/HouseConnectionPage/styles';
@@ -8,11 +8,11 @@ import MontageJobsList from 'pages/HouseConnectionPage/MontageJobsList';
 import BlowInJobsList from 'pages/HouseConnectionPage/BlowInJobsList';
 
 const HouseConnectionPage = () => {
-  const [viewType, setViewType] = useState<string>(VIEW_TYPE_BLOW_IN);
+  const viewType = useAppSelector((state) => state.sidebar.viewType);
 
   return (
     <Box>
-      <Sidebar viewType={viewType} setViewType={setViewType} />
+      <Sidebar />
       <Box sx={mainContentStyles}>
         {viewType === VIEW_TYPE_MOUNTING && <MontageJobsList />}
         {viewType === VIEW_TYPE_BLOW_IN && <BlowInJobsList />}

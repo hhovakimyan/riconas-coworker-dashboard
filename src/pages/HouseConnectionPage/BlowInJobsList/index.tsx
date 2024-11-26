@@ -24,7 +24,7 @@ import NoDataMessage from 'components/NoDataMessage';
 import { ServiceError } from 'services/helperTypes';
 import { useSnackbarContext } from 'providers/Snackbar';
 import TableWrapper from 'components/TableWrapper';
-import { TableColumn } from 'types/generic';
+import { TableColumn } from 'types/tables';
 import TableHeader from 'components/TableHeader';
 import {
   TABLE_DEFAULT_ROWS_PER_PAGE,
@@ -153,7 +153,7 @@ const tableColumns: TableColumn[] = [
 ];
 
 const BlowInJobsList = () => {
-  const sidebarFilter = useAppSelector((state) => state.sidebarFilter);
+  const sidebarFilter = useAppSelector((state) => state.sidebar.filter);
 
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState<number>(

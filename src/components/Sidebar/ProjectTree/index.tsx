@@ -1,10 +1,10 @@
 import { SimpleTreeView, TreeItem } from '@mui/x-tree-view';
 import {
-  setClientId,
-  setProjectId,
-  setSubprojectId,
-  setNvtId,
-} from 'store/sidebarFilterSlice';
+  setFilterClientId,
+  setFilterProjectId,
+  setFilterSubprojectId,
+  setFilterNvtId,
+} from 'store/sidebarSlice';
 import { useAppDispatch } from 'store/hooks';
 
 import { FetchProjectsListResponseDto } from 'services/models/Projects';
@@ -25,7 +25,7 @@ const ProjectTree = ({ treeItems }: Props) => {
           itemId={`client-${client.id}`}
           label={client.name}
           onClick={() => {
-            dispatcher(setClientId(client.id));
+            dispatcher(setFilterClientId(client.id));
           }}
         >
           {client.projects.map((project) => (
@@ -34,7 +34,7 @@ const ProjectTree = ({ treeItems }: Props) => {
               itemId={`project-${project.id}`}
               label={project.name}
               onClick={() => {
-                dispatcher(setProjectId(project.id));
+                dispatcher(setFilterProjectId(project.id));
               }}
             >
               {project.subprojects.map((subproject) => (
@@ -43,7 +43,7 @@ const ProjectTree = ({ treeItems }: Props) => {
                   itemId={`subproject-${subproject.id}`}
                   label={subproject.code}
                   onClick={() => {
-                    dispatcher(setSubprojectId(subproject.id));
+                    dispatcher(setFilterSubprojectId(subproject.id));
                   }}
                 >
                   {subproject.nvt.map((nvt) => (
@@ -52,7 +52,7 @@ const ProjectTree = ({ treeItems }: Props) => {
                       key={`nvt-${nvt.id}`}
                       label={nvt.code}
                       onClick={() => {
-                        dispatcher(setNvtId(nvt.id));
+                        dispatcher(setFilterNvtId(nvt.id));
                       }}
                     />
                   ))}

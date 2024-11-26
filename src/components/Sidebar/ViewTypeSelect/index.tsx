@@ -3,24 +3,28 @@ import {
   MenuItem,
   Select,
   SelectChangeEvent,
-  Typography
+  Typography,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import React, { SetStateAction } from 'react';
+import React from 'react';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import { setViewType } from 'store/sidebarSlice';
 
-import { selectStyles, wrapperStyles } from 'components/Sidebar/ViewTypeSelect/styles';
+import {
+  selectStyles,
+  wrapperStyles,
+} from 'components/Sidebar/ViewTypeSelect/styles';
 import { VIEW_TYPES } from 'constants/main';
+import { ViewType } from 'types/sidebar';
 
-type Props = {
-  viewType: string;
-  setViewType: React.Dispatch<SetStateAction<string>>;
-}
+const ViewTypeSelect = () => {
+  const dispatcher = useAppDispatch();
 
-const ViewTypeSelect = ({viewType, setViewType}: Props) => {
   const { t } = useTranslation('house-connections', { keyPrefix: 'viewType' });
+  const viewType = useAppSelector((state) => state.sidebar.viewType);
 
   const handleChange = (event: SelectChangeEvent) => {
-    setViewType(event.target.value as string);
+    dispatcher(setViewType(event.target.value as ViewType));
   };
 
   return (
@@ -33,19 +37,14 @@ const ViewTypeSelect = ({viewType, setViewType}: Props) => {
         onChange={handleChange}
         sx={selectStyles}
       >
-        {
-          VIEW_TYPES.map((viewTypeOption) =>
-            <MenuItem
-              key={`view-type-${viewTypeOption}`}
-              value={viewTypeOption}
-            >
-              {t(`options.${viewTypeOption}`)}
-            </MenuItem>
-          )
-        }
+        {VIEW_TYPES.map((viewTypeOption) => (
+          <MenuItem key={`view-type-${viewTypeOption}`} value={viewTypeOption}>
+            {t(`options.${viewTypeOption}`)}
+          </MenuItem>
+        ))}
       </Select>
     </Box>
-  )
+  );
 };
 
 export default ViewTypeSelect;

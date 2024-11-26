@@ -146,7 +146,7 @@ const tableColumns: TableColumn[] = [
 ];
 
 const MontageJobsList = () => {
-  const sidebarFilter = useAppSelector((state) => state.sidebarFilter);
+  const sidebarFilter = useAppSelector((state) => state.sidebar.filter);
 
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
   const [rowsPerPage, setRowsPerPage] = useState<number>(
