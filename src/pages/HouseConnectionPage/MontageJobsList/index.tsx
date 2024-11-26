@@ -1,6 +1,30 @@
-import { Table, TableBody, TableContainer, TablePagination } from '@mui/material';
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  TablePagination,
+} from '@mui/material';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import HupModal from 'features/MontageJobs/components/HupModal';
+import JobTableRow from 'features/MontageJobs/components/JobTableRow';
+import JobGalleryModal from 'features/MontageJobs/components/JobGalleryModal';
+import OntModal from 'features/MontageJobs/components/OntModal';
+import DispatcherModal from 'features/MontageJobs/components/DispatcherModal';
+import {
+  JobApiListItem,
+  JobOntListItem,
+} from 'features/MontageJobs/types/main';
+import { Status } from 'features/MontageJobs/types/hups';
+import { OntStatus } from 'features/MontageJobs/types/ont';
+import {
+  CABEL_POSITIONS,
+  CABEL_TYPES,
+  COMMENT_MAX_LENGTH,
+  TUBE_COLORS,
+} from 'features/MontageJobs/constants/table';
+import { FetchListQueryParams } from 'features/MontageJobs/services/models/Jobs';
+import { jobTableService } from 'features/MontageJobs/services';
 
 import LoadingSpinner from 'components/LoadingSpinner';
 import NoDataMessage from 'components/NoDataMessage';
@@ -9,31 +33,15 @@ import { useSnackbarContext } from 'providers/Snackbar';
 import TableWrapper from 'components/TableWrapper';
 import { SidebarFilterProps, TableColumn } from 'types/generic';
 import TableHeader from 'components/TableHeader';
-import { montageJobService } from 'services';
 import {
   TABLE_DEFAULT_ROWS_PER_PAGE,
   TABLE_DEFAULT_START_PAGE,
-  TABLE_ROWS_PER_PAGE_OPTIONS
+  TABLE_ROWS_PER_PAGE_OPTIONS,
 } from 'constants/main';
-import { JobApiListItem , JobOntListItem } from 'types/montage-jobs';
-import { FetchJobListQueryParams } from 'services/models/MontageJobs';
-import HupModal from 'pages/HouseConnectionPage/MontageJobsList/components/HupModal';
-import JobTableRow from 'pages/HouseConnectionPage/MontageJobsList/components/JobTableRow';
-import {
-  CABEL_POSITIONS,
-  CABEL_TYPES,
-  COMMENT_MAX_LENGTH,
-  TUBE_COLORS
-} from 'constants/montageJobs';
-import JobGalleryModal from 'pages/HouseConnectionPage/MontageJobsList/components/JobGalleryModal';
-import OntModal from 'pages/HouseConnectionPage/MontageJobsList/components/OntModal';
-import DispatcherModal from 'pages/HouseConnectionPage/MontageJobsList/components/DispatcherModal';
 import {
   tableContainerStyles,
-  tableStyles
+  tableStyles,
 } from 'pages/HouseConnectionPage/MontageJobsList/styles';
-import { HupStatus } from 'types/hups';
-import { OntStatus } from 'types/ont';
 
 enum TableModalActions {
   openHupModal = 'openHupModal',
@@ -43,17 +51,20 @@ enum TableModalActions {
   openOntDispatcherModal = 'openOntDispatcherModal',
 }
 
-const cabelTypeOptions = CABEL_TYPES.map(
-  (cabelType) => ({label: cabelType, value: cabelType})
-);
+const cabelTypeOptions = CABEL_TYPES.map((cabelType) => ({
+  label: cabelType,
+  value: cabelType,
+}));
 
-const tubeColorOptions = TUBE_COLORS.map(
-  (tubeColor) => ({label: tubeColor, value: tubeColor})
-);
+const tubeColorOptions = TUBE_COLORS.map((tubeColor) => ({
+  label: tubeColor,
+  value: tubeColor,
+}));
 
-const cabelPositionOptions = CABEL_POSITIONS.map((position) => (
-  {label: position, value: position}
-));
+const cabelPositionOptions = CABEL_POSITIONS.map((position) => ({
+  label: position,
+  value: position,
+}));
 
 const tableColumns: TableColumn[] = [
   {
@@ -133,22 +144,30 @@ const tableColumns: TableColumn[] = [
     id: 'photos',
     label: 'table.headers.photos',
     minWidth: 20,
-  }
+  },
 ];
 
 type Props = {
   sidebarFilter: SidebarFilterProps | null;
 };
 
-const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
+const MontageJobsList: React.FC<Props> = ({ sidebarFilter }) => {
   const [page, setPage] = useState<number>(TABLE_DEFAULT_START_PAGE);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(TABLE_DEFAULT_ROWS_PER_PAGE);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(
+    TABLE_DEFAULT_ROWS_PER_PAGE,
+  );
   const [items, setItems] = useState<JobApiListItem[]>([]);
   const [isLoadingList, setIsLoadingList] = useState<boolean>(false);
   const [totalCount, setTotalCount] = useState<number>(0);
-  const [modalAction, setModalAction] = useState<TableModalActions | null>(null);
-  const [selectedItem, setSelectedItem] = useState<JobApiListItem | undefined>(undefined);
-  const [selectedOnt, setSelectedOnt] = useState<JobOntListItem | undefined>(undefined);
+  const [modalAction, setModalAction] = useState<TableModalActions | null>(
+    null,
+  );
+  const [selectedItem, setSelectedItem] = useState<JobApiListItem | undefined>(
+    undefined,
+  );
+  const [selectedOnt, setSelectedOnt] = useState<JobOntListItem | undefined>(
+    undefined,
+  );
 
   // const [filter, setFilter] = useState<MontageJobFilterProps | null>(null);
 
@@ -156,39 +175,42 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
 
   const { setSnackbarOpen, setSnackbarMessage } = useSnackbarContext();
 
-  const fetchItems = useCallback(async (
-    newPage: number = TABLE_DEFAULT_START_PAGE,
-    newPerPage: number = TABLE_DEFAULT_ROWS_PER_PAGE,
-    // newFilter: MontageJobFilterProps | null = null,
-  ) => {
-    const clientId = sidebarFilter?.clientId || undefined;
-    const projectId = sidebarFilter?.projectId || undefined;
-    const subprojectId = sidebarFilter?.subprojectId || undefined;
-    const nvtId = sidebarFilter?.nvtId || undefined;
-    const fetchListResponse = await montageJobService.fetchList(
-      new FetchJobListQueryParams(
-        newPage,
-        newPerPage,
-        clientId,
-        projectId,
-        subprojectId,
-        nvtId
-      ),
-    );
-    setIsLoadingList(false);
-    if (fetchListResponse instanceof ServiceError) {
-      setSnackbarOpen(true);
-      setSnackbarMessage(t('table.failedToLoadItems'));
-      return;
-    }
+  const fetchItems = useCallback(
+    async (
+      newPage: number = TABLE_DEFAULT_START_PAGE,
+      newPerPage: number = TABLE_DEFAULT_ROWS_PER_PAGE,
+      // newFilter: MontageJobFilterProps | null = null,
+    ) => {
+      const clientId = sidebarFilter?.clientId || undefined;
+      const projectId = sidebarFilter?.projectId || undefined;
+      const subprojectId = sidebarFilter?.subprojectId || undefined;
+      const nvtId = sidebarFilter?.nvtId || undefined;
+      const fetchListResponse = await jobTableService.fetchList(
+        new FetchListQueryParams(
+          newPage,
+          newPerPage,
+          clientId,
+          projectId,
+          subprojectId,
+          nvtId,
+        ),
+      );
+      setIsLoadingList(false);
+      if (fetchListResponse instanceof ServiceError) {
+        setSnackbarOpen(true);
+        setSnackbarMessage(t('table.failedToLoadItems'));
+        return;
+      }
 
-    if (!fetchListResponse.items) {
-      return;
-    }
+      if (!fetchListResponse.items) {
+        return;
+      }
 
-    setItems(fetchListResponse.items);
-    setTotalCount(fetchListResponse.total_count);
-  }, [sidebarFilter])
+      setItems(fetchListResponse.items);
+      setTotalCount(fetchListResponse.total_count);
+    },
+    [sidebarFilter],
+  );
 
   useEffect(() => {
     setIsLoadingList(true);
@@ -226,31 +248,25 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
   // }
 
   const onHupBtnClick = (jobId: string) => {
-    const targetItem = items.find(
-      (item) => item.id === jobId
-    );
+    const targetItem = items.find((item) => item.id === jobId);
     setSelectedItem(targetItem);
     setModalAction(TableModalActions.openHupModal);
-  }
+  };
 
   const onHupDispatcherBtnClick = (jobId: string) => {
-    const targetItem = items.find(
-      (item) => item.id === jobId
-    );
+    const targetItem = items.find((item) => item.id === jobId);
     setSelectedItem(targetItem);
     setModalAction(TableModalActions.openHupDispatcherModal);
-  }
+  };
 
   const onOntDispatcherBtnClick = (jobId: string, ontItemId: string) => {
-    const targetItem = items.find(
-      (item) => item.id === jobId
-    );
+    const targetItem = items.find((item) => item.id === jobId);
     if (!targetItem || !targetItem.ont) {
       return;
     }
 
     const targetItemOnt = targetItem.ont.find(
-      (ontItem) => ontItem.id === ontItemId
+      (ontItem) => ontItem.id === ontItemId,
     );
     if (!targetItemOnt) {
       return;
@@ -259,26 +275,22 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setSelectedItem(targetItem);
     setSelectedOnt(targetItemOnt);
     setModalAction(TableModalActions.openOntDispatcherModal);
-  }
+  };
 
   const onGalleryBtnClick = (jobId: string) => {
-    const targetItem = items.find(
-      (item) => item.id === jobId
-    );
+    const targetItem = items.find((item) => item.id === jobId);
     setSelectedItem(targetItem);
     setModalAction(TableModalActions.openGalleryModal);
-  }
+  };
 
   const onOntBtnClick = (jobId: string, ontItemId: string) => {
-    const targetItem = items.find(
-      (item) => item.id === jobId
-    );
+    const targetItem = items.find((item) => item.id === jobId);
     if (!targetItem || !targetItem.ont) {
       return;
     }
-    
+
     const targetItemOnt = targetItem.ont.find(
-      (ontItem) => ontItem.id === ontItemId
+      (ontItem) => ontItem.id === ontItemId,
     );
     if (!targetItemOnt) {
       return;
@@ -287,15 +299,15 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setSelectedItem(targetItem);
     setSelectedOnt(targetItemOnt);
     setModalAction(TableModalActions.openOntModal);
-  }
+  };
 
   const onModalClose = () => {
     setSelectedItem(undefined);
     setModalAction(null);
     setSelectedOnt(undefined);
-  }
+  };
 
-  const onHupModalClose = (newHupStatus?: HupStatus) => {
+  const onHupModalClose = (newHupStatus?: Status) => {
     if (newHupStatus) {
       const newItems = items.map((item) => {
         if (item.id === selectedItem?.id) {
@@ -312,7 +324,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     }
 
     onModalClose();
-  }
+  };
 
   const onOntModalClose = (newOntStatus?: OntStatus) => {
     if (newOntStatus) {
@@ -323,16 +335,16 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
               return {
                 ...itemOnt,
                 status: newOntStatus,
-              }
+              };
             }
 
             return itemOnt;
-          })
+          });
 
           return {
             ...item,
             ont: newOntItems,
-          }
+          };
         }
 
         return item;
@@ -342,7 +354,7 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     }
 
     onModalClose();
-  }
+  };
 
   const onJobGalleryModalClose = (photosCount: number) => {
     const newItems = items.map((item) => {
@@ -359,143 +371,134 @@ const MontageJobsList: React.FC<Props> = ({sidebarFilter}) => {
     setItems(newItems);
 
     onModalClose();
-  }
+  };
 
-  const updateCellData = (jobId: string, itemName: string, itemValue: string) => {
+  const updateCellData = (
+    jobId: string,
+    itemName: string,
+    itemValue: string,
+  ) => {
     const newItems = items.map((item) => {
       if (item.id === jobId) {
         return {
           ...item,
           [itemName]: itemValue,
-        }
+        };
       }
 
       return item;
     });
 
-    if (itemName === "comment") {
-      montageJobService.saveComment(jobId, { comment: itemValue });
+    if (itemName === 'comment') {
+      jobTableService.saveComment(jobId, { comment: itemValue });
     } else {
-      montageJobService.updateCabelProps(
-        jobId,
-        {
-          [itemName]: itemValue,
-        }
-      );
+      jobTableService.updateCabelProps(jobId, {
+        [itemName]: itemValue,
+      });
     }
 
     setItems(newItems);
-  }
+  };
 
   const tableColumnsLocalized = tableColumns.map((tableColumn) => {
-    if (tableColumn.id === "cabel_position") {
+    if (tableColumn.id === 'cabel_position') {
       return {
         ...tableColumn,
         label: t(tableColumn.label),
-        options: tableColumn.options?.map(
-          (option) =>
-            ({ value: option.value, label: t(`cabelPositions.${option.label}`) })
-        ),
-      }
+        options: tableColumn.options?.map((option) => ({
+          value: option.value,
+          label: t(`cabelPositions.${option.label}`),
+        })),
+      };
     }
 
     return {
       ...tableColumn,
-      label: t(tableColumn.label)
-    }
+      label: t(tableColumn.label),
+    };
   });
 
   return (
     <>
-      {
-        isLoadingList ?
-          <LoadingSpinner /> :
-          (
-            !isLoadingList && items.length === 0 ?
-              <NoDataMessage message={t('table.noRecords')} /> :
-              <TableWrapper>
-                <>
-                  <TableContainer sx={tableContainerStyles}>
-                    <Table stickyHeader sx={tableStyles}>
-                      <TableHeader columns={tableColumnsLocalized} />
-                      <TableBody>
-                        {items
-                          .map((row) => (
-                            <JobTableRow
-                              key={`job-${row.id}`}
-                              tableColumns={tableColumnsLocalized}
-                              rowData={row}
-                              updateCellData={updateCellData}
-                              onHupBtnClick={onHupBtnClick}
-                              onHupDispatcherBtnClick={onHupDispatcherBtnClick}
-                              onOntDispatcherBtnClick={onOntDispatcherBtnClick}
-                              onOntBtnClick={onOntBtnClick}
-                              onGalleryBtnClick={onGalleryBtnClick}
-                            />
-                          ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                  <TablePagination
-                    rowsPerPageOptions={TABLE_ROWS_PER_PAGE_OPTIONS}
-                    component="div"
-                    count={totalCount}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
-                  />
-                </>
-              </TableWrapper>
-          )
-      }
-      {
-        modalAction === TableModalActions.openHupModal &&
-        selectedItem &&
+      {isLoadingList ? (
+        <LoadingSpinner />
+      ) : !isLoadingList && items.length === 0 ? (
+        <NoDataMessage message={t('table.noRecords')} />
+      ) : (
+        <TableWrapper>
+          <>
+            <TableContainer sx={tableContainerStyles}>
+              <Table stickyHeader sx={tableStyles}>
+                <TableHeader columns={tableColumnsLocalized} />
+                <TableBody>
+                  {items.map((row) => (
+                    <JobTableRow
+                      key={`job-${row.id}`}
+                      tableColumns={tableColumnsLocalized}
+                      rowData={row}
+                      updateCellData={updateCellData}
+                      onHupBtnClick={onHupBtnClick}
+                      onHupDispatcherBtnClick={onHupDispatcherBtnClick}
+                      onOntDispatcherBtnClick={onOntDispatcherBtnClick}
+                      onOntBtnClick={onOntBtnClick}
+                      onGalleryBtnClick={onGalleryBtnClick}
+                    />
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+              rowsPerPageOptions={TABLE_ROWS_PER_PAGE_OPTIONS}
+              component="div"
+              count={totalCount}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+          </>
+        </TableWrapper>
+      )}
+      {modalAction === TableModalActions.openHupModal && selectedItem && (
         <HupModal jobData={selectedItem} onClose={onHupModalClose} />
-      }
-      {
-        modalAction === TableModalActions.openGalleryModal &&
-        selectedItem &&
+      )}
+      {modalAction === TableModalActions.openGalleryModal && selectedItem && (
         <JobGalleryModal
           jobId={selectedItem.id}
           onClose={onJobGalleryModalClose}
         />
-      }
-      {
-        modalAction === TableModalActions.openOntModal &&
+      )}
+      {modalAction === TableModalActions.openOntModal &&
         selectedItem &&
-        selectedOnt &&
-        <OntModal
-          ontId={selectedOnt.id}
-          ontCode={selectedOnt.code}
-          onClose={onOntModalClose}
-          jobData={selectedItem}
-        />
-      }
-      {
-        modalAction === TableModalActions.openHupDispatcherModal &&
+        selectedOnt && (
+          <OntModal
+            ontId={selectedOnt.id}
+            ontCode={selectedOnt.code}
+            onClose={onOntModalClose}
+            jobData={selectedItem}
+          />
+        )}
+      {modalAction === TableModalActions.openHupDispatcherModal &&
+        selectedItem && (
+          <DispatcherModal
+            jobData={selectedItem}
+            onClose={onModalClose}
+            submitFormData={(data) => {
+              console.log(data);
+            }}
+          />
+        )}
+      {modalAction === TableModalActions.openOntDispatcherModal &&
         selectedItem &&
-        <DispatcherModal
-          jobData={selectedItem}
-          onClose={onModalClose}
-          submitFormData={(data) => {
-            console.log(data)
-          }}
-        />
-      }
-      {
-        modalAction === TableModalActions.openOntDispatcherModal &&
-        selectedItem &&
-        selectedOnt &&
-        <DispatcherModal
-          jobData={selectedItem}
-          onClose={onModalClose}
-          submitFormData={(data) => {
-            console.log(data)
-          }}
-        />
-      }
+        selectedOnt && (
+          <DispatcherModal
+            jobData={selectedItem}
+            onClose={onModalClose}
+            submitFormData={(data) => {
+              console.log(data);
+            }}
+          />
+        )}
     </>
   );
 };

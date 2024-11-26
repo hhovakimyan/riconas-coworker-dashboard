@@ -1,8 +1,7 @@
 import { render, screen } from '@testing-library/react';
-
-import LocationCell from 'pages/HouseConnectionPage/MontageJobsList/components/LocationCell';
-import { JobApiListItem, OntStatus } from 'types/montage-jobs';
-import { HupStatus } from 'types/hups';
+import LocationCell from 'features/MontageJobs/components/LocationCell';
+import { JobApiListItem, OntStatus } from 'features/MontageJobs/types/main';
+import { Status } from 'features/MontageJobs/types/hups';
 
 jest.mock('react-i18next', () => ({
   ...jest.requireActual('react-i18next'),
@@ -31,7 +30,7 @@ const rowData: JobApiListItem = {
   cabel_length: 500,
   disability_length: 200,
   hup_code: '1893737832-000',
-  hup_status: HupStatus.NOT_INSTALLED,
+  hup_status: Status.NOT_INSTALLED,
   hup_customer_name: 'Stefan Fraizer',
   hup_customer_email: 'stefan.kraus2@mailinator.com',
   hup_customer_phone_number1: '8283919002',
